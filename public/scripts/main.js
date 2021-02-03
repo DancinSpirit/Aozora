@@ -40,6 +40,7 @@ $("#login-form").submit(function(event){
 
 /* STATES */
 let state = "login";
+
 const reset = function(){
   if(state==="login"){
     $("#login").css("transform","translateX(-100%)");
@@ -57,6 +58,7 @@ const reset = function(){
   }
   $(".hidable").css("visibility","hidden");
 }
+
 const login = function(){
   reset();
   $("#login").css("visibility","visible");
@@ -82,10 +84,11 @@ const home = function(){
 
 /* LOGGED IN STATE TRIGGER */
 if(user){
-  home();
+    home();
 }else{
-  login();
+    login();
 }
+
 
 /* BUTTON TRIGGERS */
 $("#home-button").on("click", ()=>{

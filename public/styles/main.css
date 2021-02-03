@@ -7,7 +7,7 @@
 
 html, body{
     background: rgb(1,78,112);
-    background: radial-gradient(circle, rgba(1,78,112,1) 0%, rgba(20,26,50,1) 100%);
+    background: radial-gradient(at top, rgba(1,78,112,1) 0%, rgba(20,26,50,1) 100%);
     height: 100%;
     overflow: hidden;
     font-family: 'Oswald', sans-serif;
@@ -54,21 +54,22 @@ nav{
 
 #slide-bar{
     content: "";
-    background-color:#3f3f3f;
+    background-color:#05384e;
     width: 40%;
     height: 40px;
     position: absolute;
-    transform: skew(-40deg, 0deg);
+    transform: translateX(-150%) skew(-40deg, 0deg);
     box-shadow: 3px 2px 5px 0px black;
 }
 
 #nav-buttons{
     height: 40px;
     width: 30%;
-    background-color:#3f3f3f;
+    background-color:#05384e;
     position: absolute;
     padding-left: 3px;
     z-index: 1;
+    transform: translateX(-200%);
 }
 
 .nav-buttons{
@@ -88,6 +89,10 @@ nav{
     color: 	white;
 }
 
+.login-button{
+    color: white;
+}
+
 #right{
     width: 50%;
     padding-right: 10px;
@@ -105,6 +110,14 @@ nav{
     justify-content: center;
     align-items: center;
     position: absolute;
+}
+
+#login{
+    transform: translateX(-100%);
+}
+
+#register{
+    transform: translateY(100%);
 }
 
 /* FORMS */
