@@ -2,6 +2,7 @@
     margin: 0;
     padding: 0;
     box-sizing: border-box;
+    transition: 1000ms;
 }
 
 html, body{
@@ -15,27 +16,64 @@ html, body{
 
 /* NAVBAR */
 nav{
-    height: 4.5vh;
+    height: 80px;
+    display: flex;
+    flex-direction: column;
+}
+
+#top{
+    height: 50%;
     display: flex;
     background:#014E70;
     box-shadow: 0px 0px 5px 1px black;
 }
 
+#bottom{
+    height: 50%;
+    display: flex;
+}
+
 #left{
-    width: 25%;
+    width: 50%;
     font-size: 27px;
+}
+
+/* This is to hide the shadow from #slide-bar */
+#shadow-hide{
+    position: absolute;
+    background: #014E70;
+    width: 50%;
+    height: 40px;
+    position: absolute;
+    z-index: 1;
+}
+
+#aozora{
     padding-left: 10px;
 }
 
-#right{
-    width: 75%;
-    padding-right: 10px;
+#slide-bar{
+    content: "";
+    background-color:#3f3f3f;
+    width: 40%;
+    height: 40px;
+    position: absolute;
+    transform: skew(-40deg, 0deg);
+    box-shadow: 3px 2px 5px 0px black;
 }
 
 #nav-buttons{
+    height: 40px;
+    width: 30%;
+    background-color:#3f3f3f;
+    position: absolute;
+    padding-left: 3px;
+    z-index: 1;
+}
+
+.nav-buttons{
     height: 100%;
     display: flex;
-    justify-content: flex-end;
     align-content: center;
 }
 
@@ -50,9 +88,18 @@ nav{
     color: 	white;
 }
 
+#right{
+    width: 50%;
+    padding-right: 10px;
+}
+
+#login-buttons{
+    justify-content: flex-end;
+}
+
 /* MAIN BODY */
 .center-container{
-    height: 95.5vh;
+    height: 85vh;
     width: 100%;
     display: flex;
     justify-content: center;
