@@ -22,28 +22,43 @@
         </section>
         <section id="right">
             <section id="nav-buttons">
-                <button class="nav-button">
+                <button class="nav-button" id="home-button">
                     Home
                 </button>
-                <button class="nav-button">
+                <button class="nav-button" id="login-button">
                     Log In
                 </button>
-                <button class="nav-button">
+                <button class="nav-button" id="register-button">
                     Register
                 </button>
             </section>
         </section>
     </nav>
     <!-- MAIN BODY -->
-    <section id="content">
-        <section class="center container" id="register">
-                <form class="form" id="registration" action="/register" method="POST">
-                    <p class="center-form" id="register-title">Register</p>
-                    <p class="right-form">Username: <input type="text" name="username" class="form-input"></p>
-                    <p class="right-form">Password: <input type="password" name="password" class="form-input"></p>
-                    <p class="center-form"><input type="submit" value="Register" id="register-button"></p>
-                </form>
-        </section>
-    </section>  
+    <section class="center-container hidable" id="register">
+            <form class="form" id="registration-form" action="/register" method="POST">
+                <p class="center-form form-title">Register</p>
+                <p class="right-form">Username: <input type="text" name="username" class="form-input"></p>
+                <p class="right-form">Password: <input type="password" name="password" class="form-input"></p>
+                <p class="center-form"><input type="submit" value="Register" class="submit-button" id="register-button"></p>
+            </form>
+    </section>
+    <section class="center-container hidable" id="login">
+            <form class="form" id="login-form" action="/login" method="POST">
+                <p class="center-form form-title">Login</p>
+                <p class="right-form">Username: <input type="text" name="username" class="form-input"></p>
+                <p class="right-form">Password: <input type="password" name="password" class="form-input"></p>
+                <p class="center-form"><input type="submit" value="Login" class="submit-button" id="login-button"></p>
+            </form>
+    </section> 
+    <%if(user){%>
+        <script>
+            const user = JSON.parse('<%-JSON.stringify(user)%>'); 
+        </script>
+    <%}else{%>
+        <script>
+            const user = false;
+        </script>
+    <%}%>
 </body>
 </html>

@@ -28,7 +28,8 @@ app.use(session({
 }));
 
 app.use(function(req,res,next){
-    /* Load Variables Here */
+    app.locals.user = req.session.currentUser;
+    console.log(app.locals.user);
     next();
 }) 
 
