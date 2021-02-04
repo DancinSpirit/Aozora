@@ -1,17 +1,45 @@
 /*State History Management*/
 window.addEventListener('popstate', (event)=>{
   newState = event.state;
+  console.log(newState);
   if(newState==="account"){
-    account();
+    if(user){
+      $.ajax({
+        method: "GET",
+        url: "/profile",
+        success: function(res){
+          $("#account-box").html(res);
+          account();
+        }
+      })
+    }else{
+      window.history.pushState("login", '', "/login");
+      login();
+    }
   }
-  if(newState==="home"){
-    home();
+  if(newState==="games"){
+    if(user){
+      games();
+    }else{
+      window.history.pushState("login", '', "/login");
+      login();
+    }
   }
   if(newState==="login"){
-    login();
+    if(user){
+      window.history.pushState("games", '', "/games");
+      games();
+    }else{
+      login();
+    }
   }
   if(newState==="register"){
-    register();
+    if(user){
+      window.history.pushState("games", '', "/games");
+      games();
+    }else{
+      register();
+    }
   }
 })
 
@@ -39,8 +67,8 @@ $("#registration-form").submit(function(event){
       success: function(res){
         $("#response-message").html(res);
         if(res==="Registration Successful!"){
-          window.history.pushState("home", '', "/home")
-          home();
+          window.history.pushState("games", '', "/games")
+          games();
         }
         else{
           /* Error */
@@ -60,8 +88,8 @@ $("#login-form").submit(function(event){
       success: function(res){
         $("#response-message").html(res);
         if(res==="Login Successful!"){
-          window.history.pushState({state: "home"}, '', "/home")
-          home();
+          window.history.pushState("games", '', "/games")
+          games();
         }
         else{
           /* Error */
@@ -76,6 +104,7 @@ $("#logout-button").on("click",function(event){
     method: "POST",
     url: "/logout",
     success: function(res){
+      window.history.pushState("login", '', "/login")
       login();
     }
   })
@@ -94,6 +123,7 @@ const reset = function(){
   if(state==="register"){
     $("#register").css("transform","translateY(100%)");
     $("#register").css("visibility", "hidden");
+    $("#login-buttons").addClass("invisible");
   }
   if(state==="game"){
     $("#nav-buttons").css("transform","translateX(-200%)");
@@ -101,17 +131,18 @@ const reset = function(){
     $("#slide-bar").css("transform","skew(-40deg, 0deg) translateX(-150%)");
     $("#slide-bar").css("visibility", "hidden");
   }
-  if(state==="home"){
-    $("#home-buttons").addClass("invisible");
+  if(state==="games"){
+    
   }
   if(state==="account"){
     $("#account").css("transform", "translateY(200%)");
-    $("#account").css("visibility", "hidden");
+    
   }
 }
 
 const login = function(){
   reset();
+  $("#main-buttons").addClass("invisible");
   $("#login").css("visibility","visible");
   $("#login").css("transform","translateX(0%)")  
   $("#login-buttons").removeClass("invisible");
@@ -120,6 +151,7 @@ const login = function(){
 
 const register = function(){
   reset();
+  $("#main-buttons").addClass("invisible");
   $("#register").css("visibility","visible");
   $("#register").css("transform","translateY(0%)");
   $("#login-buttons").removeClass("invisible");
@@ -135,15 +167,15 @@ const game = function(){
   state="game"; 
 }
 
-const home = function(){
+const games = function(){
   reset();
-  $("#home-buttons").removeClass("invisible");
-  state="home";
+  $("#main-buttons").removeClass("invisible");
+  state="games";
 }
 
 const account = function(){
   reset();
-  $("#home-buttons").removeClass("invisible");
+  $("#main-buttons").removeClass("invisible");
   $("#account").css("visibility", "visibile");
   $("#account").css("transform", "translateY(0%)");
   state="account";
@@ -151,16 +183,13 @@ const account = function(){
 
 /* LOGGED IN STATE TRIGGER */
 if(user){
-    home();
+    games();
 }else{
     login();
 }
 
 
 /* BUTTON TRIGGERS */
-$("#home-button").on("click", ()=>{
-  home();
-})
 $("#login-button").on("click", ()=>{
   window.history.pushState("login", '', "/login");
   login();
@@ -168,6 +197,10 @@ $("#login-button").on("click", ()=>{
 $("#register-button").on("click", ()=>{
   window.history.pushState("register", '', "/register");
   register();
+})
+$("#games-button").on("click",()=>{
+  window.history.pushState("games", '', "/games");
+  games();
 })
 
 /* RESIZE ANIMATION STOPPER */
