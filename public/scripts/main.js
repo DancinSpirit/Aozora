@@ -27,6 +27,7 @@ window.addEventListener('popstate', (event)=>{
   }
   if(newState==="login"){
     if(user){
+      console.log(user);
       window.history.pushState("games", '', "/games");
       games();
     }else{
