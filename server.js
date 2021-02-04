@@ -6,6 +6,8 @@ const MongoStore = require('connect-mongo')(session);
 const ctrl = require("./controllers");
 
 const app = express();
+const http = require('http').Server(app);
+const io = require('socket.io')(http);
 require("dotenv").config()
 
 const PORT = process.env.PORT;
@@ -35,6 +37,10 @@ app.use(function(req,res,next){
 
 app.use("/", ctrl.main);
 
-app.listen(PORT, function(){
+io.on('connection', (socket) => {
+    console.log('Connected.');
+});
+
+http.listen(PORT, function(){
     console.log(`Live at http://localhost:${PORT}/`);
 })
