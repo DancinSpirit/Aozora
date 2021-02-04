@@ -31,9 +31,13 @@ app.use(session({
 
 app.use(function(req,res,next){
     app.locals.user = req.session.currentUser;
-    console.log(app.locals.user);
     next();
 }) 
+
+app.post("/logout", function(req,res){
+    req.session.destroy();
+    return res.send("Logged Out");
+})
 
 app.use("/", ctrl.main);
 

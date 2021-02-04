@@ -38,6 +38,18 @@ $("#login-form").submit(function(event){
     }) 
   })
 
+/* LOGOUT AJAX ROUTE */
+$("#logout-button").on("click",function(event){
+  $.ajax({
+    method: "POST",
+    url: "/logout",
+    success: function(res){
+      login();
+    }
+  })
+})
+
+
 /* STATES */
 let state = "login";
 
@@ -45,16 +57,20 @@ const reset = function(){
   if(state==="login"){
     $("#login").css("transform","translateX(-100%)");
     $("#login").css("visibility", "hidden");
+    $("#login-buttons").addClass("invisible");
   }
   if(state==="register"){
     $("#register").css("transform","translateY(100%)");
     $("#register").css("visibility", "hidden");
   }
-  if(state==="home"){
+  if(state==="game"){
     $("#nav-buttons").css("transform","translateX(-200%)");
     $("#nav-buttons").css("visibility", "hidden");
     $("#slide-bar").css("transform","skew(-40deg, 0deg) translateX(-150%)");
     $("#slide-bar").css("visibility", "hidden");
+  }
+  if(state==="home"){
+    $("#home-buttons").addClass("invisible");
   }
   $(".hidable").css("visibility","hidden");
 }
@@ -63,6 +79,7 @@ const login = function(){
   reset();
   $("#login").css("visibility","visible");
   $("#login").css("transform","translateX(0%)")  
+  $("#login-buttons").removeClass("invisible");
   state="login";
 }
 
@@ -70,16 +87,29 @@ const register = function(){
   reset();
   $("#register").css("visibility","visible");
   $("#register").css("transform","translateY(0%)");
+  $("#login-buttons").removeClass("invisible");
   state="register";
 }
 
-const home = function(){
+const game = function(){
   reset(); 
   $("#nav-buttons").css("visibility", "visible");
   $("#nav-buttons").css("transform","translateX(0%)");
   $("#slide-bar").css("visibility", "visible");
   $("#slide-bar").css("transform","skew(-40deg, 0deg) translateX(0%)");
-  state="home"; 
+  state="game"; 
+}
+
+const home = function(){
+  reset();
+  $("#home-buttons").removeClass("invisible");
+  state="home";
+}
+
+const account = function(){
+  reset();
+  $("#home-buttons").removeClass("invisible");
+  $("#account-box").css("transform", "translateY(0%)");
 }
 
 /* LOGGED IN STATE TRIGGER */

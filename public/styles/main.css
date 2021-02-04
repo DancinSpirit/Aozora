@@ -78,6 +78,10 @@ nav{
     align-content: center;
 }
 
+#home-buttons{
+    justify-content: flex-end;
+}
+
 .nav-button{
     background: transparent;
     outline:none;
@@ -159,4 +163,9 @@ nav{
 
 .right-form{
     text-align: right;
+}
+
+
+.invisible{
+    display: none;
 }
