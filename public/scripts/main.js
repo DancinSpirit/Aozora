@@ -1,117 +1,3 @@
-/*State History Management*/
-window.addEventListener('popstate', (event)=>{
-  newState = event.state;
-  console.log(newState);
-  if(newState==="account"){
-    if(user){
-      $.ajax({
-        method: "GET",
-        url: "/profile",
-        success: function(res){
-          $("#account-box").html(res);
-          account();
-        }
-      })
-    }else{
-      window.history.pushState("login", '', "/login");
-      login();
-    }
-  }
-  if(newState==="games"){
-    if(user){
-      games();
-    }else{
-      window.history.pushState("login", '', "/login");
-      login();
-    }
-  }
-  if(newState==="login"){
-    if(user){
-      console.log(user);
-      window.history.pushState("games", '', "/games");
-      games();
-    }else{
-      login();
-    }
-  }
-  if(newState==="register"){
-    if(user){
-      window.history.pushState("games", '', "/games");
-      games();
-    }else{
-      register();
-    }
-  }
-})
-
-/* ACCOUNT AJAX ROUTE */
-$("#account-button").on("click", ()=>{
-  $.ajax({
-    method: "GET",
-    url: "/profile",
-    success: function(res){
-      $("#account-box").html(res);
-      window.history.pushState("account", '', "/profile");
-      account();
-    }
-  }) 
-})
-
-/* REGISTER AJAX ROUTE */
-$("#registration-form").submit(function(event){
-    event.preventDefault();
-    const formData = $(this).serialize();
-    $.ajax({
-      method: "POST",
-      url: "/register",
-      data: formData,
-      success: function(res){
-        $("#response-message").html(res);
-        if(res==="Registration Successful!"){
-          window.history.pushState("games", '', "/games")
-          games();
-        }
-        else{
-          /* Error */
-        }
-      }
-    }) 
-  })
-
-/* LOGIN AJAX ROUTE */
-$("#login-form").submit(function(event){
-    event.preventDefault();
-    const formData = $(this).serialize();
-    $.ajax({
-      method: "POST",
-      url: "/login",
-      data: formData,
-      success: function(res){
-        $("#response-message").html(res);
-        if(res==="Login Successful!"){
-          window.history.pushState("games", '', "/games")
-          games();
-        }
-        else{
-          /* Error */
-        }
-      }
-    }) 
-  })
-
-/* LOGOUT AJAX ROUTE */
-$("#logout-button").on("click",function(event){
-  $.ajax({
-    method: "POST",
-    url: "/logout",
-    success: function(res){
-      window.history.pushState("login", '', "/login")
-      login();
-    }
-  })
-})
-
-
 /* STATES */
 let state = "login";
 
@@ -182,13 +68,126 @@ const account = function(){
   state="account";
 }
 
-/* LOGGED IN STATE TRIGGER */
-if(user){
-    games();
-}else{
-    login();
-}
+/*State Management*/
+window.addEventListener('popstate', (event)=>{
+  newState = event.state;
+  load(newState);
+  console.log(user);
+})
 
+const load = function(newState){
+  console.log(newState);
+  if(newState==="account"){
+    if(user){
+      $.ajax({
+        method: "GET",
+        url: "/profile/info",
+        success: function(res){
+          $("#account-box").html(res);
+          account();
+        }
+      })
+    }else{
+      window.history.pushState("login", '', "/login");
+      login();
+    }
+  }
+  if(newState==="games"){
+    if(user){
+      games();
+    }else{
+      window.history.pushState("login", '', "/login");
+      login();
+    }
+  }
+  if(newState==="login"){
+    if(user){
+      window.history.pushState("games", '', "/games");
+      games();
+    }else{
+      login();
+    }
+  }
+  if(newState==="register"){
+    if(user){
+      window.history.pushState("games", '', "/games");
+      games();
+    }else{
+      register();
+    }
+  }
+}
+if(sentState){
+  load(sentState);
+}
+/* ACCOUNT AJAX ROUTE */
+$("#account-button").on("click", ()=>{
+  $.ajax({
+    method: "GET",
+    url: "/profile/info",
+    success: function(res){
+      $("#account-box").html(res);
+      window.history.pushState("account", '', "/profile");
+      account();
+    }
+  }) 
+})
+
+/* REGISTER AJAX ROUTE */
+$("#registration-form").submit(function(event){
+    event.preventDefault();
+    const formData = $(this).serialize();
+    $.ajax({
+      method: "POST",
+      url: "/register",
+      data: formData,
+      success: function(res){
+        $("#response-message").html(res);
+        if(res==="Registration Successful!"){
+          window.history.pushState("games", '', "/games")
+          games();
+        }
+        else{
+          /* Error */
+        }
+      }
+    }) 
+  })
+
+/* LOGIN AJAX ROUTE */
+$("#login-form").submit(function(event){
+    event.preventDefault();
+    const formData = $(this).serialize();
+    $.ajax({
+      method: "POST",
+      url: "/login",
+      data: formData,
+      success: function(res){
+        $("#response-message").html(res);
+        if(res==="Login Successful!"){
+          window.history.pushState("games", '', "/games")
+          games();
+          user=true;
+        }
+        else{
+          /* Error */
+        }
+      }
+    }) 
+  })
+
+/* LOGOUT AJAX ROUTE */
+$("#logout-button").on("click",function(event){
+  $.ajax({
+    method: "POST",
+    url: "/logout",
+    success: function(res){
+      user=false;
+      window.history.pushState("login", '', "/login")
+      login();
+    }
+  })
+})
 
 /* BUTTON TRIGGERS */
 $("#login-button").on("click", ()=>{

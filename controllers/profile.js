@@ -17,13 +17,18 @@ s3.listBuckets(function(err, data) {
   }
 });
 
-/* Profile Page (Current User)*/
+/* User Profile Route */
 router.get("/", async function(req,res){
-    res.render("profile", {user: req.session.currentUser});
+  res.render("main", {sentState: "account"})
 })
 
-/* Profile Page (Get User By ID) */
-router.get("/:id", async function(req,res){
+/* Profile Component (Current User)*/
+router.get("/info", async function(req,res){
+    res.render("profile");
+})
+
+/* Profile Component (Get User By ID) */
+router.get("/info/:id", async function(req,res){
     const user = await db.Player.findById(req.params.id);
     res.render("profile", {user: user});
 })

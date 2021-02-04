@@ -78,11 +78,21 @@
     </section> 
     <%if(user){%>
         <script>
-            const user = JSON.parse('<%-JSON.stringify(user)%>'); 
+            let user = JSON.parse('<%-JSON.stringify(user)%>'); 
         </script>
     <%}else{%>
         <script>
-            const user = false;
+            let user = false;
+        </script>
+    <%}%>
+    <%if(sentState){%>
+        <script>
+            let sentState = JSON.parse('<%-JSON.stringify(sentState)%>');
+        </script>
+    <%}else{%>
+        <script>
+            let sentState = false;
+            console.log(sentState);
         </script>
     <%}%>
 </body>

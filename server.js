@@ -34,13 +34,13 @@ app.use(function(req,res,next){
     next();
 }) 
 
+app.use("/profile", ctrl.profile);
 app.post("/logout", function(req,res){
     req.session.destroy();
     return res.send("Logged Out");
 })
 
 app.use("/", ctrl.main);
-app.use("/profile", ctrl.profile);
 
 io.on('connection', (socket) => {
     console.log('Connected.');

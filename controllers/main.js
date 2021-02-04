@@ -5,7 +5,11 @@ const bcrypt = require("bcryptjs");
 
 /* Home Page */
 router.get("/", async function(req,res){
-    res.render("main");
+    if(req.session.currentUser){
+        res.render("main",{sentState: "games"});
+    }else{
+        res.render("main",{sentState: "login"});
+    }
 })
 
 /* Register */
@@ -43,6 +47,33 @@ router.post("/login", async function(req,res){
     }catch(err){
         return res.send(err);
     }    
+})
+
+/* Games Page */
+router.get("/games", async function(req, res){
+    try{
+        res.render("main",{sentState: "games"});
+    }catch(err){
+        return res.send(err);
+    }
+})
+
+/* Login Page */
+router.get("/login", async function(req, res){
+    try{
+        res.render("main",{sentState: "login"});
+    }catch(err){
+        return res.send(err);
+    }
+})
+
+/* Register Page */
+router.get("/register", async function(req, res){
+    try{
+        res.render("main",{sentState: "register"});
+    }catch(err){
+        return res.send(err);
+    }
 })
 
 module.exports = router;
