@@ -1,3 +1,4 @@
 module.exports = {
-    main: require("./main")
+    main: require("./main"),
+    profile: require("./profile")
 }

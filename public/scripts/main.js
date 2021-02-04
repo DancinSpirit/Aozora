@@ -1,3 +1,15 @@
+/* ACCOUNT AJAX ROUTE */
+$("#account-button").on("click",function(event){
+  $.ajax({
+    method: "GET",
+    url: "/profile",
+    success: function(res){
+      $("#account-box").html(res);
+    }
+  }) 
+})
+
+
 /* REGISTER AJAX ROUTE */
 $("#registration-form").submit(function(event){
     event.preventDefault();
@@ -72,7 +84,10 @@ const reset = function(){
   if(state==="home"){
     $("#home-buttons").addClass("invisible");
   }
-  $(".hidable").css("visibility","hidden");
+  if(state==="account"){
+    $("#account-box").css("transform", "translateY(100%)");
+    $("#account-box").css("visibility", "hidden");
+  }
 }
 
 const login = function(){
@@ -109,7 +124,9 @@ const home = function(){
 const account = function(){
   reset();
   $("#home-buttons").removeClass("invisible");
+  $("#account-box").css("visibility", "visibile");
   $("#account-box").css("transform", "translateY(0%)");
+  state="account";
 }
 
 /* LOGGED IN STATE TRIGGER */
@@ -129,4 +146,7 @@ $("#login-button").on("click", ()=>{
 })
 $("#register-button").on("click", ()=>{
   register();
+})
+$("#account-button").on("click", ()=>{
+  account();
 })

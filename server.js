@@ -40,6 +40,7 @@ app.post("/logout", function(req,res){
 })
 
 app.use("/", ctrl.main);
+app.use("/profile", ctrl.profile);
 
 io.on('connection', (socket) => {
     console.log('Connected.');

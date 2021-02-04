@@ -57,36 +57,24 @@
     </nav>
     <!-- MAIN BODY -->
     <section class="center-container hidable" id="register">
-            <form class="form" id="registration-form" action="/register" method="POST">
-                <p class="center-form form-title">Register</p>
-                <p class="right-form">Username: <input type="text" name="username" class="form-input"></p>
-                <p class="right-form">Password: <input type="password" name="password" class="form-input"></p>
-                <p class="center-form"><input type="submit" value="Register" class="submit-button" id="register-button"></p>
-            </form>
+        <form class="form" id="registration-form" action="/register" method="POST">
+            <p class="center-form form-title">Register</p>
+            <p class="right-form">Username: <input type="text" name="username" class="form-input"></p>
+            <p class="right-form">Password: <input type="password" name="password" class="form-input"></p>
+            <p class="center-form"><input type="submit" value="Register" class="submit-button" id="register-button"></p>
+        </form>
     </section>
     <section class="center-container hidable" id="login">
-            <form class="form" id="login-form" action="/login" method="POST">
-                <p class="center-form form-title">Login</p>
-                <p class="right-form">Username: <input type="text" name="username" class="form-input"></p>
-                <p class="right-form">Password: <input type="password" name="password" class="form-input"></p>
-                <p class="center-form"><input type="submit" value="Login" class="submit-button" id="login-button"></p>
-            </form>
+        <form class="form" id="login-form" action="/login" method="POST">
+            <p class="center-form form-title">Login</p>
+            <p class="right-form">Username: <input type="text" name="username" class="form-input"></p>
+            <p class="right-form">Password: <input type="password" name="password" class="form-input"></p>
+            <p class="center-form"><input type="submit" value="Login" class="submit-button" id="login-button"></p>
+        </form>
     </section> 
-    <section class="center-container hidable" id="login">
-            <form class="form" id="login-form" action="/login" method="POST">
-                <p class="center-form form-title">Login</p>
-                <p class="right-form">Username: <input type="text" name="username" class="form-input"></p>
-                <p class="right-form">Password: <input type="password" name="password" class="form-input"></p>
-                <p class="center-form"><input type="submit" value="Login" class="submit-button" id="login-button"></p>
-            </form>
-    </section> 
-    <section class="center-container hidable" id="account-box">
-            <form class="form" id="login-form" action="/login" method="POST">
-                <p class="center-form form-title">Login</p>
-                <p class="right-form">Username: <input type="text" name="username" class="form-input"></p>
-                <p class="right-form">Password: <input type="password" name="password" class="form-input"></p>
-                <p class="center-form"><input type="submit" value="Login" class="submit-button" id="login-button"></p>
-            </form>
+    <section class="center-container hidable">
+        <section id="account-box">
+        </section>
     </section> 
     <%if(user){%>
         <script>

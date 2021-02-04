@@ -1,0 +1,11 @@
+<section id="avatar-box">
+    <%if(user.avatar){%>
+        <img id="account-avatar" src='<%=user.avatar%>'>
+    <%}else{%>
+        <img id="account-avatar" src='/images/avatar_placeholder.png'>
+    <%}%>
+    <%=user.username%>
+</section>
+<section id="user-info">
+    <p>PLACEHOLDER TEXT</p>
+</section>
