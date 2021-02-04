@@ -24,7 +24,7 @@ router.get("/", async function(req,res){
 
 /* Profile Page (Get User By ID) */
 router.get("/:id", async function(req,res){
-    const user = await db.Player.findById(req.params.id)
+    const user = await db.Player.findById(req.params.id);
     res.render("profile", {user: user});
 })
 
