@@ -108,32 +108,41 @@ nav{
 
 /* MAIN BODY */
 .center-container{
-    height: 85vh;
+    height: calc(100vh - 40px);
     width: 100%;
     display: flex;
     justify-content: center;
     align-items: center;
     position: absolute;
+    /* This is to account for the bottom part of the navbar - Needs to be in the below transitions */
+    transform: translateY(-40px);
 }
 
 #login{
-    transform: translateX(-100%);
+    transform: translate(-100%, -40px);
 }
 
 #register{
-    transform: translateY(100%);
+    transform: translateY(calc(100% - 40px));
 }
 
 #account{
-    transform: translateY(200%);
+    transform: translateY(calc(200% - 40px));
 }
 
-#account-box{
+#games{
+    transform: translate(200%, -40px);
+}
+
+.box{
     background-color: #1E2747;
     border: solid 1px;
     box-shadow: 0px 0px 5px #03A9F4;
-    width: 40vw;
-    height: 60vh;
+}
+/* Profile */
+#account-box{
+    width: 40%;
+    height: 60%;
 }
 
 #account-avatar{
@@ -143,6 +152,12 @@ nav{
 
 #avatar-upload-form{
     display: none;
+}
+
+/* GAMES */
+#games-box{
+    width: 50%;
+    height: 80%;
 }
 
 /* FORMS */

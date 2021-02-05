@@ -56,7 +56,7 @@
         </section>
     </nav>
     <!-- MAIN BODY -->
-    <section class="center-container hidable" id="register">
+    <section class="center-container" id="register">
         <form class="form" id="registration-form" action="/register" method="POST">
             <p class="center-form form-title">Register</p>
             <p class="right-form">Username: <input type="text" name="username" class="form-input"></p>
@@ -64,7 +64,7 @@
             <p class="center-form"><input type="submit" value="Register" class="submit-button" id="register-button"></p>
         </form>
     </section>
-    <section class="center-container hidable" id="login">
+    <section class="center-container" id="login">
         <form class="form" id="login-form" action="/login" method="POST">
             <p class="center-form form-title">Login</p>
             <p class="right-form">Username: <input type="text" name="username" class="form-input"></p>
@@ -72,10 +72,15 @@
             <p class="center-form"><input type="submit" value="Login" class="submit-button" id="login-button"></p>
         </form>
     </section> 
-    <section class="center-container hidable" id = "account">
-        <section id="account-box">
+    <section class="center-container" id = "account">
+        <section id="account-box" class = "box">
         </section>
     </section> 
+    <section class="center-container" id = "games">
+        <section id="games-box" class = "box">
+            
+        </section>
+    </section>
     <%if(user){%>
         <script>
             let user = JSON.parse('<%-JSON.stringify(user)%>'); 

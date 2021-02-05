@@ -3,12 +3,12 @@ let state = "login";
 
 const reset = function(){
   if(state==="login"){
-    $("#login").css("transform","translateX(-100%)");
+    $("#login").css("transform","translate(-100%,-40px)");
     $("#login").css("visibility", "hidden");
     $("#login-buttons").addClass("invisible");
   }
   if(state==="register"){
-    $("#register").css("transform","translateY(100%)");
+    $("#register").css("transform","translateY(calc(100% - 40px))");
     $("#register").css("visibility", "hidden");
     $("#login-buttons").addClass("invisible");
   }
@@ -19,10 +19,10 @@ const reset = function(){
     $("#slide-bar").css("visibility", "hidden");
   }
   if(state==="games"){
-    
+    $("#games").css("transform", "translate(200%, -40px)");
   }
   if(state==="account"){
-    $("#account").css("transform", "translateY(200%)");
+    $("#account").css("transform", "translateY(calc(200% - 40px))");
     
   }
 }
@@ -31,7 +31,7 @@ const login = function(){
   reset();
   $("#main-buttons").addClass("invisible");
   $("#login").css("visibility","visible");
-  $("#login").css("transform","translateX(0%)")  
+  $("#login").css("transform","translate(0%,-40px)")  
   $("#login-buttons").removeClass("invisible");
   state="login";
 }
@@ -40,7 +40,7 @@ const register = function(){
   reset();
   $("#main-buttons").addClass("invisible");
   $("#register").css("visibility","visible");
-  $("#register").css("transform","translateY(0%)");
+  $("#register").css("transform","translateY(-40px)");
   $("#login-buttons").removeClass("invisible");
   state="register";
 }
@@ -48,7 +48,7 @@ const register = function(){
 const game = function(){
   reset(); 
   $("#nav-buttons").css("visibility", "visible");
-  $("#nav-buttons").css("transform","translateX(0%)");
+  $("#nav-buttons").css("transform","translate(0%)");
   $("#slide-bar").css("visibility", "visible");
   $("#slide-bar").css("transform","skew(-40deg, 0deg) translateX(0%)");
   state="game"; 
@@ -58,6 +58,7 @@ const games = function(){
   reset();
   $("#main-buttons").removeClass("invisible");
   state="games";
+  $("#games").css("transform", "translateY(-40px)");
 }
 
 const account = function(){
@@ -72,7 +73,7 @@ const account = function(){
   reset();
   $("#main-buttons").removeClass("invisible");
   $("#account").css("visibility", "visibile");
-  $("#account").css("transform", "translateY(0%)");
+  $("#account").css("transform", "translateY(-40px)");
   state="account";
 }
 
