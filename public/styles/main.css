@@ -136,6 +136,11 @@ nav{
     height: 60vh;
 }
 
+#account-avatar{
+   max-height: 200px;
+   max-width: 200px; 
+}
+
 
 /* FORMS */
 .form{

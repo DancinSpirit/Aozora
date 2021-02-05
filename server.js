@@ -1,6 +1,7 @@
 const express = require("express");
 const methodOverride = require("method-override");
 const session = require('express-session');
+const fileUpload = require('express-fileupload');
 const MongoStore = require('connect-mongo')(session);
 
 const ctrl = require("./controllers");
@@ -16,6 +17,9 @@ app.set("view engine", "ejs");
 app.use(express.static(__dirname + "/public"));
 app.use(express.urlencoded({extended:true}));
 app.use(methodOverride("_method"));
+app.use(fileUpload({
+    createParentPath: true
+}));
 
 app.use(session({
     store: new MongoStore({

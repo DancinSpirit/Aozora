@@ -120,6 +120,7 @@ const load = function(newState){
 if(sentState){
   load(sentState);
 }
+
 /* ACCOUNT AJAX ROUTE */
 $("#account-button").on("click", ()=>{
   $.ajax({
