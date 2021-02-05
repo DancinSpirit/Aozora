@@ -141,6 +141,9 @@ nav{
    max-width: 200px; 
 }
 
+#avatar-upload-form{
+    display: none;
+}
 
 /* FORMS */
 .form{

@@ -35,7 +35,7 @@ router.post("/avatar", async function(req,res){
   const file = req.files.file;
   const params = {
     Bucket: "aozora",
-    Key: `${req.session.currentUser.username}.png`,
+    Key: `${req.session.currentUser.username}.jpg`,
     Body: Buffer.from(file.data, 'binary')
   }
 

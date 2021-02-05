@@ -61,6 +61,14 @@ const games = function(){
 }
 
 const account = function(){
+  /* Image Upload */
+  $("#account-avatar").on("click", ()=>{
+    $("#file").click();
+  })
+  $("#file").change(function(){
+    console.log("TEST");
+    $("#file-submit").click();
+  })
   reset();
   $("#main-buttons").removeClass("invisible");
   $("#account").css("visibility", "visibile");
