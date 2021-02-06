@@ -1,4 +1,5 @@
 module.exports = {
     main: require("./main"),
-    profile: require("./profile")
+    profile: require("./profile"),
+    games: require("./games")
 }

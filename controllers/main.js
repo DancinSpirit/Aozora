@@ -12,6 +12,10 @@ router.get("/", async function(req,res){
     }
 })
 
+router.get("/game", async function(req,res){
+    res.render("main",{sentState: "game"})
+})
+
 /* Register */
 router.post("/register", async function(req,res){
     try{
@@ -47,15 +51,6 @@ router.post("/login", async function(req,res){
     }catch(err){
         return res.send(err);
     }    
-})
-
-/* Games Page */
-router.get("/games", async function(req, res){
-    try{
-        res.render("main",{sentState: "games"});
-    }catch(err){
-        return res.send(err);
-    }
 })
 
 /* Login Page */

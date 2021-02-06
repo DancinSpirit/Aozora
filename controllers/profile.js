@@ -31,6 +31,7 @@ router.get("/info/:id", async function(req,res){
   res.render("profile", {user: user});
 })
 
+/* Upload Avatar */
 router.post("/avatar", async function(req,res){
   const file = req.files.file;
   const params = {

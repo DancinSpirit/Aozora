@@ -44,7 +44,6 @@ nav{
     background: #014E70;
     width: 50%;
     height: 40px;
-    position: absolute;
     z-index: 1;
 }
 
@@ -139,6 +138,8 @@ nav{
     border: solid 1px;
     box-shadow: 0px 0px 5px #03A9F4;
 }
+
+
 /* Profile */
 #account-box{
     width: 40%;
@@ -156,7 +157,7 @@ nav{
 
 /* GAMES */
 #games-box{
-    width: 50%;
+    width: 60%;
     height: 80%;
 }
 
