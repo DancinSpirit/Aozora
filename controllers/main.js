@@ -12,14 +12,9 @@ router.get("/", async function(req,res){
     }
 })
 
-router.get("/game", async function(req,res){
-    res.render("main",{sentState: "game"})
-})
-router.get("/game/games", async function(req,res){
-    let gamemasterGames = await db.Game.find({gamemasters: {_id: req.session.currentUser.id}});
-    let playerGames = await db.Game.find({players: {_id: req.session.currentUser.id}});
-    let games = [...gamemasterGames, ...playerGames];
-    res.render("games",{games: games});
+router.get("/game/:id", async function(req,res){
+    const foundGame = await db.Game.findById(req.params.id);
+    res.render("main",{sentState: "game", game: foundGame})
 })
 
 /* Register */

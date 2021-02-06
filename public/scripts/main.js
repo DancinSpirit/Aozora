@@ -44,10 +44,18 @@ const game = function(){
   $("#main-buttons").removeClass("invisible");
   $("#nav-buttons").css("transform","translate(0%)");
   $("#slide-bar").css("transform","skew(-40deg, 0deg) translateX(0%)");
+  $("#title").html(game.name);
   state="game"; 
 }
 
 const games = function(){
+  $.ajax({
+    method: "GET",
+    url: "/games/games",
+    success: function(res){
+      $("#games-box").html(res);
+    }
+  }) 
   reset();
   $("#main-buttons").removeClass("invisible");
   state="games";
@@ -55,6 +63,13 @@ const games = function(){
 }
 
 const account = function(){
+  $.ajax({
+    method: "GET",
+    url: "/profile/info",
+    success: function(res){
+      $("#account-box").html(res);
+    }
+  }) 
   /* Image Upload */
   $("#account-avatar").on("click", ()=>{
     $("#file").click();
@@ -80,14 +95,7 @@ const load = function(newState){
   console.log(newState);
   if(newState==="account"){
     if(user){
-      $.ajax({
-        method: "GET",
-        url: "/profile/info",
-        success: function(res){
-          $("#account-box").html(res);
-          account();
-        }
-      })
+      account();
     }else{
       window.history.pushState("login", '', "/login");
       login();
@@ -95,14 +103,7 @@ const load = function(newState){
   }
   if(newState==="games"){
     if(user){
-      $.ajax({
-        method: "GET",
-        url: "/game/games",
-        success: function(res){
-          $("#games-box").html(res);
-          games();
-        }
-      }) 
+      games();
     }else{
       window.history.pushState("login", '', "/login");
       login();
@@ -139,15 +140,8 @@ if(sentState){
 
 /* ACCOUNT AJAX ROUTE */
 $("#account-button").on("click", ()=>{
-  $.ajax({
-    method: "GET",
-    url: "/profile/info",
-    success: function(res){
-      $("#account-box").html(res);
-      window.history.pushState("account", '', "/profile");
-      account();
-    }
-  }) 
+  window.history.pushState("account", '', "/profile");
+  account();
 })
 
 /* REGISTER AJAX ROUTE */
@@ -183,14 +177,7 @@ $("#login-form").submit(function(event){
         $("#response-message").html(res);
         if(res==="Login Successful!"){
           window.history.pushState("games", '', "/games")
-          $.ajax({
-            method: "GET",
-            url: "/game/games",
-            success: function(res){
-              $("#games-box").html(res);
-              games();
-            }
-          }) 
+          games();
         }
         else{
           /* Error */

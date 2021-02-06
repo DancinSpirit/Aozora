@@ -11,6 +11,7 @@ router.get("/", async function(req, res){
     }
 })
 
+/* Games Create */
 router.post("/create", async function(req,res){
     try{
         db.Game.create({name: "New Untitled Game", gamemasters: [req.session.currentUser.id]}); 
@@ -19,6 +20,14 @@ router.post("/create", async function(req,res){
     }catch(err){
         return res.send(err);
     }
+})
+
+/* Games Show */
+router.get("/games", async function(req,res){
+    let gamemasterGames = await db.Game.find({gamemasters: {_id: req.session.currentUser.id}});
+    let playerGames = await db.Game.find({players: {_id: req.session.currentUser.id}});
+    let games = [...gamemasterGames, ...playerGames];
+    res.render("games",{games: games});
 })
 
 module.exports = router;
