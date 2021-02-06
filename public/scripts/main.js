@@ -68,16 +68,16 @@ const account = function(){
     url: "/profile/info",
     success: function(res){
       $("#account-box").html(res);
+        /* Image Upload */
+      $("#account-avatar").on("click", ()=>{
+        $("#file").click();
+      })
+      $("#file").change(function(){
+        console.log("TEST");
+        $("#file-submit").click();
+      })
     }
   }) 
-  /* Image Upload */
-  $("#account-avatar").on("click", ()=>{
-    $("#file").click();
-  })
-  $("#file").change(function(){
-    console.log("TEST");
-    $("#file-submit").click();
-  })
   reset();
   $("#main-buttons").removeClass("invisible");
   $("#account").css("transform", "translateY(-40px)");
