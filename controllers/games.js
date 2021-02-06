@@ -13,7 +13,7 @@ router.get("/", async function(req, res){
 
 router.post("/create", async function(req,res){
     try{
-        db.Game.create({name: "New Untitled Game", gamemasters: [req.session.currentUser._id]});
+        db.Game.create({name: "New Untitled Game", gamemasters: [req.session.currentUser.id]}); 
         /* Will need to send game id somehow */
         res.redirect("/game");
     }catch(err){

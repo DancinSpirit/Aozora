@@ -4,7 +4,6 @@ const session = require('express-session');
 const fileUpload = require('express-fileupload');
 const MongoStore = require('connect-mongo')(session);
 
-const db = require("./models");
 const ctrl = require("./controllers");
 
 const app = express();
@@ -36,14 +35,6 @@ app.use(session({
 
 app.use(async function(req,res,next){
     app.locals.user = req.session.currentUser;
-    if(app.locals.user){
-        let gamemasterGames = await db.Game.find({gamemasters: app.locals.user._id});
-        let playerGames = await db.Game.find({players: app.locals.user._id});
-        app.locals.games = [...gamemasterGames, ...playerGames];
-    }
-    else{
-        app.locals.games = [];
-    }
     next();
 }) 
 

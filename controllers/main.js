@@ -16,7 +16,10 @@ router.get("/game", async function(req,res){
     res.render("main",{sentState: "game"})
 })
 router.get("/game/games", async function(req,res){
-    res.render("games");
+    let gamemasterGames = await db.Game.find({gamemasters: {_id: req.session.currentUser.id}});
+    let playerGames = await db.Game.find({players: {_id: req.session.currentUser.id}});
+    let games = [...gamemasterGames, ...playerGames];
+    res.render("games",{games: games});
 })
 
 /* Register */
