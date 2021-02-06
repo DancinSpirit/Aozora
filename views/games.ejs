@@ -1,0 +1,13 @@
+<section>
+    <%console.log(games)%>
+    <%for(let x=0; x<games.length; x++){%>
+    <section id = "game-box" class = "box-section">
+        <%=games[x].name%>
+    </section>
+    <%}%>
+    <section id = "new-game" class = "box-section">
+        <form class="form" id="create-game-form" action="/games/create" method="POST">
+            <p class="center-form"><input type="submit" value="Create New Game" class="submit-button" id="create-game-button"></p>
+        </form>
+    </section>
+</section>

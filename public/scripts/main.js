@@ -95,7 +95,14 @@ const load = function(newState){
   }
   if(newState==="games"){
     if(user){
-      games();
+      $.ajax({
+        method: "GET",
+        url: "/game/games",
+        success: function(res){
+          $("#games-box").html(res);
+          games();
+        }
+      }) 
     }else{
       window.history.pushState("login", '', "/login");
       login();
@@ -176,8 +183,14 @@ $("#login-form").submit(function(event){
         $("#response-message").html(res);
         if(res==="Login Successful!"){
           window.history.pushState("games", '', "/games")
-          games();
-          user=true;
+          $.ajax({
+            method: "GET",
+            url: "/game/games",
+            success: function(res){
+              $("#games-box").html(res);
+              games();
+            }
+          }) 
         }
         else{
           /* Error */

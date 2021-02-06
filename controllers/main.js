@@ -15,6 +15,9 @@ router.get("/", async function(req,res){
 router.get("/game", async function(req,res){
     res.render("main",{sentState: "game"})
 })
+router.get("/game/games", async function(req,res){
+    res.render("games");
+})
 
 /* Register */
 router.post("/register", async function(req,res){
