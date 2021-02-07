@@ -43,6 +43,7 @@ nav{
     position: absolute;
     background: #014E70;
     width: 50%;
+    min-width: 277px;
     height: 40px;
     z-index: 1;
 }
@@ -54,6 +55,7 @@ nav{
 #slide-bar{
     content: "";
     background-color:#05384e;
+    min-width: 260px;
     width: 40%;
     height: 40px;
     position: absolute;
