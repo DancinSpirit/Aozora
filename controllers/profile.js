@@ -20,7 +20,7 @@ router.get("/", async function(req,res){
 
 /* Profile Component (Current User)*/
 router.get("/info", async function(req,res){
-  res.render("profile");
+  res.render("components/profile");
 })
 
 /* Profile Component (Get User By ID) */

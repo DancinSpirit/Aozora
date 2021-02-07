@@ -12,11 +12,6 @@ router.get("/", async function(req,res){
     }
 })
 
-router.get("/game/:id", async function(req,res){
-    const foundGame = await db.Game.findById(req.params.id);
-    res.render("main",{sentState: "game", game: foundGame})
-})
-
 /* Register */
 router.post("/register", async function(req,res){
     try{

@@ -49,7 +49,16 @@
                 </section>
                 <section id="nav-buttons" class="nav-buttons">
                     <button class="nav-button" id="home-button">
-                        Home
+                        Story
+                    </button>
+                    <button class="nav-button" id="home-button">
+                        Files
+                    </button>
+                    <button class="nav-button" id="home-button">
+                        Characters
+                    </button>
+                    <button class="nav-button" id="home-button">
+                        Players
                     </button>
                 </section>
             </section>
@@ -80,24 +89,10 @@
         <section id="games-box" class = "box">
         </section>
     </section>
-    <%if(user){%>
-        <script>
-            let user = JSON.parse('<%-JSON.stringify(user)%>'); 
-        </script>
-    <%}else{%>
-        <script>
-            let user = false;
-        </script>
-    <%}%>
-    <%if(sentState){%>
-        <script>
-            let sentState = JSON.parse('<%-JSON.stringify(sentState)%>');
-        </script>
-    <%}else{%>
-        <script>
-            let sentState = false;
-            console.log(sentState);
-        </script>
-    <%}%>
+    <section class="center-container" id = "game">
+        <section id="game-box" class = "box">
+        </section>
+    </section>
+    <%- include('variableProcessor.ejs')%>
 </body>
 </html>

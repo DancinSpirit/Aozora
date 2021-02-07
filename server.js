@@ -39,6 +39,7 @@ app.use(async function(req,res,next){
 }) 
 
 app.use("/games", ctrl.games);
+app.use("/game", ctrl.game);
 app.use("/profile", ctrl.profile);
 app.post("/logout", function(req,res){
     req.session.destroy();

@@ -10,9 +10,10 @@ const reset = function(){
     $("#register").css("transform","translateY(calc(100% - 40px))");
     $("#login-buttons").addClass("invisible");
   }
-  if(state==="game"){
+  if(state==="story"){
     $("#nav-buttons").css("transform","translateX(-200%)");
     $("#slide-bar").css("transform","skew(-40deg, 0deg) translateX(-150%)");
+    $("#title").html("Aozora");
   }
   if(state==="games"){
     $("#games").css("transform", "translate(200%, -40px)");
@@ -39,13 +40,13 @@ const register = function(){
   state="register";
 }
 
-const game = function(){
+const storyState = function(){
   reset(); 
   $("#main-buttons").removeClass("invisible");
   $("#nav-buttons").css("transform","translate(0%)");
   $("#slide-bar").css("transform","skew(-40deg, 0deg) translateX(0%)");
   $("#title").html(game.name);
-  state="game"; 
+  state="story"; 
 }
 
 const games = function(){
@@ -58,8 +59,8 @@ const games = function(){
   }) 
   reset();
   $("#main-buttons").removeClass("invisible");
-  state="games";
   $("#games").css("transform", "translateY(-40px)");
+  state="games";
 }
 
 const account = function(){
@@ -125,15 +126,16 @@ const load = function(newState){
       register();
     }
   }
-  if(newState==="game"){
+  if(newState==="story"){
     if(user){
-      game();
+      storyState();
     }else{
       window.history.pushState("login", '', "/login");
       login();
     }
   }
 }
+
 if(sentState){
   load(sentState);
 }

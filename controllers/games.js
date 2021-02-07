@@ -14,20 +14,19 @@ router.get("/", async function(req, res){
 /* Games Create */
 router.post("/create", async function(req,res){
     try{
-        db.Game.create({name: "New Untitled Game", gamemasters: [req.session.currentUser.id]}); 
-        /* Will need to send game id somehow */
-        res.redirect("/game");
+        let game = await db.Game.create({name: "New Untitled Game", gamemasters: [req.session.currentUser.id]}); 
+        res.redirect(`/game/${game._id}/story`);
     }catch(err){
         return res.send(err);
     }
 })
 
-/* Games Show */
+/* Games Component */
 router.get("/games", async function(req,res){
     let gamemasterGames = await db.Game.find({gamemasters: {_id: req.session.currentUser.id}});
     let playerGames = await db.Game.find({players: {_id: req.session.currentUser.id}});
     let games = [...gamemasterGames, ...playerGames];
-    res.render("games",{games: games});
+    res.render("components/games",{games: games});
 })
 
 module.exports = router;
