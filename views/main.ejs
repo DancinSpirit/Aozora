@@ -19,7 +19,14 @@
     <nav>
         <section id="top">
             <section id="left">
-                <section id="shadow-hide"><p id="title">Aozora</p></section>
+                <section id="shadow-hide">
+                    <p id="title">Aozora</p>
+                    <%if(game){%>
+                        <form id="title-form" action="/game/<%=game.id%>/name" method="POST">
+                            <input id="game-name-input" type="text" name="name" class="invisible">
+                        </form>
+                    <%}%>
+                </section>
             </section>
             <section id="right">
                 <section class="nav-buttons invisible" id="login-buttons">

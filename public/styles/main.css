@@ -47,14 +47,32 @@ nav{
 #shadow-hide{
     position: absolute;
     background: #014E70;
-    width: 50%;
     min-width: 277px;
+    width: 40.89%;
     height: 40px;
     z-index: 1;
 }
 
 #title{
     padding-left: 10px;
+}
+
+#title-form{
+    padding-left: 10px;
+    height: 100%;
+}
+
+#game-name-input{
+    font-size: 27px;
+    background: none;
+    border: none;
+    color: white;
+    font-family:'Oswald', sans-serif;
+    width: 100%;
+    outline: none;
+}
+#title-form:focus-within{
+    background-color:#01628b;
 }
 
 #slide-bar{
