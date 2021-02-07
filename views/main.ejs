@@ -23,7 +23,7 @@
                     <p id="title">Aozora</p>
                     <%if(game){%>
                         <form id="title-form" action="/game/<%=game.id%>/name" method="POST">
-                            <input id="game-name-input" type="text" name="name" class="invisible">
+                            <input id="game-name-input" type="text" name="name" class="invisible" value='<%=game.name%>'>
                         </form>
                     <%}%>
                 </section>

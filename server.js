@@ -42,6 +42,7 @@ app.use(async function(req,res,next){
 app.use("/games", ctrl.games);
 app.use("/game", ctrl.game);
 app.use("/profile", ctrl.profile);
+app.use("/story", ctrl.story);
 app.post("/logout", function(req,res){
     req.session.destroy();
     return res.send("Logged Out");

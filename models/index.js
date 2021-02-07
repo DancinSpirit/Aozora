@@ -24,5 +24,6 @@ mongoose.connection.on("error", function(err){
 module.exports = {
     Game: require("./Game"),
     Character: require("./Character"),
-    User: require("./User")
+    User: require("./User"),
+    Story: require("./Story")
 }

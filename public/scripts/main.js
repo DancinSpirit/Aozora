@@ -46,10 +46,8 @@ const storyState = function(){
   $("#nav-buttons").css("transform","translate(0%)");
   $("#slide-bar").css("transform","skew(-40deg, 0deg) translateX(0%)");
   $("#title").html(game.name);
-  $("#title").on("click", function(){
-    $("#title").addClass("invisible");
-    $("#game-name-input").removeClass("invisible");
-  })
+  $("#title").addClass("invisible");
+  $("#game-name-input").removeClass("invisible");
   state="story"; 
 }
 
