@@ -5,6 +5,11 @@
     transition: 1000ms;
 }
 
+a{
+    text-decoration: none;
+    color: white;
+}
+
 html, body{
     background: rgb(1,78,112);
     background: radial-gradient(at top, rgba(1,78,112,1) 0%, rgba(20,26,50,1) 100%);
@@ -131,6 +136,10 @@ nav{
     transform: translate(200%, -40px);
 }
 
+#story{
+    transform: translate(-100%, -40px);
+}
+
 .box{
     background-color: #1E2747;
     border: solid 1px;
@@ -157,6 +166,12 @@ nav{
 #games-box{
     width: 60%;
     height: 80%;
+}
+
+#game-box{
+    padding: 10px;
+    border: solid 1px;
+    box-shadow: 0px 0px 5px #03A9F4;
 }
 
 /* FORMS */

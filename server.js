@@ -35,6 +35,7 @@ app.use(session({
 
 app.use(async function(req,res,next){
     app.locals.user = req.session.currentUser;
+    app.locals.game = false;
     next();
 }) 
 
