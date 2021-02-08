@@ -47,6 +47,9 @@ const storyState = function(){
   $("#title").addClass("invisible");
   $("#edit-title").removeClass("invisible");
   $("#game-name-input").removeClass("invisible");
+  if(window.localStorage.getItem("game")){
+    game = JSON.parse(window.localStorage.getItem("game"));
+  }
   $("#game-name-input").val(game.name);
   state="story"; 
 }
@@ -59,6 +62,7 @@ const games = function(){
       $("#games-box").html(res);
       $(".game-button").on("click", function(){
         game = {_id: $(this).attr('id'), name: $(this).attr('name')};
+        window.localStorage.setItem('game', JSON.stringify(game));
         window.history.pushState("story", '', `/game/${game._id}/story`);
         storyState();
       })
