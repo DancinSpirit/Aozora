@@ -6,7 +6,7 @@ const gameSchema = new mongoose.Schema(
     gamemasters: [{type: mongoose.Schema.Types.ObjectId, ref: "User"}],
     players: [{user:{type: mongoose.Schema.Types.ObjectId, ref: "User"},character:{type: mongoose.Schema.Types.ObjectId, ref: "Character"}}],
     characters: [{type: mongoose.Schema.Types.ObjectId, ref: "Character"}],
-    story: {type: mongoose.Schema.Types.ObjectId, ref: "Story"}
+    chapters: [{type: mongoose.Schema.Types.ObjectId, ref: "Chapter"}]
   },
   {timestamps: true}
 )

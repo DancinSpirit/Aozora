@@ -23,9 +23,24 @@ router.get("/:id/files", async function(req,res){
     res.render("main",{sentState: "files", game: foundGame})
 })
 
+/* Create Story Chapter */
+router.post("/:id/story/create", async function(req, res){
+    try{
+        foundGame = await db.Game.findById(req.params.id);
+        chapterNumber = foundGame.chapters.length + 1;
+        newChapter = await db.Chapter.create({chapter: chapterNumber}); 
+        foundgame = await db.Game.findByIdAndUpdate(req.params.id, {$push: {chapters: newChapter}});
+        res.redirect(`/game/${foundGame._id}/story/${newChapter._id}`);
+    }catch(err){
+        console.log(err);
+        return res.send(err);
+    } 
+})
+
 /* Game Component: Story */
 router.get("/:id/story/story", async function(req, res){
-    res.render("components/game/story");
+    foundGame = await db.Game.findById(req.params.id).populate("chapters");
+    res.render("components/game/story",{stories: foundGame.chapters, game:foundGame});
 })
 /* Game Component: Characters */
 router.get("/:id/characters/characters", async function(req, res){
@@ -43,6 +58,14 @@ router.get("/:id/files/files", async function(req, res){
 router.post("/:id/name", async function(req, res){
     await db.Game.findByIdAndUpdate(req.params.id,{"name":req.body.name});
     res.send("Name Change Success!");
+})
+
+
+/* Story View */
+router.get("/:id/story/:storyId", async function(req, res){
+    const foundChapter = await db.Chapter.findById(req.params.storyId);
+    const foundGame = await db.Game.findById(req.params.id);
+    res.render("story",{story: foundChapter, game: foundGame});
 })
 
 module.exports = router;

@@ -1,6 +1,6 @@
 const mongoose = require("mongoose");
 
-const storySchema = new mongoose.Schema(
+const chapterSchema = new mongoose.Schema(
   {
     chapter: {type:Number, required:true},
     story: [String],
@@ -10,6 +10,6 @@ const storySchema = new mongoose.Schema(
   {timestamps: true}
 )
 
-const Story = mongoose.model("Story", storySchema);
+const Chapter = mongoose.model("Chapter", chapterSchema);
 
-module.exports = Story;
+module.exports = Chapter;

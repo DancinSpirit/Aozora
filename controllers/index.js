@@ -3,5 +3,4 @@ module.exports = {
     profile: require("./profile"),
     games: require("./games"),
     game: require("./game"),
-    story: require("./story")
 }

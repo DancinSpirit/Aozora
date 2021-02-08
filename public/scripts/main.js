@@ -13,6 +13,7 @@ const reset = function(){
   if(state==="story"){
     $("#nav-buttons").css("transform","translateX(-200%)");
     $("#slide-bar").css("transform","skew(-40deg, 0deg) translateX(-150%)");
+    $("#story").css("transform","translate(-100%, -40px)")
   }
   if(state==="games"){
     $("#games").css("transform", "translate(200%, -40px)");
@@ -28,6 +29,8 @@ const login = function(){
   $("#main-buttons").addClass("invisible");
   $("#login").css("transform","translate(0%,-40px)")  
   $("#login-buttons").removeClass("invisible");
+  $("#edit-title").addClass("invisible");
+  $("#game-name-input").addClass("invisible");
   state="login";
 }
 
@@ -36,10 +39,19 @@ const register = function(){
   $("#main-buttons").addClass("invisible");
   $("#register").css("transform","translateY(-40px)");
   $("#login-buttons").removeClass("invisible");
+  $("#edit-title").addClass("invisible");
+  $("#game-name-input").addClass("invisible");
   state="register";
 }
 
 const storyState = function(){
+  $.ajax({
+    method: "GET",
+    url: `${window.location.href}/story`,
+    success: function(res){
+      $("#story-box").html(res);
+    }
+  }) 
   reset(); 
   $("#main-buttons").removeClass("invisible");
   $("#nav-buttons").css("transform","translate(0%)");
@@ -51,6 +63,7 @@ const storyState = function(){
     game = JSON.parse(window.localStorage.getItem("game"));
   }
   $("#game-name-input").val(game.name);
+  $("#story").css("transform","translate(0%, -40px)")
   state="story"; 
 }
 
@@ -150,7 +163,7 @@ const load = function(newState){
 
 if(sentState){
   if(sentState ==="home-games"){
-    window.history.puhsState("games", '', '/games');
+    window.history.pushState("games", '', '/games');
     games();
   }else if(sentState === "home-login"){
     window.history.pushState("login", '', '/login');

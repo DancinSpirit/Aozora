@@ -1,0 +1,12 @@
+<section>
+    <%for(let x=0; x<stories.length; x++){%>
+    <section class = "box-section chapter-box">
+        <a class = "chapter-button" href=<%=`/game/${game.id}/story/${stories[x].id}`%>><%="Chapter " + stories[x].chapter%></a>
+    </section>
+    <%}%>
+    <section id = "new-chapter" class = "box-section">
+        <form class="form" id="create-chapter-form" action="/game/<%=game.id%>/story/create" method="POST">
+            <p class="center-form"><input type="submit" value="Create New Chapter" class="submit-button" id="create-chapter-button"></p>
+        </form>
+    </section>
+</section>

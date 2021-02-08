@@ -1,7 +1,7 @@
 <section>
     <%for(let x=0; x<games.length; x++){%>
     <section class = "box-section game-box">
-        <button class = "game-button" name="<%=games[x].name%>" id="<%=games[x].id%>"><%=games[x].name%></button>
+        <button class = "box-button game-button" name="<%=games[x].name%>" id="<%=games[x].id%>"><%=games[x].name%></button>
     </section>
     <%}%>
     <section id = "new-game" class = "box-section">
