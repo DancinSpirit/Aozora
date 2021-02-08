@@ -1,5 +1,16 @@
+const socket = io();
 let listenerAdded = false;
 let index = -1;
+
+socket.on('nextLine', function(text){
+    story.push(text);
+    if($("#user-input").length){
+        index--;
+        index--;
+        $("#user-input").remove();
+        listenerAdded = false;
+    }
+})
 
 const specialCommand = function(text){
     return text;
@@ -39,10 +50,11 @@ const nextLine = function(){
                 method: "POST",
                 url: `/game/${game._id}/story/${storyId}/${formData}`,
                 success: function(res){
-                    story.push(res);
                     nextLine();
+                    socket.emit('nextLine',res);
                     $("#user-input").remove();
                     listenerAdded = false;
+                    index++;
                 }
             })
             else{

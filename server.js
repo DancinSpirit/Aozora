@@ -50,7 +50,11 @@ app.post("/logout", function(req,res){
 app.use("/", ctrl.main);
 
 io.on('connection', (socket) => {
-    console.log('Connected.');
+    socket.on('nextLine', (msg)=>{
+        console.log(msg);
+        io.emit('nextLine', msg);
+    })
+    console.log('User Connected!');
 });
 
 http.listen(PORT, function(){

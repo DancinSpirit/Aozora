@@ -8,5 +8,9 @@
         <form class="form" id="create-game-form" action="/games/create" method="POST">
             <p class="center-form"><input type="submit" value="Create New Game" class="submit-button" id="create-game-button"></p>
         </form>
+        <form class="form" id="join-game-form" action="/games/join/<%=user.id%>" method="POST">
+            Game Id: <input type="text" name="gameId" class="form-input">
+            <p class="center-form"><input type="submit" value="Join New Game By Id" class="submit-button" id="join-game-button"></p>
+        </form>
     </section>
 </section>

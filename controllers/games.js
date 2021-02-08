@@ -21,9 +21,19 @@ router.post("/create", async function(req,res){
     }
 })
 
+/* Games Join */
+router.post("/join/:id", async function(req,res){
+    try{
+        let user = await db.User.findById(req.params.id);
+        let game = await db.Game.findByIdAndUpdate(req.body.gameId,{$push: {players: user}});
+        return res.redirect(`/game/${game._id}/story`);
+    }catch(err){
+        return res.send(err);
+    }
+})
+
 /* Games Component */
 router.get("/games", async function(req,res){
-    console.log("test");
     let gamemasterGames = await db.Game.find({gamemasters: {_id: req.session.currentUser.id}});
     let playerGames = await db.Game.find({players: {_id: req.session.currentUser.id}});
     let games = [...gamemasterGames, ...playerGames];
