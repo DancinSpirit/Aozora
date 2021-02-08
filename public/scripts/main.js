@@ -250,6 +250,7 @@ $("#game-name-input").focusout(function(){
   })
 })
 
+/* If User Hits Enter While Editing Name */
 $("#title-form").submit(function(event){
   event.preventDefault();
   $("#game-name-input").blur();

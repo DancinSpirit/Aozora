@@ -1,7 +1,9 @@
 const socket = io();
 let listenerAdded = false;
 let index = -1;
+let song;
 
+/* Socket Reciever */
 socket.on('nextLine', function(text){
     story.push(text);
     if($("#user-input").length){
@@ -13,7 +15,18 @@ socket.on('nextLine', function(text){
 })
 
 const specialCommand = function(text){
-    return text;
+      if(text.startsWith("<MUSIC>")){
+        song = document.getElementById(text.replace('<MUSIC>',""));
+        song.play();
+        nextLine();
+        return "";
+      }
+      if(text.startsWith("<SCENE TRANSITION>")){
+        /* This is where you switch images based on name */
+        console.log(text);
+        nextLine();
+        return "";
+      }
 }
 
 const addText = function(){

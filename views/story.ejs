@@ -21,9 +21,9 @@
         <div id="bottom">
         </div>
     </div>
-    <%for(let x=0; x<story.songs.length; x++){%>
-        <audio id='<%=story.songs[x].name%>-song' volume=2 loop>
-            <source src=<%=story.songs[x].url%>>
+    <%for(let x=0; x<game.songs.length; x++){%>
+        <audio id='<%=game.songs[x].name%>' volume=1 loop>
+            <source src=<%=game.songs[x].url%>>
         </audio>
     <%}%>
     <!-- Variable Processors -->
