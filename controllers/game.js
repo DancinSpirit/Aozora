@@ -67,5 +67,13 @@ router.get("/:id/story/:storyId", async function(req, res){
     const foundGame = await db.Game.findById(req.params.id);
     res.render("story",{story: foundChapter, game: foundGame});
 })
+router.post("/:id/story/:storyId/:form", async function(req,res){
+    try{
+        await db.Chapter.findByIdAndUpdate(req.params.storyId,{$push: {story: req.params.form}})
+        res.send(req.params.form);
+    }catch(err){
+        console.log(err);
+    }
+})
 
 module.exports = router;

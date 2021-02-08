@@ -1,7 +1,7 @@
 *{
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
 }
 
 body{
@@ -14,4 +14,55 @@ body{
   overflow:hidden;
   transition: background-image 0.2s ease-in-out;
   display: flex;
+}
+
+#textbox::-webkit-scrollbar {
+  display: none;
+}
+#textbox{
+  -ms-overflow-style: none;  /* IE and Edge */
+  scrollbar-width: none;  /* Firefox */
+  margin: auto;
+  color: white;
+  height: 80vh;
+  width: 90vw;
+  background-color: rgba(0, 0, 0, 0.7);
+  position: relative;
+  overflow-y: auto;
+}
+#bottom{
+  height: 1%;
+  position: absolute;
+  bottom: 0;
+  width: 100%;
+}
+.boxtext{
+  user-select: none;
+  font-family:'Oswald', sans-serif;
+  font-size: 20px;
+  padding-left: 20px;
+  padding-right: 20px;
+  padding-bottom: 20px;
+}
+
+.optionquestion{
+  text-align: center;
+}
+
+.option{
+  text-align: center;
+  color: gray;
+}
+
+choice{
+  color: white;
+}
+
+.hidden-text{
+  display: none;
+}
+
+form{
+  display: flex;
+  flex-direction: column;
 }
