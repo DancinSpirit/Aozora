@@ -57,7 +57,7 @@ router.get("/:id/files/files", async function(req, res){
 
 router.post("/:id/name", async function(req, res){
     await db.Game.findByIdAndUpdate(req.params.id,{"name":req.body.name});
-    res.send("Name Change Success!");
+    res.send(req.body.name);
 })
 
 

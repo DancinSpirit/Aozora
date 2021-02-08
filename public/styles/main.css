@@ -166,6 +166,10 @@ nav{
     transform: translate(-100%, -40px);
 }
 
+#files{
+    transform: translate(200%, -40px);
+}
+
 .box{
     background-color: #1E2747;
     border: solid 1px;

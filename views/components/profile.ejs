@@ -2,7 +2,7 @@
         <img id="account-avatar" src=<%=`https://aozora.s3.us-east-2.amazonaws.com/${user.username}.jpg`%>>
         <form id="avatar-upload-form" class="mt-4" action="/profile/avatar" method="POST" enctype="multipart/form-data">
             <div class="form-group">
-                <input id = "file" type="file" name="file" id="input-files" class="form-control-file border"/>
+                <input type="file" name="file" id="input-files" class="form-control-file border"/>
             </div>
             <button id="file-submit" type="submit" class="btn btn-primary">Submit</button>
         </form>

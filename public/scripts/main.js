@@ -15,6 +15,11 @@ const reset = function(){
     $("#slide-bar").css("transform","skew(-40deg, 0deg) translateX(-150%)");
     $("#story").css("transform","translate(-100%, -40px)")
   }
+  if(state==="files"){
+    $("#nav-buttons").css("transform","translateX(-200%)");
+    $("#slide-bar").css("transform","skew(-40deg, 0deg) translateX(-150%)");
+    $("#files").css("transform","translate(200%, -40px)")
+  }
   if(state==="games"){
     $("#games").css("transform", "translate(200%, -40px)");
   }
@@ -65,6 +70,29 @@ const storyState = function(){
   $("#game-name-input").val(game.name);
   $("#story").css("transform","translate(0%, -40px)")
   state="story"; 
+}
+
+const files = function(){
+  $.ajax({
+    method: "GET",
+    url: `${window.location.href}/files`,
+    success: function(res){
+      $("#files-box").html(res);
+    }
+  }) 
+  reset(); 
+  $("#main-buttons").removeClass("invisible");
+  $("#nav-buttons").css("transform","translate(0%)");
+  $("#slide-bar").css("transform","skew(-40deg, 0deg) translateX(0%)");
+  $("#title").addClass("invisible");
+  $("#edit-title").removeClass("invisible");
+  $("#game-name-input").removeClass("invisible");
+  if(window.localStorage.getItem("game")){
+    game = JSON.parse(window.localStorage.getItem("game"));
+  }
+  $("#game-name-input").val(game.name);
+  $("#files").css("transform","translate(0%, -40px)")
+  state="files"; 
 }
 
 const games = function(){
@@ -159,6 +187,14 @@ const load = function(newState){
       login();
     }
   }
+  if(newState==="files"){
+    if(user){
+      files();
+    }else{
+      window.history.pushState("login", '', "/login");
+      login();
+    }
+  }
 }
 
 if(sentState){
@@ -207,6 +243,8 @@ $("#game-name-input").focusout(function(){
     url: `/game/${game._id}/name`,
     data: {name: $("#game-name-input").val()},
     success: function(res){
+      game.name = res;
+      window.localStorage.setItem('game', JSON.stringify(game));
       console.log("Name changed!");
     }
   })
@@ -263,6 +301,14 @@ $("#register-button").on("click", ()=>{
 $("#games-button").on("click",()=>{
   window.history.pushState("games", '', "/games");
   games();
+})
+$("#story-button").on("click",()=>{
+  window.history.pushState("story", '', `story`);
+  storyState();
+})
+$("#files-button").on("click",()=>{
+  window.history.pushState('files', '', `files`);
+  files();
 })
 $(".fa-edit").on("click",()=>{
   $("#game-name-input").focus();
