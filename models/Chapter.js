@@ -3,9 +3,7 @@ const mongoose = require("mongoose");
 const chapterSchema = new mongoose.Schema(
   {
     chapter: {type:Number, required:true},
-    story: [String],
-    songs: [{name: String, url: String}],
-    images: [{name: String, url: String}]
+    story: [String]
   },
   {timestamps: true}
 )

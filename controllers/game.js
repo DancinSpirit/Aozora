@@ -1,6 +1,7 @@
 const express = require('express');
 const router = express.Router();
 const db = require("../models");
+const s3 = require('../s3.js');
 
 /* Game Story Route */
 router.get("/:id/story", async function(req,res){
@@ -37,6 +38,64 @@ router.post("/:id/story/create", async function(req, res){
     } 
 })
 
+/* Upload Music */
+router.post("/:id/music", async function(req,res){
+    const file = req.files.file;
+    let filename = `${Date.now()}-${file.name}`;
+    let url = `https://aozora.s3.us-east-2.amazonaws.com/${filename}`
+    const params = {
+      Bucket: "aozora",
+      Key: filename,
+      Body: Buffer.from(file.data, 'binary')
+    }
+  
+    s3.upload(params, function(err, data){
+      if(err){
+        throw err;
+      }
+      console.log(`File uploaded successfully. ${data.Location}`);
+    })
+
+    try{
+        musicObject = {name: "Test-File", url: url};
+        game = await db.Game.findByIdAndUpdate(req.params.id,{$push:{songs: musicObject}})
+        console.log(game);
+        }catch(err){
+            console.log("Error?");
+            console.log(err)
+        }
+    res.redirect('back');
+})
+
+/* Upload Images*/
+router.post("/:id/images", async function(req,res){
+    const file = req.files.file;
+    let filename = `${Date.now()}-${file.name}`;
+    let url = `https://aozora.s3.us-east-2.amazonaws.com/${filename}`
+    const params = {
+      Bucket: "aozora",
+      Key: filename,
+      Body: Buffer.from(file.data, 'binary')
+    }
+  
+    s3.upload(params, async function(err, data){
+      if(err){
+        throw err;
+      }
+      console.log(`File uploaded successfully. ${data.Location}`);
+    })
+
+    try{
+        imageObject = {name: "Test-File", url: url};
+        game = await db.Game.findByIdAndUpdate(req.params.id,{$push:{images: imageObject}})
+        console.log(game);
+        }catch(err){
+            console.log("Error?");
+            console.log(err)
+        }
+    res.redirect('back');
+})
+
 /* Game Component: Story */
 router.get("/:id/story/story", async function(req, res){
     foundGame = await db.Game.findById(req.params.id).populate("chapters");
@@ -52,7 +111,8 @@ router.get("/:id/players/players", async function(req, res){
 })
 /* Game Component: Files */
 router.get("/:id/files/files", async function(req, res){
-    res.render("components/game/files");
+    foundGame = await db.Game.findById(req.params.id).populate("chapters");
+    res.render("components/game/files",{game:foundGame});
 })
 
 router.post("/:id/name", async function(req, res){

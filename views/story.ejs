@@ -28,9 +28,9 @@
     <%}%>
     <!-- Variable Processors -->
     <script>
-        let images = JSON.parse('<%-JSON.stringify(story.images)%>'); 
+        let images = JSON.parse('<%-JSON.stringify(game.images)%>'); 
         let story = JSON.parse('<%-JSON.stringify(story.story)%>'); 
-        let songs = JSON.parse('<%-JSON.stringify(story.songs)%>'); 
+        let songs = JSON.parse('<%-JSON.stringify(game.songs)%>'); 
         let game = JSON.parse('<%-JSON.stringify(game)%>'); 
         let storyId = JSON.parse('<%-JSON.stringify(story.id)%>'); 
     </script>
