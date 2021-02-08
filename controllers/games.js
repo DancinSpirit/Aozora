@@ -23,6 +23,7 @@ router.post("/create", async function(req,res){
 
 /* Games Component */
 router.get("/games", async function(req,res){
+    console.log("test");
     let gamemasterGames = await db.Game.find({gamemasters: {_id: req.session.currentUser.id}});
     let playerGames = await db.Game.find({players: {_id: req.session.currentUser.id}});
     let games = [...gamemasterGames, ...playerGames];

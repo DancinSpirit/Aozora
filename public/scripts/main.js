@@ -13,7 +13,6 @@ const reset = function(){
   if(state==="story"){
     $("#nav-buttons").css("transform","translateX(-200%)");
     $("#slide-bar").css("transform","skew(-40deg, 0deg) translateX(-150%)");
-    $("#title").html("Aozora");
   }
   if(state==="games"){
     $("#games").css("transform", "translate(200%, -40px)");
@@ -45,9 +44,10 @@ const storyState = function(){
   $("#main-buttons").removeClass("invisible");
   $("#nav-buttons").css("transform","translate(0%)");
   $("#slide-bar").css("transform","skew(-40deg, 0deg) translateX(0%)");
-  $("#title").html(game.name);
   $("#title").addClass("invisible");
+  $("#edit-title").removeClass("invisible");
   $("#game-name-input").removeClass("invisible");
+  $("#game-name-input").val(game.name);
   state="story"; 
 }
 
@@ -57,11 +57,19 @@ const games = function(){
     url: "/games/games",
     success: function(res){
       $("#games-box").html(res);
+      $(".game-button").on("click", function(){
+        game = {_id: $(this).attr('id'), name: $(this).attr('name')};
+        window.history.pushState("story", '', `/game/${game._id}/story`);
+        storyState();
+      })
     }
   }) 
   reset();
   $("#main-buttons").removeClass("invisible");
   $("#games").css("transform", "translateY(-40px)");
+  $("#title").removeClass("invisible");
+  $("#edit-title").addClass("invisible");
+  $("#game-name-input").addClass("invisible");
   state="games";
 }
 
@@ -76,7 +84,6 @@ const account = function(){
         $("#file").click();
       })
       $("#file").change(function(){
-        console.log("TEST");
         $("#file-submit").click();
       })
     }
@@ -91,7 +98,6 @@ const account = function(){
 window.addEventListener('popstate', (event)=>{
   newState = event.state;
   load(newState);
-  console.log(user);
 })
 
 const load = function(newState){
@@ -139,7 +145,15 @@ const load = function(newState){
 }
 
 if(sentState){
+  if(sentState ==="home-games"){
+    window.history.puhsState("games", '', '/games');
+    games();
+  }else if(sentState === "home-login"){
+    window.history.pushState("login", '', '/login');
+    login();
+  }else{
   load(sentState);
+  }
 }
 
 /* ACCOUNT AJAX ROUTE */
@@ -168,6 +182,23 @@ $("#registration-form").submit(function(event){
       }
     }) 
   })
+
+/* NAME CHANGE AJAX ROUTE*/
+$("#game-name-input").focusout(function(){
+  $.ajax({
+    method: "POST",
+    url: `/game/${game._id}/name`,
+    data: {name: $("#game-name-input").val()},
+    success: function(res){
+      console.log("Name changed!");
+    }
+  })
+})
+
+$("#title-form").submit(function(event){
+  event.preventDefault();
+  $("#game-name-input").blur();
+})
 
 /* LOGIN AJAX ROUTE */
 $("#login-form").submit(function(event){
@@ -215,6 +246,9 @@ $("#register-button").on("click", ()=>{
 $("#games-button").on("click",()=>{
   window.history.pushState("games", '', "/games");
   games();
+})
+$(".fa-edit").on("click",()=>{
+  $("#game-name-input").focus();
 })
 
 /* RESIZE ANIMATION STOPPER */

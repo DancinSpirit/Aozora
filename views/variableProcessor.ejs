@@ -21,4 +21,8 @@
     <script>
         let game = JSON.parse('<%-JSON.stringify(game)%>');
     </script>
+<%}else{%>
+    <script>
+        let game = {};
+    </script>
 <%}%>

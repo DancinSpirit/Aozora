@@ -6,9 +6,9 @@ const bcrypt = require("bcryptjs");
 /* Home Page */
 router.get("/", async function(req,res){
     if(req.session.currentUser){
-        res.render("main",{sentState: "games"});
+        res.render("main",{sentState: "home-games"});
     }else{
-        res.render("main",{sentState: "login"});
+        res.render("main",{sentState: "home-login"});
     }
 })
 

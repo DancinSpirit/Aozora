@@ -11,6 +11,8 @@
     <link rel="stylesheet" href="/styles/main.css">
     <!-- JQUERY -->
     <script src="https://code.jquery.com/jquery-3.5.1.min.js" integrity="sha256-9/aliU8dGd2tb6OSsuzixeV4y/faTqgFtohetphbbj0=" crossorigin="anonymous"></script>
+    <!-- FONT AWESOME -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.2/css/all.min.css" integrity="sha512-HK5fgLBL+xu6dm/Ii3z4xhlSUyZgTT9tuc/hSrtw6uzJOvgRr2a9jyxxT1ely+B+xFAmJKVSTbpM/CuL7qxO8w==" crossorigin="anonymous" />
     <!-- SCRIPTS -->
     <script src = "/scripts/main.js" defer></script>
 </head>
@@ -19,13 +21,12 @@
     <nav>
         <section id="top">
             <section id="left">
+                <i id="edit-title" class="fas fa-edit"></i>
                 <section id="shadow-hide">
                     <p id="title">Aozora</p>
-                    <%if(game){%>
-                        <form id="title-form" action="/game/<%=game.id%>/name" method="POST">
-                            <input id="game-name-input" type="text" name="name" class="invisible" value='<%=game.name%>'>
-                        </form>
-                    <%}%>
+                    <form id="title-form" action="/game/<%=game.id%>/name" method="POST">
+                        <input id="game-name-input" type="text" name="name" class="invisible">
+                    </form>
                 </section>
             </section>
             <section id="right">
