@@ -54,6 +54,12 @@ io.on('connection', (socket) => {
         console.log(msg);
         io.emit('nextLine', msg);
     })
+    socket.on('edit', (info)=>{
+        io.emit('edit', info);
+    })
+    socket.on('delete', (index)=>{
+        io.emit('delete', index);
+    })
     console.log('User Connected!');
 });
 

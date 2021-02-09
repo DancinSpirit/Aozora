@@ -1,9 +1,11 @@
 <section>
+    <section class = "box-section">Gamemasters:</section>
     <%for(let x=0; x<game.gamemasters.length; x++){%>
     <section class = "box-section gamemaster-box">
         <%=game.gamemasters[x].username%>
     </section>
     <%}%>
+    <section class = "box-section">Players:</section>
     <%for(let x=0; x<game.players.length; x++){%>
     <section class = "box-section player-box">
         <%=game.players[x].user.username%>

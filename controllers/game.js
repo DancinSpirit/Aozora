@@ -128,10 +128,38 @@ router.get("/:id/story/:storyId", async function(req, res){
     const foundGame = await db.Game.findById(req.params.id);
     res.render("story",{story: foundChapter, game: foundGame});
 })
+/* Edit Story */
+router.post("/:id/story/:storyId/edit/:index/:form", async function(req,res){
+    try{
+        let story = await db.Chapter.findById(req.params.storyId);
+        let array = story.story;
+        array[req.params.index] = req.params.form;
+        await db.Chapter.findByIdAndUpdate(req.params.storyId, {story: array});
+        res.send(req.params.form);
+
+    }catch(err){
+        console.log(err);
+    }
+})
+/* Delete Story */
+router.post("/:id/story/:storyId/delete/:index/", async function(req,res){
+    try{
+        let story = await db.Chapter.findById(req.params.storyId);
+        array = story.story;
+        array.splice(req.params.index, 1);
+        console.log(array)
+        await db.Chapter.findByIdAndUpdate(req.params.storyId, {story: array});
+        res.send(req.params.form);
+
+    }catch(err){
+        console.log(err);
+    }
+})
+/* Add to Story */
 router.post("/:id/story/:storyId/:form", async function(req,res){
     try{
         let sentText = req.params.form;
-        sentText = sentText.replaceAll('"','&quot;').replaceAll("'","&apos;")
+        sentText = sentText.replace(/"/g,'&quot;').replace(/'/g,"&apos;")
         await db.Chapter.findByIdAndUpdate(req.params.storyId,{$push: {story: sentText}})
         res.send(sentText);
     }catch(err){

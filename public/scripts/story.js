@@ -3,7 +3,7 @@ let listenerAdded = false;
 let index = -1;
 let song;
 
-/* Socket Reciever */
+/* Socket Recievers */
 socket.on('nextLine', function(text){
     story.push(text);
     if($("#user-input").length){
@@ -12,6 +12,83 @@ socket.on('nextLine', function(text){
         index--;
     }
 })
+socket.on('delete', function(sentIndex){
+    $(`#edit-form-${sentIndex}`).remove();
+    $(`#boxtext-${sentIndex}`).remove();
+    story.splice(sentIndex, 1);
+    let childIndex = -1;
+    console.log("Length: " + $("#player-bottom").children().length)
+    $("#player-bottom").children().each(function(){
+        childIndex++;
+        $(this).attr("id",`boxtext-${childIndex}`);
+    });
+    childIndex = -1;
+    $("#gamemaster-bottom").children().each(function(){
+        childIndex++;
+        $(this).attr("id",`edit-form-${childIndex}`);
+        $(this).attr("action", `/game/${game._id}/story/${storyId}/edit/${childIndex}`)
+        $(this).unbind("submit");
+        $(this).submit(function(event){
+            event.preventDefault();
+            let formData = $(this).serialize();
+            formData = formData.substring(6);
+            newIndex = parseInt($(this).attr("id").substring(10),10);
+            if(formData)
+                $.ajax({
+                    method: "POST",
+                    url: `/game/${game._id}/story/${storyId}/edit/${newIndex}/${formData}`,
+                    success: function(res){
+                        socket.emit('edit', {index: index, res: res});
+                    }
+                })
+            else{
+                $.ajax({
+                    method: "POST",
+                    url: `/game/${game._id}/story/${storyId}/delete/${newIndex}`,
+                    success: function(res){
+                        socket.emit('delete', newIndex);
+                    }
+                })
+            }
+        })
+    });
+    index--;
+})
+socket.on('edit',function(sent){
+    console.log(sent.res);
+    console.log(sent.index);
+    $(`#boxtext-${sent.index}`).replaceWith(`<p id="boxtext-${sent.index}" class="boxtext">${sent.res}</p>`)
+})
+
+const appendGamemasterText = function(text){
+    $("#gamemaster-bottom").append(`<form id="edit-form-${index}" action="/game/${game._id}/story/${storyId}/edit/${index}" method="POST"><input id="edit-input" type="text" name="story" value='${text}'></form>`);
+    let sentIndex = index;
+    $(`#edit-form-${index}`).focusout(function(){
+        let formData = $(this).serialize();
+        formData = formData.substring(6);
+        if(formData)
+            $.ajax({
+                method: "POST",
+                url: `/game/${game._id}/story/${storyId}/edit/${sentIndex}/${formData}`,
+                success: function(res){
+                    socket.emit('edit', {index: sentIndex, res: res});
+                }
+            })
+        else{
+            $.ajax({
+                method: "POST",
+                url: `/game/${game._id}/story/${storyId}/delete/${sentIndex}`,
+                success: function(res){
+                    socket.emit('delete', sentIndex);
+                }
+            })
+        }
+    })
+    $(`#edit-form-${index}`).submit(function(event){
+        event.preventDefault();
+        $(this).blur;
+    })
+}
 
 const specialCommand = function(text){
       if(text.startsWith("[MUSIC]")){
@@ -19,7 +96,7 @@ const specialCommand = function(text){
         song.volume = 0.2;
         song.play();
         nextLine();
-        $("#gamemaster-bottom").append(`<form id="edit-form" action="/game/${game._id}/story/${story._id}/${index}" method="POST"><input id="edit-input" type="text" name="story" value='${text}'></form>`);
+        gamemasterAppendText(text);
         return "";
       }
       if(text.startsWith("[SCENE TRANSITION]")){
@@ -31,7 +108,7 @@ const specialCommand = function(text){
             }
         }
         $("body").css("background-image", `url('${url}')`);
-        $("#gamemaster-bottom").append(`<form id="edit-form" action="/game/${game._id}/story/${story._id}/${index}" method="POST"><input id="edit-input" type="text" name="story" value='${text}'></form>`);
+        gamemasterAppendText(text);
         nextLine();
         return "";
       }
@@ -63,8 +140,8 @@ const nextLine = function(){
     returnedText = addText();
     }
     if(returnedText!==""){
-        $("#player-bottom").append(`<p class='boxtext'>${returnedText}</p>`);
-        $("#gamemaster-bottom").append(`<form id="edit-form" action="/game/${game._id}/story/${story._id}/${index}" method="POST"><input id="edit-input" type="text" name="story" value='${returnedText}'></form>`);
+        $("#player-bottom").append(`<p id="boxtext-${index}" class='boxtext'>${returnedText}</p>`);
+        appendGamemasterText(returnedText);
     }   
 
     if(!listenerAdded){
