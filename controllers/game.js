@@ -131,11 +131,13 @@ router.get("/:id/story/:storyId", async function(req, res){
 /* Edit Story */
 router.post("/:id/story/:storyId/edit/:index/:form", async function(req,res){
     try{
+        let sentText = req.params.form;
+        sentText = sentText.replace(/"/g,'&quot;').replace(/'/g,"&apos;")
         let story = await db.Chapter.findById(req.params.storyId);
         let array = story.story;
-        array[req.params.index] = req.params.form;
+        array[req.params.index] = sentText;
         await db.Chapter.findByIdAndUpdate(req.params.storyId, {story: array});
-        res.send(req.params.form);
+        res.send(sentText);
 
     }catch(err){
         console.log(err);
