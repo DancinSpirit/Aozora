@@ -22,7 +22,7 @@
         </div>
     </div>
     <%for(let x=0; x<game.songs.length; x++){%>
-        <audio id='<%=game.songs[x].name%>' volume=1 loop>
+        <audio id='<%=game.songs[x].name%>' loop>
             <source src=<%=game.songs[x].url%>>
         </audio>
     <%}%>

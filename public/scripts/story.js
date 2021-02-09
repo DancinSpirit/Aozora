@@ -17,12 +17,20 @@ socket.on('nextLine', function(text){
 const specialCommand = function(text){
       if(text.startsWith("<MUSIC>")){
         song = document.getElementById(text.replace('<MUSIC>',""));
+        song.volume = 0.2;
         song.play();
         nextLine();
         return "";
       }
       if(text.startsWith("<SCENE TRANSITION>")){
-        /* This is where you switch images based on name */
+        let url;
+        for(let x=0; x<images.length; x++){
+            if(images[x].name===text.replace('<SCENE TRANSITION>',"")){
+                url = images[x].url;
+                break;
+            }
+        }
+        $("body").css("background-image", `url('${url}')`);
         console.log(text);
         nextLine();
         return "";
