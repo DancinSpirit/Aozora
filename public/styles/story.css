@@ -18,8 +18,10 @@ body{
 
 #tabs{
   position: absolute;
-  top: calc(10vh - 20px);
+  top: calc(10vh - 25px);
   margin-left: 5vw;
+  padding: 0;
+  font-size: 0;
 }
 
 .textbox::-webkit-scrollbar {
@@ -58,6 +60,21 @@ body{
 form{
   display: flex;
   flex-direction: column;
+}
+
+.tab{
+  background-color: rgba(0, 0, 0, 0.7);
+  border: none;
+  padding: 5px;
+  margin: 0;
+  color: white;
+  user-select: none;
+  cursor: pointer;
+}
+
+.unselected{
+  background-color: rgba(0, 0, 0, 0.9);
+  color: gray;
 }
 
 .invisible{

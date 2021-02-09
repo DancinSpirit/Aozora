@@ -109,10 +109,14 @@ $("body").on("keypress", function(e){
 $("#gamemaster-tab").on("click", function(){
     $("#gamemaster-box").removeClass("invisible");
     $("#player-box").addClass("invisible");
+    $("#player-tab").addClass("unselected");
+    $("#gamemaster-tab").removeClass("unselected");
     $("#gamemaster-box").scrollTop($("#gamemaster-box").prop("scrollHeight"));
 })
 $("#player-tab").on("click", function(){
     $("#gamemaster-box").addClass("invisible");
+    $("#player-tab").removeClass("unselected");
+    $("#gamemaster-tab").addClass("unselected");
     $("#player-box").removeClass("invisible");
     $(".textbox").scrollTop($(".textbox").prop("scrollHeight"));
 })
