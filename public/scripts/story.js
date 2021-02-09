@@ -105,8 +105,8 @@ const specialCommand = function(text){
         song = document.getElementById(text.replace('[MUSIC]',""));
         song.volume = 0.2;
         song.play();
+        appendGamemasterText(text);
         nextLine();
-        gamemasterAppendText(text);
         return "";
       }
       if(text.startsWith("[SCENE TRANSITION]")){
@@ -118,7 +118,7 @@ const specialCommand = function(text){
             }
         }
         $("body").css("background-image", `url('${url}')`);
-        gamemasterAppendText(text);
+        appendGamemasterText(text);
         nextLine();
         return "";
       }
