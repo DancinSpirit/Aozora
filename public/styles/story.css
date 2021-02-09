@@ -14,6 +14,7 @@ body{
   overflow:hidden;
   transition: background-image 0.2s ease-in-out;
   display: flex;
+  flex-direction: column;
 }
 
 #tabs{
@@ -53,6 +54,10 @@ body{
   padding-bottom: 20px;
 }
 
+.gamemaster-text:hover{
+  background-color: rgba(0, 0, 0, 0.3);
+}
+
 .hidden-text{
   display: none;
 }
@@ -70,6 +75,14 @@ form{
   color: white;
   user-select: none;
   cursor: pointer;
+}
+
+#user-input{
+  position: absolute;
+  bottom: 9vh;
+  height: 1vh;
+  margin-left: 5vw;
+  width: 90vw;
 }
 
 .unselected{

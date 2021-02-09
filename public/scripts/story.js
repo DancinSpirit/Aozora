@@ -7,10 +7,9 @@ let song;
 socket.on('nextLine', function(text){
     story.push(text);
     if($("#user-input").length){
-        index--;
-        index--;
         $("#user-input").remove();
         listenerAdded = false;
+        index--;
     }
 })
 
@@ -20,7 +19,7 @@ const specialCommand = function(text){
         song.volume = 0.2;
         song.play();
         nextLine();
-        $("#gamemaster-bottom").append(`<p class='boxtext'>${text}</p>`);
+        $("#gamemaster-bottom").append(`<form id="edit-form" action="/game/${game._id}/story/${story._id}/${index}" method="POST"><input id="edit-input" type="text" name="story" value='${text}'></form>`);
         return "";
       }
       if(text.startsWith("[SCENE TRANSITION]")){
@@ -32,9 +31,8 @@ const specialCommand = function(text){
             }
         }
         $("body").css("background-image", `url('${url}')`);
-        console.log(text);
+        $("#gamemaster-bottom").append(`<form id="edit-form" action="/game/${game._id}/story/${story._id}/${index}" method="POST"><input id="edit-input" type="text" name="story" value='${text}'></form>`);
         nextLine();
-        $("#gamemaster-bottom").append(`<p class='boxtext'>${text}</p>`);
         return "";
       }
 }
@@ -44,45 +42,52 @@ const addText = function(){
         index++;
     }
     if(index==story.length){
-        return `<form id="user-input"><input type="text" name="user-input" class="boxtext" action="/game/:${game._id}/story/:${storyId}/" method="POST"><input type="submit" value="Submit" id="submit"></form>`
+        $("#gamemaster-box").after(`<form id="user-input"><input type="text" name="user-input" class="boxtext" action="/game/:${game._id}/story/:${storyId}/" method="POST"><input type="submit" value="Submit" id="submit"></form>`)
+        return '';
     }
     else if(index<story.length){
         if(!story[index].startsWith("[")){
-            return `<p class='boxtext'>${story[index]}</p>`;
+            return story[index];
         }
         else{
             return specialCommand(story[index]);
         }
-    } 
+    }
+    return '';
 }
 
 const nextLine = function(){
-    let returnedText = addText();
-    $(".bottom").append(returnedText);
+    console.log(index);
+    let returnedText = "";
+    if(index!==story.length){
+    returnedText = addText();
+    }
+    if(returnedText!==""){
+        $("#player-bottom").append(`<p class='boxtext'>${returnedText}</p>`);
+        $("#gamemaster-bottom").append(`<form id="edit-form" action="/game/${game._id}/story/${story._id}/${index}" method="POST"><input id="edit-input" type="text" name="story" value='${returnedText}'></form>`);
+    }   
+
     if(!listenerAdded){
         if($("#user-input").length){
         $("#user-input").submit(function(event){
-            index--;
-            index--;
             listenerAdded = false;
             event.preventDefault();
             let formData = $(this).serialize();
             formData = formData.substring(11);
             if(formData)
-            $.ajax({
-                method: "POST",
-                url: `/game/${game._id}/story/${storyId}/${formData}`,
-                success: function(res){
-                    nextLine();
-                    socket.emit('nextLine',res);
-                    $("#user-input").remove();
-                    listenerAdded = false;
-                    index++;
-                }
-            })
+                $.ajax({
+                    method: "POST",
+                    url: `/game/${game._id}/story/${storyId}/${formData}`,
+                    success: function(res){
+                        socket.emit('nextLine',res);
+                        $("#user-input").remove();
+                        listenerAdded = false;
+                        index--;
+                    }
+                })
             else{
-            $("#user-input").unbind('submit');
-            index=story.length+1;
+                console.log("Empty");
+                listenerAdded = true;
             }
         })
         listenerAdded = true;
