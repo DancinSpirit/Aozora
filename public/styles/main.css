@@ -170,6 +170,14 @@ nav{
     transform: translate(200%, -40px);
 }
 
+#players{
+    transform: translateY(calc(100% - 40px));
+}
+
+#characters{
+    transform: translateY(calc(100% - 40px));
+}
+
 .box{
     background-color: #1E2747;
     border: solid 1px;

@@ -129,8 +129,10 @@ router.get("/:id/story/:storyId", async function(req, res){
 })
 router.post("/:id/story/:storyId/:form", async function(req,res){
     try{
-        await db.Chapter.findByIdAndUpdate(req.params.storyId,{$push: {story: req.params.form}})
-        res.send(req.params.form);
+        let sentText = req.params.form;
+        sentText = sentText.replaceAll('"','&quot;').replaceAll("'","&apos;")
+        await db.Chapter.findByIdAndUpdate(req.params.storyId,{$push: {story: sentText}})
+        res.send(sentText);
     }catch(err){
         console.log(err);
     }
