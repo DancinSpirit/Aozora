@@ -24,8 +24,8 @@ router.post("/create", async function(req,res){
 /* Games Join */
 router.post("/join/:id", async function(req,res){
     try{
-        let user = await db.User.findById(req.params.id);
-        let game = await db.Game.findByIdAndUpdate(req.body.gameId,{$push: {players: user}});
+        console.log(req.params.id);
+        let game = await db.Game.findByIdAndUpdate(req.body.gameId,{$push: {players: {user: req.params.id}}});
         return res.redirect(`/game/${game._id}/story`);
     }catch(err){
         return res.send(err);

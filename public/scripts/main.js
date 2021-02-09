@@ -20,6 +20,11 @@ const reset = function(){
     $("#slide-bar").css("transform","skew(-40deg, 0deg) translateX(-150%)");
     $("#files").css("transform","translate(200%, -40px)")
   }
+  if(state==="players"){
+    $("#nav-buttons").css("transform","translateX(-200%)");
+    $("#slide-bar").css("transform","skew(-40deg, 0deg) translateX(-150%)");
+    $("#players").css("transform","translateY(calc(100% - 40px))")
+  }
   if(state==="games"){
     $("#games").css("transform", "translate(200%, -40px)");
   }
@@ -93,6 +98,29 @@ const files = function(){
   $("#game-name-input").val(game.name);
   $("#files").css("transform","translate(0%, -40px)")
   state="files"; 
+}
+
+const players = function(){
+  $.ajax({
+    method: "GET",
+    url: `${window.location.href}/players`,
+    success: function(res){
+      $("#players-box").html(res);
+    }
+  }) 
+  reset(); 
+  $("#main-buttons").removeClass("invisible");
+  $("#nav-buttons").css("transform","translate(0%)");
+  $("#slide-bar").css("transform","skew(-40deg, 0deg) translateX(0%)");
+  $("#title").addClass("invisible");
+  $("#edit-title").removeClass("invisible");
+  $("#game-name-input").removeClass("invisible");
+  if(window.localStorage.getItem("game")){
+    game = JSON.parse(window.localStorage.getItem("game"));
+  }
+  $("#game-name-input").val(game.name);
+  $("#players").css("transform","translate(0%, -40px)")
+  state="players"; 
 }
 
 const games = function(){
@@ -190,6 +218,14 @@ const load = function(newState){
   if(newState==="files"){
     if(user){
       files();
+    }else{
+      window.history.pushState("login", '', "/login");
+      login();
+    }
+  }
+  if(newState==="players"){
+    if(user){
+      players();
     }else{
       window.history.pushState("login", '', "/login");
       login();
@@ -310,6 +346,10 @@ $("#story-button").on("click",()=>{
 $("#files-button").on("click",()=>{
   window.history.pushState('files', '', `files`);
   files();
+})
+$("#players-button").on("click",()=>{
+  window.history.pushState('players', '', `players`);
+  players();
 })
 $(".fa-edit").on("click",()=>{
   $("#game-name-input").focus();
