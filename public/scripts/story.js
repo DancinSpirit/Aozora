@@ -28,6 +28,8 @@ socket.on('delete', function(sentIndex){
         $(this).attr("id",`edit-form-${childIndex}`);
         $(this).attr("action", `/game/${game._id}/story/${storyId}/edit/${childIndex}`)
         $(this).unbind("submit");
+        $(this).unbind("focusout");
+        $(this).unbind("click");
         $(this).focusout(function(){
             let formData = $(this).serialize();
             formData = formData.substring(6);
@@ -37,7 +39,7 @@ socket.on('delete', function(sentIndex){
                     method: "POST",
                     url: `/game/${game._id}/story/${storyId}/edit/${newIndex}/${formData}`,
                     success: function(res){
-                        socket.emit('edit', {index: index, res: res});
+                        socket.emit('edit', {index: newIndex, res: res});
                     }
                 })
             else{
