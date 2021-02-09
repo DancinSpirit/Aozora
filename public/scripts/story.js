@@ -28,8 +28,7 @@ socket.on('delete', function(sentIndex){
         $(this).attr("id",`edit-form-${childIndex}`);
         $(this).attr("action", `/game/${game._id}/story/${storyId}/edit/${childIndex}`)
         $(this).unbind("submit");
-        $(this).submit(function(event){
-            event.preventDefault();
+        $(this).focusout(function(){
             let formData = $(this).serialize();
             formData = formData.substring(6);
             newIndex = parseInt($(this).attr("id").substring(10),10);
@@ -51,6 +50,13 @@ socket.on('delete', function(sentIndex){
                 })
             }
         })
+        $(this).submit(function(event){
+            event.preventDefault();
+            $(this).blur;
+        })
+        $(this).on("click",function(event){
+            event.stopPropagation();
+        })
     });
     index--;
 })
@@ -61,7 +67,7 @@ socket.on('edit',function(sent){
 })
 
 const appendGamemasterText = function(text){
-    $("#gamemaster-bottom").append(`<form id="edit-form-${index}" action="/game/${game._id}/story/${storyId}/edit/${index}" method="POST"><input id="edit-input" type="text" name="story" value='${text}'></form>`);
+    $("#gamemaster-bottom").append(`<form id="edit-form-${index}" action="/game/${game._id}/story/${storyId}/edit/${index}" method="POST"><input class="edit-input" type="text" name="story" value='${text}'></form>`);
     let sentIndex = index;
     $(`#edit-form-${index}`).focusout(function(){
         let formData = $(this).serialize();
@@ -88,6 +94,10 @@ const appendGamemasterText = function(text){
         event.preventDefault();
         $(this).blur;
     })
+    $(`#edit-form-${index}`).on("click",function(event){
+        event.stopPropagation();
+    })
+    
 }
 
 const specialCommand = function(text){
