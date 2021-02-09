@@ -17,10 +17,18 @@
     <script src = "/scripts/story.js" defer></script>
 </head>
 <body>
-    <div id="textbox">
-        <div id="bottom">
-        </div>
-    </div>
+    <section id = "tabs">
+        <button id="gamemaster-tab">Gamemaster View</button>
+        <button id="player-tab">Player View</button>
+    </section>
+    <section class="textbox" id="player-box">
+        <section class="bottom">
+        </section>
+    </section>
+    <section class="textbox invisible" id="gamemaster-box">
+        <section class="bottom" id="gamemaster-bottom">
+        </section>
+    </section>
     <%for(let x=0; x<game.songs.length; x++){%>
         <audio id='<%=game.songs[x].name%>' loop>
             <source src=<%=game.songs[x].url%>>

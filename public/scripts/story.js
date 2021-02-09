@@ -15,17 +15,18 @@ socket.on('nextLine', function(text){
 })
 
 const specialCommand = function(text){
-      if(text.startsWith("<MUSIC>")){
-        song = document.getElementById(text.replace('<MUSIC>',""));
+      if(text.startsWith("[MUSIC]")){
+        song = document.getElementById(text.replace('[MUSIC]',""));
         song.volume = 0.2;
         song.play();
         nextLine();
+        $("#gamemaster-bottom").append(`<p class='boxtext'>${text}</p>`);
         return "";
       }
-      if(text.startsWith("<SCENE TRANSITION>")){
+      if(text.startsWith("[SCENE TRANSITION]")){
         let url;
         for(let x=0; x<images.length; x++){
-            if(images[x].name===text.replace('<SCENE TRANSITION>',"")){
+            if(images[x].name===text.replace('[SCENE TRANSITION]',"")){
                 url = images[x].url;
                 break;
             }
@@ -33,6 +34,7 @@ const specialCommand = function(text){
         $("body").css("background-image", `url('${url}')`);
         console.log(text);
         nextLine();
+        $("#gamemaster-bottom").append(`<p class='boxtext'>${text}</p>`);
         return "";
       }
 }
@@ -45,7 +47,7 @@ const addText = function(){
         return `<form id="user-input"><input type="text" name="user-input" class="boxtext" action="/game/:${game._id}/story/:${storyId}/" method="POST"><input type="submit" value="Submit" id="submit"></form>`
     }
     else if(index<story.length){
-        if(!story[index].startsWith("<")){
+        if(!story[index].startsWith("[")){
             return `<p class='boxtext'>${story[index]}</p>`;
         }
         else{
@@ -56,7 +58,7 @@ const addText = function(){
 
 const nextLine = function(){
     let returnedText = addText();
-    $("#bottom").append(returnedText);
+    $(".bottom").append(returnedText);
     if(!listenerAdded){
         if($("#user-input").length){
         $("#user-input").submit(function(event){
@@ -86,10 +88,11 @@ const nextLine = function(){
         listenerAdded = true;
         }
     }
-    $("#textbox").scrollTop($("#textbox").prop("scrollHeight"));
+    $(".textbox").scrollTop($(".textbox").prop("scrollHeight"));
+    $("#gamemaster-box").scrollTop($("#gamemaster-box").prop("scrollHeight"));
 }
 
-$("#textbox").on("click", nextLine);
+$(".textbox").on("click", nextLine);
 
 $("body").on("keydown", function(e){
     if(e.keyCode == 17){
@@ -103,3 +106,13 @@ $("body").on("keypress", function(e){
     }
 })
 
+$("#gamemaster-tab").on("click", function(){
+    $("#gamemaster-box").removeClass("invisible");
+    $("#player-box").addClass("invisible");
+    $("#gamemaster-box").scrollTop($("#gamemaster-box").prop("scrollHeight"));
+})
+$("#player-tab").on("click", function(){
+    $("#gamemaster-box").addClass("invisible");
+    $("#player-box").removeClass("invisible");
+    $(".textbox").scrollTop($(".textbox").prop("scrollHeight"));
+})
