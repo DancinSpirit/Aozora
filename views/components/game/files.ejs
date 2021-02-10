@@ -8,7 +8,7 @@
         </section>
         <%for(let x=0; x<game.songs.length; x++){%>
         <section class = "box-section box-content">
-            <%=game.songs[x].name%>
+            <button class="box-button music-play" id="<%=game.songs[x].name%>-button"><%=game.songs[x].name%></button>
         </section>
         <%}%>
         <section class = "fill"></section>
@@ -54,3 +54,9 @@
     </form>
 </section>
 </section>
+<!-- Audio -->
+<%for(let x=0; x<game.songs.length; x++){%>
+    <audio id='<%=game.songs[x].name%>' loop>
+        <source src='<%=game.songs[x].url%>'>
+    </audio>
+<%}%>

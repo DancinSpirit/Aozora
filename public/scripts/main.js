@@ -1,5 +1,6 @@
 /* STATES */
 let state = "login";
+let song;
 
 const reset = function () {
   if (state === "login") {
@@ -87,6 +88,15 @@ const files = function () {
         if($(this).height()<1){
           $(this).remove();
         }
+      })
+      $(".music-play").on("click", function(){
+        if(song){
+          song.pause();
+        }
+        song = document.getElementById($(this).attr('id').replace("-button",""));
+        console.log(song);
+        song.volume = 0.2;
+        song.play();
       })
     }
   })

@@ -110,6 +110,9 @@ const appendGamemasterText = function (text) {
 
 const specialCommand = function (text) {
     if (text.startsWith("[MUSIC]")) {
+        if(song){
+            song.pause();
+        }
         song = document.getElementById(text.replace('[MUSIC]', ""));
         song.volume = 0.2;
         song.play();

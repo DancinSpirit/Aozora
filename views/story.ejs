@@ -33,16 +33,16 @@
     </section>
     <%for(let x=0; x<game.songs.length; x++){%>
     <audio id='<%=game.songs[x].name%>' loop>
-        <source src=<%=game.songs[x].url%>>
+        <source src='<%=game.songs[x].url%>'>
     </audio>
     <%}%>
     <!-- Variable Processors -->
     <script>
         let images = JSON.parse('<%-JSON.stringify(game.images)%>');
-    let story = JSON.parse('<%-JSON.stringify(story.story)%>');
-    let songs = JSON.parse('<%-JSON.stringify(game.songs)%>');
-    let game = JSON.parse('<%-JSON.stringify(game)%>');
-    let storyId = JSON.parse('<%-JSON.stringify(story.id)%>');
+        let story = JSON.parse('<%-JSON.stringify(story.story)%>');
+        let songs = JSON.parse('<%-JSON.stringify(game.songs)%>');
+        let game = JSON.parse('<%-JSON.stringify(game)%>');
+        let storyId = JSON.parse('<%-JSON.stringify(story.id)%>');
     </script>
 </body>
 
