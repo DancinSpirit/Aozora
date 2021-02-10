@@ -61,10 +61,10 @@ router.post("/:id/music", async function(req,res){
         musicObject = {name: req.body.name, url: url};
         game = await db.Game.findByIdAndUpdate(req.params.id,{$push:{songs: musicObject}})
         console.log(game);
-        }catch(err){
-            console.log("Error?");
-            console.log(err)
-        }
+    }catch(err){
+        console.log("Error?");
+        console.log(err)
+    }
     res.redirect('back');
 })
 
@@ -90,10 +90,10 @@ router.post("/:id/images", async function(req,res){
         imageObject = {name: req.body.name, url: url};
         game = await db.Game.findByIdAndUpdate(req.params.id,{$push:{images: imageObject}})
         console.log(game);
-        }catch(err){
-            console.log("Error?");
-            console.log(err)
-        }
+    }catch(err){
+        console.log("Error?");
+        console.log(err)
+    }
     res.redirect('back');
 })
 

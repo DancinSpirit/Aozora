@@ -3,6 +3,7 @@ const methodOverride = require("method-override");
 const session = require('express-session');
 const fileUpload = require('express-fileupload');
 const MongoStore = require('connect-mongo')(session);
+const db = require("./models");
 
 const ctrl = require("./controllers");
 
@@ -35,6 +36,11 @@ app.use(session({
 
 app.use(async function(req,res,next){
     app.locals.user = req.session.currentUser;
+    /* Add Avatar to User */
+    if(app.locals.user){
+    foundUser = await db.User.findById(app.locals.user.id);
+    app.locals.user.avatar = foundUser.avatar;
+    }
     app.locals.game = false;
     next();
 }) 

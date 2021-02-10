@@ -1,6 +1,10 @@
 <section id="avatar-box">
-        <img id="account-avatar" src=<%=`https://aozora.s3.us-east-2.amazonaws.com/${user.username}.jpg`%>>
-        <form id="avatar-upload-form" class="mt-4" action="/profile/avatar" method="POST" enctype="multipart/form-data">
+    <%if(user.avatar){%>
+        <img id="account-avatar" src='<%=user.avatar%>'>
+    <%}else{%>
+        <img id = "account-avatar" src="/images/avatar_placeholder.png">
+    <%}%>
+        <form id="avatar-upload-form" class="mt-4" action="/profile/avatar/<%=user.id%>" method="POST" enctype="multipart/form-data">
             <div class="form-group">
                 <input id="file" type="file" name="file" class="form-control-file border"/>
             </div>

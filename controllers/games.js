@@ -34,8 +34,8 @@ router.post("/join/:id", async function(req,res){
 
 /* Games Component */
 router.get("/games", async function(req,res){
-    let gamemasterGames = await db.Game.find({gamemasters: {_id: req.session.currentUser.id}});
-    let playerGames = await db.Game.find({players: {_id: req.session.currentUser.id}});
+    let gamemasterGames = await db.Game.find({gamemasters: {_id: req.session.currentUser.id}}).populate("gamemasters players");
+    let playerGames = await db.Game.find({players: {_id: req.session.currentUser.id}}).populate("gamemasters players");
     console.log(playerGames);
     let games = [...gamemasterGames, ...playerGames];
     res.render("components/games",{games: games});

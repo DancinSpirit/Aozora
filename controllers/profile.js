@@ -20,11 +20,13 @@ router.get("/info/:id", async function(req,res){
 })
 
 /* Upload Avatar */
-router.post("/avatar", async function(req,res){
+router.post("/avatar/:id", async function(req,res){
   const file = req.files.file;
+  let filename = `${Date.now()}-${file.name}`;
+  let url = `https://aozora.s3.us-east-2.amazonaws.com/${filename}`
   const params = {
     Bucket: "aozora",
-    Key: `${req.session.currentUser.username}.jpg`,
+    Key: filename,
     Body: Buffer.from(file.data, 'binary')
   }
 
@@ -35,6 +37,13 @@ router.post("/avatar", async function(req,res){
     console.log(`File uploaded successfully. ${data.Location}`);
 
   })
+  try{
+    user = await db.User.findByIdAndUpdate(req.params.id,{avatar: url});
+  }catch(err){
+    console.log("Error?");
+    console.log(err)
+  }
+
   res.redirect('back');
 })
 
