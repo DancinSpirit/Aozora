@@ -128,7 +128,7 @@ const games = function () {
     method: "GET",
     url: "/games/games",
     success: function (res) {
-      $("#games-box").html(res);
+      $("#games-box-box").html(res);
       $(".game-button").on("click", function () {
         game = {
           _id: $(this).attr('id'),

@@ -182,13 +182,13 @@ nav {
 
 .box {
     background-color: #1E2747;
-    border: solid 1px;
     box-shadow: 0px 0px 5px #03A9F4;
 }
 
 
 /* Profile */
 #account-box {
+    border: solid 1px;
     width: 40%;
     height: 60%;
 }
@@ -203,17 +203,23 @@ nav {
 }
 
 /* GAMES */
-#games-box {
-    overflow-y: scroll;
+#games-box-box{
     width: 60%;
     height: 80%;
+    display: flex;
+    flex-direction: column;
+    overflow: hidden;
+}
+.games-box {
+    overflow-y: auto;
 }
 
 .box-title {
     font-size: 30px;
     border: solid 1px;
     padding-left: 10px;
-    background-color:  #1E2747;
+    background-color: #014E70;
+    box-shadow: 0px 0px 5px #03A9F4;
 }
 
 .box-section {
@@ -244,12 +250,17 @@ nav {
     border: solid 1px;
     padding: 10px;
     margin: 10px;
+    background-color: #014E70;
 }
 
 .player-avatar{
     max-height: 50px;
     max-width: 50px;
     padding-right: 10px;
+}
+
+.game-title{
+    font-size: 28px;
 }
 
 /* STORY */

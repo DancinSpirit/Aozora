@@ -19,7 +19,7 @@ body {
 
 #tabs {
   position: absolute;
-  top: calc(10vh - 25px);
+  top: calc(10vh - 26px);
   margin-left: 5vw;
   padding: 0;
   font-size: 0;

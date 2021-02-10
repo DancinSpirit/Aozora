@@ -1,11 +1,11 @@
-<section>
-    <section class = "box-title">
-        Your Games:
-    </section>
+<section class = "box-title">
+    Your Games:
+</section>
+<section class = "games-box">
     <%for(let x=0; x<games.length; x++){%>
     <section class = "box-section game-box">
         <button class = "box-button game-button" name="<%=games[x].name%>" id="<%=games[x].id%>">
-            <section><%=games[x].name%></section>
+            <section class = "game-title"><%=games[x].name%></section>
             <section>Gamemasters:</section>
             <%for(let y=0; y<games[x].gamemasters.length; y++){%>
                 <section class="player-box"><img class='player-avatar'src='<%=games[x].gamemasters[y].avatar%>'><%=games[x].gamemasters[y].username%></section>
@@ -18,10 +18,10 @@
     </section>
     <%}%>
     <section id = "new-game" class = "box-section">
-        <form class="form" id="create-game-form" action="/games/create" method="POST">
+        <form id="create-game-form" action="/games/create" method="POST">
             <p class="center-form"><input type="submit" value="Create New Game" class="submit-button" id="create-game-button"></p>
         </form>
-        <form class="form" id="join-game-form" action="/games/join/<%=user.id%>" method="POST">
+        <form id="join-game-form" action="/games/join/<%=user.id%>" method="POST">
             Game Id: <input id="game-id-input" type="text" name="gameId" class="form-input">
             <p class="center-form"><input type="submit" value="Join New Game By Id" class="submit-button" id="join-game-button"></p>
         </form>
