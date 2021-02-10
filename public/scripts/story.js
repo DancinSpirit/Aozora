@@ -167,7 +167,7 @@ const nextLine = function () {
                 event.preventDefault();
                 let formData = $(this).serialize();
                 formData = formData.substring(11);
-                if (formData)
+                if (formData) {
                     $.ajax({
                         method: "POST",
                         url: `/game/${game._id}/story/${storyId}/${formData}`,
@@ -178,7 +178,7 @@ const nextLine = function () {
                             index--;
                         }
                     })
-                else {
+                } else {
                     console.log("Empty");
                     listenerAdded = true;
                 }

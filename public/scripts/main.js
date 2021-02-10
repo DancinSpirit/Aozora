@@ -167,6 +167,9 @@ const account = function () {
   reset();
   $("#main-buttons").removeClass("invisible");
   $("#account").css("transform", "translateY(-40px)");
+  $("#title").removeClass("invisible");
+  $("#edit-title").addClass("invisible");
+  $("#game-name-input").addClass("invisible");
   state = "account";
 }
 
@@ -176,6 +179,7 @@ window.addEventListener('popstate', (event) => {
   load(newState);
 })
 
+/* Auth */
 const load = function (newState) {
   console.log(newState);
   if (newState === "account") {
@@ -236,6 +240,7 @@ const load = function (newState) {
   }
 }
 
+/* Home Page Front-End Routing */
 if (sentState) {
   if (sentState === "home-games") {
     window.history.pushState("games", '', '/games');
