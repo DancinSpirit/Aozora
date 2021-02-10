@@ -1,6 +1,9 @@
 <section id="music-box">
     <form id="music-upload-form" class="mt-4" action="/game/<%=game._id%>/music" method="POST" enctype="multipart/form-data">
         <div class="form-group">
+            Name: <input id = "music-name" type = "text" name="name"/>
+            <p></p>
+            File:
             <input id = "file" type="file" name="file" id="input-files" class="form-control-file border"/>
         </div>
         <button id="music-submit" type="submit" class="btn btn-primary">Submit</button>
@@ -9,7 +12,9 @@
 <section id="images-box">
     <form id="image-upload-form" class="mt-4" action="/game/<%=game._id%>/images" method="POST" enctype="multipart/form-data">
         <div class="form-group">
-            <input id = "file" type="file" name="file" id="input-files" class="form-control-file border"/>
+            Name: <input id = "image-name" type = "text" name="name"/>
+            <p></p>
+            File:<input id = "file" type="file" name="file" id="input-files" class="form-control-file border"/>
         </div>
         <button id="image-submit" type="submit" class="btn btn-primary">Submit</button>
     </form>

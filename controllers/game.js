@@ -40,6 +40,7 @@ router.post("/:id/story/create", async function(req, res){
 
 /* Upload Music */
 router.post("/:id/music", async function(req,res){
+    console.log(req.body.name);
     const file = req.files.file;
     let filename = `${Date.now()}-${file.name}`;
     let url = `https://aozora.s3.us-east-2.amazonaws.com/${filename}`
@@ -57,7 +58,7 @@ router.post("/:id/music", async function(req,res){
     })
 
     try{
-        musicObject = {name: "Test-File", url: url};
+        musicObject = {name: req.body.name, url: url};
         game = await db.Game.findByIdAndUpdate(req.params.id,{$push:{songs: musicObject}})
         console.log(game);
         }catch(err){
@@ -86,7 +87,7 @@ router.post("/:id/images", async function(req,res){
     })
 
     try{
-        imageObject = {name: "Test-File", url: url};
+        imageObject = {name: req.body.name, url: url};
         game = await db.Game.findByIdAndUpdate(req.params.id,{$push:{images: imageObject}})
         console.log(game);
         }catch(err){
