@@ -59,7 +59,7 @@ const storyState = function () {
     method: "GET",
     url: `${window.location.href}/story`,
     success: function (res) {
-      $("#story-box").html(res);
+      $("#story-box-box").html(res);
     }
   })
   reset();
