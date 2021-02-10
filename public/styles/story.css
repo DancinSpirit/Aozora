@@ -1,23 +1,23 @@
-*{
+* {
   margin: 0;
   padding: 0;
   box-sizing: border-box;
 }
 
-body{
+body {
   background-image: url('https://i.imgur.com/l3r8Aum.jpeg');
   background-repeat: no-repeat;
   background-size: cover;
   background-position: top;
   backdrop-filter: blur(5px);
   min-height: 100vh;
-  overflow:hidden;
+  overflow: hidden;
   transition: background-image 0.2s ease-in-out;
   display: flex;
   flex-direction: column;
 }
 
-#tabs{
+#tabs {
   position: absolute;
   top: calc(10vh - 25px);
   margin-left: 5vw;
@@ -28,9 +28,12 @@ body{
 .textbox::-webkit-scrollbar {
   display: none;
 }
-.textbox{
-  -ms-overflow-style: none;  /* IE and Edge */
-  scrollbar-width: none;  /* Firefox */
+
+.textbox {
+  -ms-overflow-style: none;
+  /* IE and Edge */
+  scrollbar-width: none;
+  /* Firefox */
   margin: auto;
   color: white;
   height: 80vh;
@@ -39,35 +42,37 @@ body{
   position: relative;
   overflow-y: auto;
 }
-.bottom{
+
+.bottom {
   height: 1%;
   position: absolute;
   bottom: 0;
   width: 100%;
 }
-.boxtext{
+
+.boxtext {
   user-select: none;
-  font-family:'Oswald', sans-serif;
+  font-family: 'Oswald', sans-serif;
   font-size: 20px;
   padding-left: 20px;
   padding-right: 20px;
   padding-bottom: 20px;
 }
 
-.gamemaster-text:hover{
+.gamemaster-text:hover {
   background-color: rgba(0, 0, 0, 0.3);
 }
 
-.hidden-text{
+.hidden-text {
   display: none;
 }
 
-form{
+form {
   display: flex;
   flex-direction: column;
 }
 
-.tab{
+.tab {
   background-color: rgba(0, 0, 0, 0.7);
   border: none;
   padding: 5px;
@@ -77,7 +82,7 @@ form{
   cursor: pointer;
 }
 
-#user-input{
+#user-input {
   position: absolute;
   bottom: 9vh;
   height: 1vh;
@@ -85,10 +90,10 @@ form{
   width: 90vw;
 }
 
-.edit-input{
+.edit-input {
   background: none;
   user-select: none;
-  font-family:'Oswald', sans-serif;
+  font-family: 'Oswald', sans-serif;
   font-size: 20px;
   padding-left: 20px;
   padding-right: 20px;
@@ -97,13 +102,11 @@ form{
   border: none;
 }
 
-
-
-.unselected{
+.unselected {
   background-color: rgba(0, 0, 0, 0.9);
   color: gray;
 }
 
-.invisible{
+.invisible {
   display: none;
 }

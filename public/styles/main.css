@@ -1,50 +1,51 @@
-*{
+* {
     margin: 0;
     padding: 0;
     box-sizing: border-box;
     transition: 1000ms;
 }
 
-a{
+a {
     text-decoration: none;
     color: white;
 }
 
-html, body{
-    background: rgb(1,78,112);
-    background: radial-gradient(at top, rgba(1,78,112,1) 0%, rgba(20,26,50,1) 100%);
+html, body {
+    background: rgb(1, 78, 112);
+    background: radial-gradient(at top, rgba(1, 78, 112, 1) 0%, rgba(20, 26, 50, 1) 100%);
     height: 100%;
     overflow: hidden;
     font-family: 'Oswald', sans-serif;
-    color: 	white;
+    color: white;
 }
 
 /* NAVBAR */
-#edit-title{
+#edit-title {
     font-size: 15px;
     position: absolute;
     z-index: 3;
-    padding: 10px; 
+    padding: 10px;
 }
-nav{
+
+nav {
     height: 80px;
     display: flex;
     flex-direction: column;
 }
 
-#top{
+#top {
     height: 50%;
     display: flex;
-    background:#014E70;
+    background: #014E70;
     box-shadow: 0px 0px 5px 1px black;
 }
 
-#bottom{
+#bottom {
     height: 50%;
     display: flex;
 }
 
-#left{
+#left {
     display: flex;
     align-items: center;
     width: 50%;
@@ -52,7 +53,7 @@ nav{
 }
 
 /* This is to hide the shadow from #slide-bar */
-#shadow-hide{
+#shadow-hide {
     position: absolute;
     background: #014E70;
     min-width: 277px;
@@ -61,31 +62,32 @@ nav{
     z-index: 1;
 }
 
-#title{
+#title {
     padding-left: 10px;
 }
 
-#title-form{
+#title-form {
     padding-left: 35px;
     height: 100%;
 }
 
-#game-name-input{
+#game-name-input {
     font-size: 27px;
     background: none;
     border: none;
     color: white;
-    font-family:'Oswald', sans-serif;
+    font-family: 'Oswald', sans-serif;
     width: 100%;
     outline: none;
 }
-#title-form:focus-within{
-    background-color:#01628b;
+
+#title-form:focus-within {
+    background-color: #01628b;
 }
 
-#slide-bar{
+#slide-bar {
     content: "";
-    background-color:#05384e;
+    background-color: #05384e;
     min-width: 260px;
     width: 40%;
     height: 40px;
@@ -94,48 +96,48 @@ nav{
     box-shadow: 3px 2px 5px 0px black;
 }
 
-#nav-buttons{
+#nav-buttons {
     height: 40px;
     width: 30%;
-    background-color:#05384e;
+    background-color: #05384e;
     position: absolute;
     padding-left: 3px;
     z-index: 1;
     transform: translateX(-200%);
 }
 
-.nav-buttons{
+.nav-buttons {
     height: 100%;
     display: flex;
     align-content: center;
 }
 
-#main-buttons{
+#main-buttons {
     justify-content: flex-end;
 }
 
-.nav-button{
+.nav-button {
     background: transparent;
-    outline:none;
+    outline: none;
     border: none;
     cursor: pointer;
     text-decoration: none;
     padding-left: 8px;
     padding-right: 8px;
-    color: 	white;
+    color: white;
 }
 
-#right{
+#right {
     width: 50%;
     padding-right: 10px;
 }
 
-#login-buttons{
+#login-buttons {
     justify-content: flex-end;
 }
 
 /* MAIN BODY */
-.center-container{
+.center-container {
     height: calc(100vh - 40px);
     width: 100%;
     display: flex;
@@ -146,39 +148,39 @@ nav{
     transform: translateY(-40px);
 }
 
-#login{
+#login {
     transform: translate(-100%, -40px);
 }
 
-#register{
+#register {
     transform: translateY(calc(100% - 40px));
 }
 
-#account{
+#account {
     transform: translateY(calc(200% - 40px));
 }
 
-#games{
+#games {
     transform: translate(200%, -40px);
 }
 
-#story{
+#story {
     transform: translate(-100%, -40px);
 }
 
-#files{
+#files {
     transform: translate(200%, -40px);
 }
 
-#players{
+#players {
     transform: translateY(calc(100% - 40px));
 }
 
-#characters{
+#characters {
     transform: translateY(calc(100% - 40px));
 }
 
-.box{
+.box {
     background-color: #1E2747;
     border: solid 1px;
     box-shadow: 0px 0px 5px #03A9F4;
@@ -186,69 +188,70 @@ nav{
 
 
 /* Profile */
-#account-box{
+#account-box {
     width: 40%;
     height: 60%;
 }
 
-#account-avatar{
-   max-height: 200px;
-   max-width: 200px; 
+#account-avatar {
+    max-height: 200px;
+    max-width: 200px;
 }
 
-#avatar-upload-form{
+#avatar-upload-form {
     display: none;
 }
 
 /* GAMES */
-#games-box{
+#games-box {
     width: 60%;
     height: 80%;
 }
 
-.box-section{
+.box-section {
     padding: 10px;
     border: solid 1px;
     box-shadow: 0px 0px 5px #03A9F4;
 }
 
-.box-button{
+.box-button {
     background: none;
     border: none;
     color: white;
     font-family: 'Oswald', sans-serif;
     font-size: 20px;
 }
-.box-button:hover{
+
+.box-button:hover {
     cursor: pointer;
 }
 
 /* STORY */
-#story-box{
+#story-box {
     width: 60%;
     height: 80%;
 }
 
 /* FORMS */
-.form{
+.form {
     background-color: #1E2747;
     padding: 10px;
     border: solid 1px;
     box-shadow: 0px 0px 5px #03A9F4;
 }
 
-.form-input{
-    color: 	#606060;
-    border-color:#03A9F4;
+.form-input {
+    color: #606060;
+    border-color: #03A9F4;
     border-radius: 4px;
 }
 
-.form-input:focus{
-    outline-color:rgb(83, 189, 224);
-    color:rgb(83, 189, 224);
+.form-input:focus {
+    outline-color: rgb(83, 189, 224);
+    color: rgb(83, 189, 224);
 }
 
-.submit-button{
+.submit-button {
     background-color: #03A9F4;
     border: none;
     border-radius: 4px;
@@ -258,25 +261,26 @@ nav{
     margin-top: 10px;
 }
 
-.form-title{
+.form-title {
     text-shadow: 0px 0px 10px #03A9F4;
 }
 
-.center-form{
+.center-form {
     text-align: center;
 }
 
-.right-form{
+.right-form {
     text-align: right;
 }
 
 /* Special Classes */
-.invisible{
+.invisible {
     display: none;
     visibility: hidden;
     transition: 0ms;
 }
+
 .resize-animation-stopper * {
     animation: none !important;
     transition: none !important;
-}  
+}

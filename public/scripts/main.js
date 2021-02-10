@@ -1,284 +1,288 @@
 /* STATES */
 let state = "login";
 
-const reset = function(){
-  if(state==="login"){
-    $("#login").css("transform","translate(-100%,-40px)");
+const reset = function () {
+  if (state === "login") {
+    $("#login").css("transform", "translate(-100%,-40px)");
     $("#login-buttons").addClass("invisible");
   }
-  if(state==="register"){
-    $("#register").css("transform","translateY(calc(100% - 40px))");
+  if (state === "register") {
+    $("#register").css("transform", "translateY(calc(100% - 40px))");
     $("#login-buttons").addClass("invisible");
   }
-  if(state==="story"){
-    $("#nav-buttons").css("transform","translateX(-200%)");
-    $("#slide-bar").css("transform","skew(-40deg, 0deg) translateX(-150%)");
-    $("#story").css("transform","translate(-100%, -40px)")
+  if (state === "story") {
+    $("#nav-buttons").css("transform", "translateX(-200%)");
+    $("#slide-bar").css("transform", "skew(-40deg, 0deg) translateX(-150%)");
+    $("#story").css("transform", "translate(-100%, -40px)")
   }
-  if(state==="files"){
-    $("#nav-buttons").css("transform","translateX(-200%)");
-    $("#slide-bar").css("transform","skew(-40deg, 0deg) translateX(-150%)");
-    $("#files").css("transform","translate(200%, -40px)")
+  if (state === "files") {
+    $("#nav-buttons").css("transform", "translateX(-200%)");
+    $("#slide-bar").css("transform", "skew(-40deg, 0deg) translateX(-150%)");
+    $("#files").css("transform", "translate(200%, -40px)")
   }
-  if(state==="players"){
-    $("#nav-buttons").css("transform","translateX(-200%)");
-    $("#slide-bar").css("transform","skew(-40deg, 0deg) translateX(-150%)");
-    $("#players").css("transform","translateY(calc(100% - 40px))")
+  if (state === "players") {
+    $("#nav-buttons").css("transform", "translateX(-200%)");
+    $("#slide-bar").css("transform", "skew(-40deg, 0deg) translateX(-150%)");
+    $("#players").css("transform", "translateY(calc(100% - 40px))")
   }
-  if(state==="games"){
+  if (state === "games") {
     $("#games").css("transform", "translate(200%, -40px)");
   }
-  if(state==="account"){
+  if (state === "account") {
     $("#account").css("transform", "translateY(calc(200% - 40px))");
-    
+
   }
 }
 
-const login = function(){
+const login = function () {
   reset();
   $("#main-buttons").addClass("invisible");
-  $("#login").css("transform","translate(0%,-40px)")  
+  $("#login").css("transform", "translate(0%,-40px)")
   $("#login-buttons").removeClass("invisible");
   $("#edit-title").addClass("invisible");
   $("#game-name-input").addClass("invisible");
-  state="login";
+  state = "login";
 }
 
-const register = function(){
+const register = function () {
   reset();
   $("#main-buttons").addClass("invisible");
-  $("#register").css("transform","translateY(-40px)");
+  $("#register").css("transform", "translateY(-40px)");
   $("#login-buttons").removeClass("invisible");
   $("#edit-title").addClass("invisible");
   $("#game-name-input").addClass("invisible");
-  state="register";
+  state = "register";
 }
 
-const storyState = function(){
+const storyState = function () {
   $.ajax({
     method: "GET",
     url: `${window.location.href}/story`,
-    success: function(res){
+    success: function (res) {
       $("#story-box").html(res);
     }
-  }) 
-  reset(); 
+  })
+  reset();
   $("#main-buttons").removeClass("invisible");
-  $("#nav-buttons").css("transform","translate(0%)");
-  $("#slide-bar").css("transform","skew(-40deg, 0deg) translateX(0%)");
+  $("#nav-buttons").css("transform", "translate(0%)");
+  $("#slide-bar").css("transform", "skew(-40deg, 0deg) translateX(0%)");
   $("#title").addClass("invisible");
   $("#edit-title").removeClass("invisible");
   $("#game-name-input").removeClass("invisible");
-  if(window.localStorage.getItem("game")){
+  if (window.localStorage.getItem("game")) {
     game = JSON.parse(window.localStorage.getItem("game"));
   }
   $("#game-name-input").val(game.name);
-  $("#story").css("transform","translate(0%, -40px)")
-  state="story"; 
+  $("#story").css("transform", "translate(0%, -40px)")
+  state = "story";
 }
 
-const files = function(){
+const files = function () {
   $.ajax({
     method: "GET",
     url: `${window.location.href}/files`,
-    success: function(res){
+    success: function (res) {
       $("#files-box").html(res);
     }
-  }) 
-  reset(); 
+  })
+  reset();
   $("#main-buttons").removeClass("invisible");
-  $("#nav-buttons").css("transform","translate(0%)");
-  $("#slide-bar").css("transform","skew(-40deg, 0deg) translateX(0%)");
+  $("#nav-buttons").css("transform", "translate(0%)");
+  $("#slide-bar").css("transform", "skew(-40deg, 0deg) translateX(0%)");
   $("#title").addClass("invisible");
   $("#edit-title").removeClass("invisible");
   $("#game-name-input").removeClass("invisible");
-  if(window.localStorage.getItem("game")){
+  if (window.localStorage.getItem("game")) {
     game = JSON.parse(window.localStorage.getItem("game"));
   }
   $("#game-name-input").val(game.name);
-  $("#files").css("transform","translate(0%, -40px)")
-  state="files"; 
+  $("#files").css("transform", "translate(0%, -40px)")
+  state = "files";
 }
 
-const players = function(){
+const players = function () {
   $.ajax({
     method: "GET",
     url: `${window.location.href}/players`,
-    success: function(res){
+    success: function (res) {
       $("#players-box").html(res);
     }
-  }) 
-  reset(); 
+  })
+  reset();
   $("#main-buttons").removeClass("invisible");
-  $("#nav-buttons").css("transform","translate(0%)");
-  $("#slide-bar").css("transform","skew(-40deg, 0deg) translateX(0%)");
+  $("#nav-buttons").css("transform", "translate(0%)");
+  $("#slide-bar").css("transform", "skew(-40deg, 0deg) translateX(0%)");
   $("#title").addClass("invisible");
   $("#edit-title").removeClass("invisible");
   $("#game-name-input").removeClass("invisible");
-  if(window.localStorage.getItem("game")){
+  if (window.localStorage.getItem("game")) {
     game = JSON.parse(window.localStorage.getItem("game"));
   }
   $("#game-name-input").val(game.name);
-  $("#players").css("transform","translate(0%, -40px)")
-  state="players"; 
+  $("#players").css("transform", "translate(0%, -40px)")
+  state = "players";
 }
 
-const games = function(){
+const games = function () {
   $.ajax({
     method: "GET",
     url: "/games/games",
-    success: function(res){
+    success: function (res) {
       $("#games-box").html(res);
-      $(".game-button").on("click", function(){
-        game = {_id: $(this).attr('id'), name: $(this).attr('name')};
+      $(".game-button").on("click", function () {
+        game = {
+          _id: $(this).attr('id'),
+          name: $(this).attr('name')
+        };
         window.localStorage.setItem('game', JSON.stringify(game));
         window.history.pushState("story", '', `/game/${game._id}/story`);
         storyState();
       })
     }
-  }) 
+  })
   reset();
   $("#main-buttons").removeClass("invisible");
   $("#games").css("transform", "translateY(-40px)");
   $("#title").removeClass("invisible");
   $("#edit-title").addClass("invisible");
   $("#game-name-input").addClass("invisible");
-  state="games";
+  state = "games";
 }
 
-const account = function(){
+const account = function () {
   $.ajax({
     method: "GET",
     url: "/profile/info",
-    success: function(res){
+    success: function (res) {
       $("#account-box").html(res);
-        /* Image Upload */
-      $("#account-avatar").on("click", ()=>{
+      /* Image Upload */
+      $("#account-avatar").on("click", () => {
         $("#file").click();
       })
-      $("#file").change(function(){
+      $("#file").change(function () {
         $("#file-submit").click();
       })
     }
-  }) 
+  })
   reset();
   $("#main-buttons").removeClass("invisible");
   $("#account").css("transform", "translateY(-40px)");
-  state="account";
+  state = "account";
 }
 
 /*State Management*/
-window.addEventListener('popstate', (event)=>{
+window.addEventListener('popstate', (event) => {
   newState = event.state;
   load(newState);
 })
 
-const load = function(newState){
+const load = function (newState) {
   console.log(newState);
-  if(newState==="account"){
-    if(user){
+  if (newState === "account") {
+    if (user) {
       account();
-    }else{
+    } else {
       window.history.pushState("login", '', "/login");
       login();
     }
   }
-  if(newState==="games"){
-    if(user){
+  if (newState === "games") {
+    if (user) {
       games();
-    }else{
+    } else {
       window.history.pushState("login", '', "/login");
       login();
     }
   }
-  if(newState==="login"){
-    if(user){
+  if (newState === "login") {
+    if (user) {
       window.history.pushState("games", '', "/games");
       games();
-    }else{
+    } else {
       login();
     }
   }
-  if(newState==="register"){
-    if(user){
+  if (newState === "register") {
+    if (user) {
       window.history.pushState("games", '', "/games");
       games();
-    }else{
+    } else {
       register();
     }
   }
-  if(newState==="story"){
-    if(user){
+  if (newState === "story") {
+    if (user) {
       storyState();
-    }else{
+    } else {
       window.history.pushState("login", '', "/login");
       login();
     }
   }
-  if(newState==="files"){
-    if(user){
+  if (newState === "files") {
+    if (user) {
       files();
-    }else{
+    } else {
       window.history.pushState("login", '', "/login");
       login();
     }
   }
-  if(newState==="players"){
-    if(user){
+  if (newState === "players") {
+    if (user) {
       players();
-    }else{
+    } else {
       window.history.pushState("login", '', "/login");
       login();
     }
   }
 }
 
-if(sentState){
-  if(sentState ==="home-games"){
+if (sentState) {
+  if (sentState === "home-games") {
     window.history.pushState("games", '', '/games');
     games();
-  }else if(sentState === "home-login"){
+  } else if (sentState === "home-login") {
     window.history.pushState("login", '', '/login');
     login();
-  }else{
-  load(sentState);
+  } else {
+    load(sentState);
   }
 }
 
 /* ACCOUNT AJAX ROUTE */
-$("#account-button").on("click", ()=>{
+$("#account-button").on("click", () => {
   window.history.pushState("account", '', "/profile");
   account();
 })
 
 /* REGISTER AJAX ROUTE */
-$("#registration-form").submit(function(event){
-    event.preventDefault();
-    const formData = $(this).serialize();
-    $.ajax({
-      method: "POST",
-      url: "/register",
-      data: formData,
-      success: function(res){
-        $("#response-message").html(res);
-        if(res==="Registration Successful!"){
-          window.history.pushState("games", '', "/games")
-          games();
-        }
-        else{
-          /* Error */
-        }
+$("#registration-form").submit(function (event) {
+  event.preventDefault();
+  const formData = $(this).serialize();
+  $.ajax({
+    method: "POST",
+    url: "/register",
+    data: formData,
+    success: function (res) {
+      $("#response-message").html(res);
+      if (res === "Registration Successful!") {
+        window.history.pushState("games", '', "/games")
+        games();
+      } else {
+        /* Error */
       }
-    }) 
+    }
   })
+})
 
 /* NAME CHANGE AJAX ROUTE*/
-$("#game-name-input").focusout(function(){
+$("#game-name-input").focusout(function () {
   $.ajax({
     method: "POST",
     url: `/game/${game._id}/name`,
-    data: {name: $("#game-name-input").val()},
-    success: function(res){
+    data: {
+      name: $("#game-name-input").val()
+    },
+    success: function (res) {
       game.name = res;
       window.localStorage.setItem('game', JSON.stringify(game));
       console.log("Name changed!");
@@ -287,39 +291,38 @@ $("#game-name-input").focusout(function(){
 })
 
 /* If User Hits Enter While Editing Name */
-$("#title-form").submit(function(event){
+$("#title-form").submit(function (event) {
   event.preventDefault();
   $("#game-name-input").blur();
 })
 
 /* LOGIN AJAX ROUTE */
-$("#login-form").submit(function(event){
-    event.preventDefault();
-    const formData = $(this).serialize();
-    $.ajax({
-      method: "POST",
-      url: "/login",
-      data: formData,
-      success: function(res){
-        $("#response-message").html(res);
-        if(res==="Login Successful!"){
-          window.history.pushState("games", '', "/games")
-          games();
-        }
-        else{
-          /* Error */
-        }
+$("#login-form").submit(function (event) {
+  event.preventDefault();
+  const formData = $(this).serialize();
+  $.ajax({
+    method: "POST",
+    url: "/login",
+    data: formData,
+    success: function (res) {
+      $("#response-message").html(res);
+      if (res === "Login Successful!") {
+        window.history.pushState("games", '', "/games")
+        games();
+      } else {
+        /* Error */
       }
-    }) 
+    }
   })
+})
 
 /* LOGOUT AJAX ROUTE */
-$("#logout-button").on("click",function(event){
+$("#logout-button").on("click", function (event) {
   $.ajax({
     method: "POST",
     url: "/logout",
-    success: function(res){
-      user=false;
+    success: function (res) {
+      user = false;
       window.history.pushState("login", '', "/login")
       login();
     }
@@ -327,31 +330,31 @@ $("#logout-button").on("click",function(event){
 })
 
 /* BUTTON TRIGGERS */
-$("#login-button").on("click", ()=>{
+$("#login-button").on("click", () => {
   window.history.pushState("login", '', "/login");
   login();
 })
-$("#register-button").on("click", ()=>{
+$("#register-button").on("click", () => {
   window.history.pushState("register", '', "/register");
   register();
 })
-$("#games-button").on("click",()=>{
+$("#games-button").on("click", () => {
   window.history.pushState("games", '', "/games");
   games();
 })
-$("#story-button").on("click",()=>{
+$("#story-button").on("click", () => {
   window.history.pushState("story", '', `story`);
   storyState();
 })
-$("#files-button").on("click",()=>{
+$("#files-button").on("click", () => {
   window.history.pushState('files', '', `files`);
   files();
 })
-$("#players-button").on("click",()=>{
+$("#players-button").on("click", () => {
   window.history.pushState('players', '', `players`);
   players();
 })
-$(".fa-edit").on("click",()=>{
+$(".fa-edit").on("click", () => {
   $("#game-name-input").focus();
 })
 

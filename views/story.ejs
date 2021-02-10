@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -14,12 +15,13 @@
     <!-- SOCKET.IO -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/3.1.0/socket.io.js" integrity="sha512-+l9L4lMTFNy3dEglQpprf7jQBhQsQ3/WvOnjaN/+/L4i0jOstgScV0q2TjfvRF4V+ZePMDuZYIQtg5T4MKr+MQ==" crossorigin="anonymous"></script>
     <!-- SCRIPTS -->
-    <script src = "/scripts/story.js" defer></script>
+    <script src="/scripts/story.js" defer></script>
 </head>
+
 <body>
-    <section id = "tabs">
-        <button class = "tab" id="player-tab">Player View</button>
-        <button class = "tab unselected" id="gamemaster-tab">Gamemaster View</button>
+    <section id="tabs">
+        <button class="tab" id="player-tab">Player View</button>
+        <button class="tab unselected" id="gamemaster-tab">Gamemaster View</button>
     </section>
     <section class="textbox" id="player-box">
         <section class="bottom" id="player-bottom">
@@ -30,17 +32,18 @@
         </section>
     </section>
     <%for(let x=0; x<game.songs.length; x++){%>
-        <audio id='<%=game.songs[x].name%>' loop>
-            <source src=<%=game.songs[x].url%>>
-        </audio>
+    <audio id='<%=game.songs[x].name%>' loop>
+        <source src=<%=game.songs[x].url%>>
+    </audio>
     <%}%>
     <!-- Variable Processors -->
     <script>
-        let images = JSON.parse('<%-JSON.stringify(game.images)%>'); 
-        let story = JSON.parse('<%-JSON.stringify(story.story)%>'); 
-        let songs = JSON.parse('<%-JSON.stringify(game.songs)%>'); 
-        let game = JSON.parse('<%-JSON.stringify(game)%>'); 
-        let storyId = JSON.parse('<%-JSON.stringify(story.id)%>'); 
+        let images = JSON.parse('<%-JSON.stringify(game.images)%>');
+    let story = JSON.parse('<%-JSON.stringify(story.story)%>');
+    let songs = JSON.parse('<%-JSON.stringify(game.songs)%>');
+    let game = JSON.parse('<%-JSON.stringify(game)%>');
+    let storyId = JSON.parse('<%-JSON.stringify(story.id)%>');
     </script>
 </body>
+
 </html>
