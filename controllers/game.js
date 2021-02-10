@@ -107,7 +107,7 @@ router.get("/:id/characters/characters", async function(req, res){
 })
 /* Game Component: Players */
 router.get("/:id/players/players", async function(req, res){
-    foundGame = await db.Game.findById(req.params.id).populate("gamemasters").populate("players.user");
+    foundGame = await db.Game.findById(req.params.id).populate("gamemasters").populate("players");
     res.render("components/game/players",{game:foundGame});
 })
 /* Game Component: Files */
