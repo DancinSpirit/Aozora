@@ -59,7 +59,7 @@ const storyState = function () {
     method: "GET",
     url: `${window.location.href}/story`,
     success: function (res) {
-      $("#story-box-box").html(res);
+      $("#story-box").html(res);
     }
   })
   reset();
@@ -83,6 +83,11 @@ const files = function () {
     url: `${window.location.href}/files`,
     success: function (res) {
       $("#files-box").html(res);
+      $(".fill").each(function(){
+        if($(this).height()<1){
+          $(this).remove();
+        }
+      })
     }
   })
   reset();
@@ -128,7 +133,7 @@ const games = function () {
     method: "GET",
     url: "/games/games",
     success: function (res) {
-      $("#games-box-box").html(res);
+      $("#games-box").html(res);
       $(".game-button").on("click", function () {
         game = {
           _id: $(this).attr('id'),

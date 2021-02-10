@@ -1,7 +1,7 @@
 <section class = "box-title">
     Chapters:
 </section>
-<section class = "story-box">
+<section class = "box-content">
     <%for(let x=0; x<stories.length; x++){%>
     <section class = "box-section chapter-box">
         <a class = "chapter-button" href=<%=`/game/${game.id}/story/${stories[x].id}`%>><%="Chapter " + stories[x].chapter%></a>

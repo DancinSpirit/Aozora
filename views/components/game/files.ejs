@@ -1,5 +1,38 @@
+<section class = "box-title">
+    Files:
+</section>
+<section id = "files-list-box">
+    <section class="half-box left-border">
+        <section class = "box-title-half">
+            Music:
+        </section>
+        <%for(let x=0; x<game.songs.length; x++){%>
+        <section class = "box-section box-content">
+            <%=game.songs[x].name%>
+        </section>
+        <%}%>
+        <section class = "fill"></section>
+    </section>
+    <section class="half-box right-border">
+        <section class = "box-title-half">
+            Images:
+        </section>
+        <%for(let x=0; x<game.images.length; x++){%>
+        <section class = "box-section box-content">
+            <%=game.images[x].name%>
+            <div class="image-display" style="background-image: url('<%=game.images[x].url%>');"></div>
+        </section>
+        <%}%>
+        <section class = "fill"></section>
+    </section>
+    <section>
+
+    </section>
+</section>
+<section id="upload-files" class="box-section">
 <section id="music-box">
     <form id="music-upload-form" class="mt-4" action="/game/<%=game._id%>/music" method="POST" enctype="multipart/form-data">
+        <p>Upload Music:</p>
         <div class="form-group">
             Name: <input id = "music-name" type = "text" name="name"/>
             <p></p>
@@ -11,11 +44,13 @@
 </section>
 <section id="images-box">
     <form id="image-upload-form" class="mt-4" action="/game/<%=game._id%>/images" method="POST" enctype="multipart/form-data">
+        <p>Upload Images:</p>
         <div class="form-group">
             Name: <input id = "image-name" type = "text" name="name"/>
             <p></p>
-            File:<input id = "file" type="file" name="file" id="input-files" class="form-control-file border"/>
+            File: <input id = "file" type="file" name="file" id="input-files" class="form-control-file border"/>
         </div>
         <button id="image-submit" type="submit" class="btn btn-primary">Submit</button>
     </form>
+</section>
 </section>
