@@ -144,7 +144,7 @@ const games = function () {
     url: "/games/games",
     success: function (res) {
       $("#games-box").html(res);
-      $(".game-button").on("click", function () {
+      $(".game-button").on("click", function (event) {
         game = {
           _id: $(this).attr('id'),
           name: $(this).attr('name')
@@ -152,6 +152,26 @@ const games = function () {
         window.localStorage.setItem('game', JSON.stringify(game));
         window.history.pushState("story", '', `/game/${game._id}/story`);
         storyState();
+      })
+      /* DELETE GAME ROUTE */
+      $(".delete-button").on("click",function(event){
+        event.stopPropagation();
+        const id = $(this).attr("id").replace("-delete",'');
+        const originalHtml = $(`#${id}`).html();
+        $(`#${id}`).html(`<section class="delete-message"><p class="delete-text">Are you sure you want to delete ${$(`#${id}`).attr("name")}?</p><section class="delete-buttons"><button id="yes-button">Yes</button><button id="no-button">No</button></section></section>`)
+        $(".game-button").unbind("click");
+        $("#yes-button").on("click",function(){
+          $.ajax({
+            method: "POST",
+            url: `/games/${id}/delete`,
+            success: function(res){
+              location.reload();
+            }
+          })
+        })
+        $("#no-button").on("click",function(){
+           games();
+        })
       })
       /* CREATE GAME ROUTE */
       $("#create-game-form").submit(function (event) {

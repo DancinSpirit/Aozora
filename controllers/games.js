@@ -21,6 +21,16 @@ router.post("/create", async function(req,res){
     }
 })
 
+/* Games Delete */
+router.post("/:id/delete", async function(req,res){
+    try{
+        let game = await db.Game.findByIdAndDelete(req.params.id);
+        res.redirect("/games");
+    }catch(err){
+        console.log(err);
+    }
+})
+
 /* Games Join */
 router.post("/join/:id", async function(req,res){
     try{

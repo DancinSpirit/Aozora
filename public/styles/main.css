@@ -284,6 +284,35 @@ nav {
 
 .game-title{
     font-size: 28px;
+    display: flex;
+    justify-content: space-between;
+    width: 100%;
+}
+
+.delete-message{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.delete-text{
+    font-size: 30px;
+}
+
+.delete-buttons{
+    display: flex;
+    justify-content: space-between;
+}
+
+#yes-button, #no-button{
+    background: #014E70;
+    border: solid 1px;
+    color: white;
+    font-family: 'Oswald', sans-serif;
+    font-size: 20px;
+    width: 50px;
+    margin: 5px;
 }
 
 .chapter-button{

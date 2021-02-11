@@ -3,9 +3,12 @@
 </section>
 <section class = "box-content">
     <%for(let x=0; x<games.length; x++){%>
+    
     <section class = "box-section game-box">
-        <button class = "box-button game-button" name="<%=games[x].name%>" id="<%=games[x].id%>">
-            <section class = "game-title"><%=games[x].name%></section>
+        <section class = "box-button game-button" name="<%=games[x].name%>" id="<%=games[x].id%>">
+            <section class = "game-title">
+                <%=games[x].name%><span id="<%=games[x].id%>-delete"class="delete-button"><i class="fas fa-times-circle"></i></span>
+            </section>
             <p>Gamemasters:</p>
             <section class="gamemaster-section">
                 <%for(let y=0; y<games[x].gamemasters.length; y++){%>
@@ -18,7 +21,7 @@
                     <section class="player-box"><img class='player-avatar'src='<%=games[x].players[y].avatar%>'><%=games[x].players[y].username%></section>
                 <%}%>
             </section>
-        </button>
+        </section>
     </section>
     <%}%>
 </section>
