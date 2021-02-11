@@ -69,11 +69,19 @@ socket.on('delete', function (sentIndex) {
 socket.on('edit', function (sent) {
     console.log(sent.res);
     console.log(sent.index);
-    $(`#boxtext-${sent.index}`).replaceWith(`<p id="boxtext-${sent.index}" class="boxtext">${sent.res}</p>`)
+    if (sent.res.startsWith("[MUSIC]")) {
+
+    }
+    else if (sent.res.startsWith("[SCENE TRANSITION]")) {
+
+    }
+    else{
+        $(`#boxtext-${sent.index}`).replaceWith(`<p id="boxtext-${sent.index}" class="boxtext">${sent.res}</p>`)
+    }
 })
 
 const appendGamemasterText = function (text) {
-    $("#gamemaster-bottom").append(`<form id="edit-form-${index}" action="/game/${game._id}/story/${storyId}/edit/${index}" method="POST"><input class="edit-input" type="text" name="story" value='${text}'></form>`);
+    $("#gamemaster-bottom").append(`<form id="edit-form-${index}" action="/game/${game._id}/story/${storyId}/edit/${index}" method="POST"><input class="edit-input" type="text" name="story" value='${text}'></form>`); 
     let sentIndex = index;
     $(`#edit-form-${index}`).focusout(function () {
         let formData = $(this).serialize();
@@ -116,9 +124,13 @@ const specialCommand = function (text) {
             song.pause();
         }
         song = document.getElementById(text.replace('[MUSIC]', ""));
+        if(song){
         song.volume = 0.2;
         song.play();
-        $("#player-bottom").append(`<p id="boxtext-${index}" class='boxtext invisible'>${returnedText}</p>`);
+        }else{
+            console.log("Not a valid audio file!")
+        }
+        $("#player-bottom").append(`<p id="boxtext-${index}" class='boxtext invisible'>${text}</p>`);
         appendGamemasterText(text);
         nextLine();
         return "";
@@ -132,7 +144,7 @@ const specialCommand = function (text) {
             }
         }
         $("body").css("background-image", `url('${url}')`);
-        $("#player-bottom").append(`<p id="boxtext-${index}" class='boxtext invisible'>${returnedText}</p>`);
+        $("#player-bottom").append(`<p id="boxtext-${index}" class='boxtext invisible'>${text}</p>`);
         appendGamemasterText(text);
         nextLine();
         return "";
@@ -225,3 +237,4 @@ $("#player-tab").on("click", function () {
     $("#player-box").removeClass("invisible");
     $(".textbox").scrollTop($(".textbox").prop("scrollHeight"));
 })
+
