@@ -132,8 +132,9 @@ router.get("/:id/story/:storyId", async function(req, res){
 /* Edit Story */
 router.post("/:id/story/:storyId/edit/:index/:form", async function(req,res){
     try{
-        let sentText = req.params.form;
-        sentText = sentText.replace(/"/g,'&quot;').replace(/'/g,"&apos;")
+        let sentText = req.params.form.replace(/PERCENT-SIGN/g, '%');
+        console.log(sentText);
+        sentText = sentText.replace(/"/g,'&quot;').replace(/'/g,"&apos;").replace(/%/g, '&#37;');
         let story = await db.Chapter.findById(req.params.storyId);
         let array = story.story;
         array[req.params.index] = sentText;
@@ -161,7 +162,7 @@ router.post("/:id/story/:storyId/delete/:index/", async function(req,res){
 /* Add to Story */
 router.post("/:id/story/:storyId/:form", async function(req,res){
     try{
-        let sentText = req.params.form;
+        let sentText = req.params.form.replace(/PERCENT-SIGN/g, '%');
         sentText = sentText.replace(/"/g,'&quot;').replace(/'/g,"&apos;").replace(/%/g, '&#37;');
         await db.Chapter.findByIdAndUpdate(req.params.storyId,{$push: {story: sentText}})
         res.send(sentText);

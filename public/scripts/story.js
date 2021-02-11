@@ -30,7 +30,7 @@ socket.on('delete', function (sentIndex) {
         $(this).unbind("focusout");
         $(this).unbind("click");
         $(this).focusout(function () {
-            let formData = $(this).html();
+            let formData = $(this).html().replace(/%/g, 'PERCENT-SIGN');
             newIndex = parseInt($(this).attr("id").substring(10), 10);
             console.log("newIndex" + newIndex);
             if (formData)
@@ -80,9 +80,15 @@ socket.on('edit', function (sent) {
 
 const appendGamemasterText = function (text) {
     $("#gamemaster-bottom").append(`<span id="edit-form-${index}" class="edit-input" role="textbox" contenteditable>${text}</span>`); 
+    $(`#edit-form-${index}`).on("paste", function(event){
+        event.preventDefault();
+        let copyText = window.event.clipboardData.getData('text/plain');
+        console.log(copyText);
+        $(this).text(copyText);
+    })
     let sentIndex = index;
     $(`#edit-form-${index}`).focusout(function () {
-        let formData = $(this).html();
+        let formData = $(this).html().replace(/%/g, 'PERCENT-SIGN');
         console.log(formData);
         console.log("sentIndex" + sentIndex)
         if (formData)
