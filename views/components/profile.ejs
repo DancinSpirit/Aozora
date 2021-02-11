@@ -4,14 +4,20 @@
     <%}else{%>
         <img id = "account-avatar" src="/images/avatar_placeholder.png">
     <%}%>
+    <%if(thisUser){%>
         <form id="avatar-upload-form" class="mt-4" action="/profile/avatar/<%=user.id%>" method="POST" enctype="multipart/form-data">
             <div class="form-group">
                 <input id="file" type="file" name="file" class="form-control-file border"/>
             </div>
             <button id="file-submit" type="submit" class="btn btn-primary">Submit</button>
         </form>
-    <%=user.username%>
+    <%}%>
+    <p id="username"><%=user.username%></p>
 </section>
 <section id="user-info">
-    <p>PLACEHOLDER TEXT</p>
+    <%if(thisUser){%>
+        
+    <%}%>
+    Name: <%=user.fullname%>
+    Bio: <%=user.bio%>
 </section>

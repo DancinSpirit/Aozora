@@ -7,50 +7,38 @@
             Music:
         </section>
         <section class = 'box-content'>
-        <%for(let x=0; x<game.songs.length; x++){%>
-        <section class = "box-section">
-            <button class="box-button music-play" id="<%=game.songs[x].name%>-button"><%=game.songs[x].name%></button>
+            <%for(let x=0; x<game.songs.length; x++){%>
+            <section class = "box-section">
+                <button class="box-button music-play" id="<%=game.songs[x].name%>-button"><%=game.songs[x].name%></button>
+            </section>
+            <%}%>
         </section>
-        <%}%>
         <section class = "fill"></section>
-        </section>
     </section>
     <section class="half-box right-border">
         <section class = "box-title-half">
             Images:
         </section>
         <section class = 'box-content'>
-        <%for(let x=0; x<game.images.length; x++){%>
-        <section class = "box-section image-section">
-            <p><%=game.images[x].name%>: </p>
-            <div class="image-display" style="background-image: url('<%=game.images[x].url%>');"></div>
+            <%for(let x=0; x<game.images.length; x++){%>
+            <section class = "box-section image-section">
+                <p><%=game.images[x].name%>: </p>
+                <div class="image-display" style="background-image: url('<%=game.images[x].url%>');"></div>
+            </section>
+            <%}%>
         </section>
-        <%}%>
         <section class = "fill"></section>
-        </section>
     </section>
 </section>
-<section id="upload-files" class="box-section">
-<section id="music-box">
-    <form id="music-upload-form" class="mt-4" action="/game/<%=game._id%>/music" method="POST" enctype="multipart/form-data">
-        <p>Upload Music:</p>
+<section id="files-box-box">
+    <form id="file-upload-form" class="mt-4" action="/game/<%=game._id%>/files" method="POST" enctype="multipart/form-data">
+        <p>Upload Files:</p>
         <div class="form-group">
-            Name: <input id = "music-name" type = "text" name="name"/>
+            Name: <input id = "file-name" type = "text" name="name"/>
             <p>File: <input id = "file" type="file" name="file" id="input-files" class="form-control-file border"/></p>
         </div>
-        <button id="music-submit" type="submit" class="btn btn-primary">Submit</button>
+        <button id="file-submit" type="submit" class="btn btn-primary">Submit</button>
     </form>
-</section>
-<section id="images-box">
-    <form id="image-upload-form" class="mt-4" action="/game/<%=game._id%>/images" method="POST" enctype="multipart/form-data">
-        <p>Upload Images:</p>
-        <div class="form-group">
-            Name: <input id = "image-name" type = "text" name="name"/>
-            <p>File: <input id = "file" type="file" name="file" id="input-files" class="form-control-file border"/></p>
-        </div>
-        <button id="image-submit" type="submit" class="btn btn-primary">Submit</button>
-    </form>
-</section>
 </section>
 <!-- Audio -->
 <%for(let x=0; x<game.songs.length; x++){%>

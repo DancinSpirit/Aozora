@@ -10,13 +10,13 @@ router.get("/", async function(req,res){
 
 /* Profile Component (Current User)*/
 router.get("/info", async function(req,res){
-  res.render("components/profile");
+  res.render("components/profile",{thisUser: true});
 })
 
 /* Profile Component (Get User By ID) */
 router.get("/info/:id", async function(req,res){
   const user = await db.Player.findById(req.params.id);
-  res.render("profile", {user: user});
+  res.render("profile", {user: user, thisUser: false});
 })
 
 /* Upload Avatar */

@@ -7,8 +7,8 @@ const gameSchema = new mongoose.Schema(
     players: [{type: mongoose.Schema.Types.ObjectId, ref: "User"}],
     characters: [{type: mongoose.Schema.Types.ObjectId, ref: "Character"}],
     chapters: [{type: mongoose.Schema.Types.ObjectId, ref: "Chapter"}],
-    songs: [{name: {type:String}, url: {type:String}}],
-    images: [{name: {type:String}, url: {type:String}}]
+    songs: [{name: {type:String, unique:true}, url: {type:String}}],
+    images: [{name: {type:String, unique:true}, url: {type:String}}]
   },
   {timestamps: true}
 )

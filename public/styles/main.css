@@ -211,6 +211,13 @@ nav {
     flex-direction: column;
     overflow: hidden; 
 }
+#files-box-box{
+    border: solid 1px;
+    display: flex;
+    justify-content: center;
+    padding: 10px;
+    padding-bottom: 20px;
+}
 #games-box, #story-box{
     width: 60%;
     max-height: 80%;
