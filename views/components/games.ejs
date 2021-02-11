@@ -12,13 +12,13 @@
             <p>Gamemasters:</p>
             <section class="gamemaster-section">
                 <%for(let y=0; y<games[x].gamemasters.length; y++){%>
-                    <section class="player-box"><img class='player-avatar'src='<%=games[x].gamemasters[y].avatar%>'><%=games[x].gamemasters[y].username%></section>
+                    <section class="player-box"id="<%=games[x].gamemasters[y].id%>"><img class='player-avatar'src='<%=games[x].gamemasters[y].avatar%>'><%=games[x].gamemasters[y].username%></section>
                 <%}%>
             </section>
             <p>Players:</p>
             <section class="player-section">
                 <%for(let y=0; y<games[x].players.length; y++){%>
-                    <section class="player-box"><img class='player-avatar'src='<%=games[x].players[y].avatar%>'><%=games[x].players[y].username%></section>
+                    <section class="player-box" id="<%=games[x].players[y].id%>"><img class='player-avatar'src='<%=games[x].players[y].avatar%>'><%=games[x].players[y].username%></section>
                 <%}%>
             </section>
         </section>

@@ -29,9 +29,8 @@ const reset = function () {
   if (state === "games") {
     $("#games").css("transform", "translate(200%, -40px)");
   }
-  if (state === "account") {
+  if (state === "account" || state==="profile") {
     $("#account").css("transform", "translateY(calc(200% - 40px))");
-
   }
 }
 
@@ -171,6 +170,26 @@ const games = function () {
         window.history.pushState("story", '', `/game/${game._id}/story`);
         storyState();
       })
+      /* PLAYER PROFILE */
+      $(".player-box").on("click", function(event){
+        event.stopPropagation();
+        const id = $(this).attr('id');
+        $.ajax({
+          method: "GET",
+          url: `profile/info/${id}`,
+          success: function(res){
+            window.history.pushState("profile",'',`profile/${id}`)
+            $("#account-box").html(res);
+            reset();
+            $("#main-buttons").removeClass("invisible");
+            $("#account").css("transform", "translateY(-40px)");
+            $("#title").removeClass("invisible");
+            $("#edit-title").addClass("invisible");
+            $("#game-name-input").addClass("invisible");
+            state = "account";
+          }
+        })
+      })
       /* DELETE GAME ROUTE */
       $(".delete-button").on("click",function(event){
         event.stopPropagation();
@@ -255,6 +274,26 @@ const account = function () {
   state = "account";
 }
 
+const profile = function () {
+  const id = window.location.href.substr(window.location.href.lastIndexOf("/")+1);
+  console.log(id);
+  $.ajax({
+    method: "GET",
+    url: `/profile/info/${id}`,
+    success: function(res){
+      window.history.pushState("profile",'',`${id}`)
+      $("#account-box").html(res);
+    }
+  })
+  reset();
+  $("#main-buttons").removeClass("invisible");
+  $("#account").css("transform", "translateY(-40px)");
+  $("#title").removeClass("invisible");
+  $("#edit-title").addClass("invisible");
+  $("#game-name-input").addClass("invisible");
+  state = "profile";
+}
+
 /*State Management*/
 window.addEventListener('popstate', (event) => {
   newState = event.state;
@@ -267,6 +306,14 @@ const load = function (newState) {
   if (newState === "account") {
     if (user) {
       account();
+    } else {
+      window.history.pushState("login", '', "/login");
+      login();
+    }
+  }
+  if (newState === "profile") {
+    if (user) {
+      profile();
     } else {
       window.history.pushState("login", '', "/login");
       login();

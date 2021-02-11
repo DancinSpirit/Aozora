@@ -4,7 +4,14 @@
 <section class = "box-content">
     <%for(let x=0; x<stories.length; x++){%>
     <section class = "box-section chapter-box">
-        <a class = "chapter-button" href=<%=`/game/${game.id}/story/${stories[x].id}`%>><%="Chapter " + stories[x].chapter%></a>
+        <a class = "chapter-button" href=<%=`/game/${game.id}/story/${stories[x].id}`%>> 
+            <div>
+                <%="Chapter " + stories[x].chapter%>   
+            </div>
+            <div id="<%=stories[x].chapter%>-delete" class="chapter-delete-button">
+                <i class="fas fa-times-circle"></i>
+            </div>
+        </a>
     </section>
     <%}%>
 </section>

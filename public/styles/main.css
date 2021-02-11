@@ -361,6 +361,9 @@ nav {
 
 .chapter-button{
     font-size: 25px;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
 }
 
 #new-game, #new-chapter, #upload-files{
