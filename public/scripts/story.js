@@ -34,6 +34,7 @@ socket.on('delete', function (sentIndex) {
             let formData = $(this).serialize();
             formData = formData.substring(6);
             newIndex = parseInt($(this).attr("id").substring(10), 10);
+            console.log("newIndex" + newIndex);
             if (formData)
                 $.ajax({
                     method: "POST",
@@ -77,6 +78,7 @@ const appendGamemasterText = function (text) {
     $(`#edit-form-${index}`).focusout(function () {
         let formData = $(this).serialize();
         formData = formData.substring(6);
+        console.log("sentIndex" + sentIndex)
         if (formData)
             $.ajax({
                 method: "POST",
@@ -116,6 +118,7 @@ const specialCommand = function (text) {
         song = document.getElementById(text.replace('[MUSIC]', ""));
         song.volume = 0.2;
         song.play();
+        $("#player-bottom").append(`<p id="boxtext-${index}" class='boxtext invisible'>${returnedText}</p>`);
         appendGamemasterText(text);
         nextLine();
         return "";
@@ -129,6 +132,7 @@ const specialCommand = function (text) {
             }
         }
         $("body").css("background-image", `url('${url}')`);
+        $("#player-bottom").append(`<p id="boxtext-${index}" class='boxtext invisible'>${returnedText}</p>`);
         appendGamemasterText(text);
         nextLine();
         return "";
