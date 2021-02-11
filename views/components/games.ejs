@@ -6,14 +6,18 @@
     <section class = "box-section game-box">
         <button class = "box-button game-button" name="<%=games[x].name%>" id="<%=games[x].id%>">
             <section class = "game-title"><%=games[x].name%></section>
-            <section>Gamemasters:</section>
-            <%for(let y=0; y<games[x].gamemasters.length; y++){%>
-                <section class="player-box"><img class='player-avatar'src='<%=games[x].gamemasters[y].avatar%>'><%=games[x].gamemasters[y].username%></section>
-            <%}%>
-            <section>Players:</section>
-            <%for(let y=0; y<games[x].players.length; y++){%>
-                <section class="player-box"><img class='player-avatar'src='<%=games[x].players[y].avatar%>'><%=games[x].players[y].username%></section>
-            <%}%>
+            <p>Gamemasters:</p>
+            <section class="gamemaster-section">
+                <%for(let y=0; y<games[x].gamemasters.length; y++){%>
+                    <section class="player-box"><img class='player-avatar'src='<%=games[x].gamemasters[y].avatar%>'><%=games[x].gamemasters[y].username%></section>
+                <%}%>
+            </section>
+            <p>Players:</p>
+            <section class="player-section">
+                <%for(let y=0; y<games[x].players.length; y++){%>
+                    <section class="player-box"><img class='player-avatar'src='<%=games[x].players[y].avatar%>'><%=games[x].players[y].username%></section>
+                <%}%>
+            </section>
         </button>
     </section>
     <%}%>

@@ -331,6 +331,12 @@ nav {
     align-items: center;
 }
 
+.gamemaster-section, .player-section{
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+}
+
 /* FORMS */
 .form {
     background-color: #1E2747;
