@@ -68,6 +68,25 @@ router.post("/:id/music", async function(req,res){
     res.redirect('back');
 })
 
+/* Delete Files */
+router.post("/:id/files/:type/:name/delete", async function(req, res){
+    try{
+        if(req.params.type==="audio"){
+            await db.Game.findByIdAndUpdate(req.params.id,{$pull: {songs:{name: req.params.name}} });
+        }
+        else if(req.params.type==="image"){
+            await db.Game.findByIdAndUpdate(req.params.id,{$pull: {images:{name: req.params.name}} });
+        }
+        else{
+            console.log("Something went terribly wrong on the server side delete files route.")
+        }
+        res.send("Success!");
+    }catch(err){
+        console.log(err);
+        res.send(err);
+    }
+})
+
 /* Upload Files*/
 router.post("/:id/files", async function(req,res){
     if(file.size>10000000){

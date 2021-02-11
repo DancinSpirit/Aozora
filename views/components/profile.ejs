@@ -12,12 +12,26 @@
             <button id="file-submit" type="submit" class="btn btn-primary">Submit</button>
         </form>
     <%}%>
-    <p id="username"><%=user.username%></p>
+    <section id="username-section">
+        <p id="username"><%=user.username%></p>
+    </section>
 </section>
 <section id="user-info">
-    <%if(thisUser){%>
-        
+    <%if(!thisUser){%>
+        <section id="name-section">
+            Name: <%=user.fullname%>
+        </section>
+        <section id="bio-section">
+            Bio: <%=user.bio%>
+        </section>
+    <%}else{%>
+        <form id="profile-form" action="/profile/<%=user.id%>" method="POST">
+            <section id="name-section">
+                <p id="profile-name">Name:</p> <input id="full-name-input" type="text" name="fullname" value='<%=user.fullname%>'>
+            </section>
+            <section id="bio-section">
+                <p id="profile-bio">Bio:</p> <textarea cols="50" rows="5"id="bio-input" name="bio" value='<%=user.bio%>'></textarea>
+            </section>
+        </form>
     <%}%>
-    Name: <%=user.fullname%>
-    Bio: <%=user.bio%>
 </section>

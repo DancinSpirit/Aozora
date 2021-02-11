@@ -202,6 +202,50 @@ nav {
     display: none;
 }
 
+#avatar-box{
+    display: flex;
+    align-items: center;
+    background-color:rgba(1, 78, 112, 1);
+    padding-bottom: 10px;
+    border-bottom: solid 1px white;
+}
+
+#account-avatar{
+    margin-left: 20px;
+    margin-top: 20px;
+    border: solid 1px;
+}
+
+#username-section{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    height: 100%;
+    font-size: 50px;
+}
+
+#user-info{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+}
+
+#name-section{
+    padding: 30px;
+}
+
+#bio-section{
+    padding-left: 30px;
+}
+
+#profile-name, #profile-bio{
+    vertical-align: top;
+}
+
+
 /* GAMES */
 #files-box{
     margin-top: 40px;
@@ -373,12 +417,26 @@ nav {
     flex-wrap: wrap;
 }
 
+.music-play, .image-name-section{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+}
+
+.image-name-section{
+    width: 100%;
+}
+
 /* FORMS */
 .form {
     background-color: #1E2747;
     padding: 10px;
     border: solid 1px;
     box-shadow: 0px 0px 5px #03A9F4;
+}
+
+#file-upload-form{
+    padding-left: 50px;
 }
 
 .form-input {

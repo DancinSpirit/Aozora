@@ -9,7 +9,14 @@
         <section class = 'box-content'>
             <%for(let x=0; x<game.songs.length; x++){%>
             <section class = "box-section">
-                <button class="box-button music-play" id="<%=game.songs[x].name%>-button"><%=game.songs[x].name%></button>
+                <button class="box-button music-play" id="<%=game.songs[x].name%>-button">
+                    <div>
+                        <%=game.songs[x].name%>
+                    </div>
+                    <div id="<%=game.songs[x].name%>-delete" type="audio" class="file-delete-button">
+                        <i class="fas fa-times-circle"></i>
+                    </div>
+                </button>
             </section>
             <%}%>
         </section>
@@ -22,7 +29,14 @@
         <section class = 'box-content'>
             <%for(let x=0; x<game.images.length; x++){%>
             <section class = "box-section image-section">
-                <p><%=game.images[x].name%>: </p>
+                <section class="image-name-section">
+                    <div class="image-name">
+                        <%=game.images[x].name%>
+                    </div>
+                    <div id="<%=game.images[x].name%>-delete" type="image" class="file-delete-button image-delete-button">
+                        <i class="fas fa-times-circle"></i>
+                    </div>
+                </section>
                 <div class="image-display" style="background-image: url('<%=game.images[x].url%>');"></div>
             </section>
             <%}%>

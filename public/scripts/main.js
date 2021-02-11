@@ -89,6 +89,24 @@ const files = function () {
           $(this).remove();
         }
       })
+      $(".file-delete-button").on("click",function(event){
+        event.stopPropagation();
+        const name = $(this).attr("id").replace("-delete",'');
+        const type = $(this).attr("type");
+        $(`#files-box-box`).html(`<section class="delete-message"><p class="delete-text">Are you sure you want to delete ${name}?</p><section class="delete-buttons"><button id="yes-button">Yes</button><button id="no-button">No</button></section></section>`)
+        $("#yes-button").on("click",function(){
+          $.ajax({
+            method: "POST",
+            url: `files/${type}/${name}/delete`,
+            success: function(res){
+              location.reload();
+            }
+          })
+        })
+        $("#no-button").on("click",function(){
+           files();
+        })
+      })
       $(".music-play").on("click", function(){
         if(song){
           song.pause();
