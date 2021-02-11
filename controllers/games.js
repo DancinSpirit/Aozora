@@ -15,7 +15,7 @@ router.get("/", async function(req, res){
 router.post("/create", async function(req,res){
     try{
         let game = await db.Game.create({name: "New Untitled Game", gamemasters: [req.session.currentUser.id]}); 
-        res.redirect(`/game/${game._id}/story`);
+        res.send(game);
     }catch(err){
         return res.send(err);
     }
@@ -26,7 +26,7 @@ router.post("/join/:id", async function(req,res){
     try{
         console.log(req.params.id);
         let game = await db.Game.findByIdAndUpdate(req.body.gameId,{$push: {players: req.params.id}});
-        return res.redirect(`/game/${game._id}/story`);
+        return res.send(game);
     }catch(err){
         return res.send(err);
     }

@@ -153,6 +153,35 @@ const games = function () {
         window.history.pushState("story", '', `/game/${game._id}/story`);
         storyState();
       })
+      /* CREATE GAME ROUTE */
+      $("#create-game-form").submit(function (event) {
+        event.preventDefault();
+        const formData = $(this).serialize();
+        $.ajax({
+          method: "POST",
+          url: "/games/create",
+          data: formData,
+          success: function (res) {
+              window.localStorage.setItem('game', JSON.stringify(res))
+              window.history.pushState("story", '', `/game/${res._id}/story`)
+              storyState();
+          }
+        })
+      })
+      $("#join-game-form").submit(function (event) {
+        event.preventDefault();
+        const formData = $(this).serialize();
+        $.ajax({
+          method: "POST",
+          url: `/games/join/${user.id}`,
+          data: formData,
+          success: function (res) {
+              window.localStorage.setItem('game', JSON.stringify(res))
+              window.history.pushState("story", '', `/game/${res._id}/story`)
+              storyState();
+          }
+        })
+      })
     }
   })
   reset();
