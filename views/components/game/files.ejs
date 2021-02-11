@@ -6,27 +6,28 @@
         <section class = "box-title-half">
             Music:
         </section>
+        <section class = 'box-content'>
         <%for(let x=0; x<game.songs.length; x++){%>
-        <section class = "box-section box-content">
+        <section class = "box-section">
             <button class="box-button music-play" id="<%=game.songs[x].name%>-button"><%=game.songs[x].name%></button>
         </section>
         <%}%>
         <section class = "fill"></section>
+        </section>
     </section>
     <section class="half-box right-border">
         <section class = "box-title-half">
             Images:
         </section>
+        <section class = 'box-content'>
         <%for(let x=0; x<game.images.length; x++){%>
-        <section class = "box-section box-content">
-            <%=game.images[x].name%>
+        <section class = "box-section image-section">
+            <p><%=game.images[x].name%>: </p>
             <div class="image-display" style="background-image: url('<%=game.images[x].url%>');"></div>
         </section>
         <%}%>
         <section class = "fill"></section>
-    </section>
-    <section>
-
+        </section>
     </section>
 </section>
 <section id="upload-files" class="box-section">
@@ -35,9 +36,7 @@
         <p>Upload Music:</p>
         <div class="form-group">
             Name: <input id = "music-name" type = "text" name="name"/>
-            <p></p>
-            File:
-            <input id = "file" type="file" name="file" id="input-files" class="form-control-file border"/>
+            <p>File: <input id = "file" type="file" name="file" id="input-files" class="form-control-file border"/></p>
         </div>
         <button id="music-submit" type="submit" class="btn btn-primary">Submit</button>
     </form>
@@ -47,8 +46,7 @@
         <p>Upload Images:</p>
         <div class="form-group">
             Name: <input id = "image-name" type = "text" name="name"/>
-            <p></p>
-            File: <input id = "file" type="file" name="file" id="input-files" class="form-control-file border"/>
+            <p>File: <input id = "file" type="file" name="file" id="input-files" class="form-control-file border"/></p>
         </div>
         <button id="image-submit" type="submit" class="btn btn-primary">Submit</button>
     </form>
