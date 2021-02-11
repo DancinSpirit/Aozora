@@ -87,6 +87,7 @@ form {
   height: 1vh;
   margin-left: 5vw;
   width: 90vw;
+  word-wrap: normal;
 }
 
 .edit-input {
@@ -97,8 +98,7 @@ form {
   padding-left: 20px;
   padding-right: 20px;
   padding-bottom: 20px;
-  color: white;
-  border: none;
+  display: inline-block;
 }
 
 .unselected {

@@ -26,13 +26,11 @@ socket.on('delete', function (sentIndex) {
     $("#gamemaster-bottom").children().each(function () {
         childIndex++;
         $(this).attr("id", `edit-form-${childIndex}`);
-        $(this).attr("action", `/game/${game._id}/story/${storyId}/edit/${childIndex}`)
         $(this).unbind("submit");
         $(this).unbind("focusout");
         $(this).unbind("click");
         $(this).focusout(function () {
-            let formData = $(this).serialize();
-            formData = formData.substring(6);
+            let formData = $(this).html();
             newIndex = parseInt($(this).attr("id").substring(10), 10);
             console.log("newIndex" + newIndex);
             if (formData)
@@ -81,11 +79,11 @@ socket.on('edit', function (sent) {
 })
 
 const appendGamemasterText = function (text) {
-    $("#gamemaster-bottom").append(`<form id="edit-form-${index}" action="/game/${game._id}/story/${storyId}/edit/${index}" method="POST"><input class="edit-input" type="text" name="story" value='${text}'></form>`); 
+    $("#gamemaster-bottom").append(`<span id="edit-form-${index}" class="edit-input" role="textbox" contenteditable>${text}</span>`); 
     let sentIndex = index;
     $(`#edit-form-${index}`).focusout(function () {
-        let formData = $(this).serialize();
-        formData = formData.substring(6);
+        let formData = $(this).html();
+        console.log(formData);
         console.log("sentIndex" + sentIndex)
         if (formData)
             $.ajax({
@@ -237,4 +235,6 @@ $("#player-tab").on("click", function () {
     $("#player-box").removeClass("invisible");
     $(".textbox").scrollTop($(".textbox").prop("scrollHeight"));
 })
+
+
 

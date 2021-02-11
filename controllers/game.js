@@ -162,7 +162,7 @@ router.post("/:id/story/:storyId/delete/:index/", async function(req,res){
 router.post("/:id/story/:storyId/:form", async function(req,res){
     try{
         let sentText = req.params.form;
-        sentText = sentText.replace(/"/g,'&quot;').replace(/'/g,"&apos;")
+        sentText = sentText.replace(/"/g,'&quot;').replace(/'/g,"&apos;").replace(/%/g, '&#37;');
         await db.Chapter.findByIdAndUpdate(req.params.storyId,{$push: {story: sentText}})
         res.send(sentText);
     }catch(err){
