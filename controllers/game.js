@@ -103,41 +103,41 @@ router.post("/:id/files/:type/:name/delete", async function(req, res){
 
 /* Upload Files*/
 router.post("/:id/files", async function(req,res){
-    if(file.size>10000000){
-        console.log("FILE TOO BIG")
-    }else{
         const file = req.files.file;
-        let filename = `${Date.now()}-${file.name}`;
-        let url = `https://aozora.s3.us-east-2.amazonaws.com/${filename}`
-        const params = {
-          Bucket: "aozora",
-          Key: filename,
-          Body: Buffer.from(file.data, 'binary')
-        }
-      
-        s3.upload(params, async function(err, data){
-          if(err){
-            throw err;
-          }
-          console.log(`File uploaded successfully. ${data.Location}`);
-        })
-    
-        try{
-            if(file.mimetype.substring(0,5)==="image"){
-                imageObject = {name: req.body.name, url: url};
-                game = await db.Game.findByIdAndUpdate(req.params.id,{$push:{images: imageObject}})
-            }else if(file.mimetype.substring(0,5)==="audio"){
-                musicObject = {name: req.body.name, url: url};
-                game = await db.Game.findByIdAndUpdate(req.params.id,{$push:{songs: musicObject}})
-            }else{
-                console.log("INVALID FILETYPE");
+        if(file.size>10000000){
+            console.log("FILE TOO BIG")
+        }else{
+            let filename = `${Date.now()}-${file.name}`;
+            let url = `https://aozora.s3.us-east-2.amazonaws.com/${filename}`
+            const params = {
+            Bucket: "aozora",
+            Key: filename,
+            Body: Buffer.from(file.data, 'binary')
             }
-        }catch(err){
-            console.log("Error?");
-            console.log(err)
+        
+            s3.upload(params, async function(err, data){
+            if(err){
+                throw err;
+            }
+            console.log(`File uploaded successfully. ${data.Location}`);
+            })
+        
+            try{
+                if(file.mimetype.substring(0,5)==="image"){
+                    imageObject = {name: req.body.name, url: url};
+                    game = await db.Game.findByIdAndUpdate(req.params.id,{$push:{images: imageObject}})
+                }else if(file.mimetype.substring(0,5)==="audio"){
+                    musicObject = {name: req.body.name, url: url};
+                    game = await db.Game.findByIdAndUpdate(req.params.id,{$push:{songs: musicObject}})
+                }else{
+                    console.log("INVALID FILETYPE");
+                }
+            }catch(err){
+                console.log("Error?");
+                console.log(err)
+            }
+            res.redirect('back');
         }
-        res.redirect('back');
-    }
 })
 
 /* Game Component: Story */
