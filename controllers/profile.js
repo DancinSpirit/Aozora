@@ -53,4 +53,10 @@ router.post("/avatar/:id", async function(req,res){
   res.redirect('back');
 })
 
+/* Edit Name and Bio */
+router.post("/:id", async function(req,res){
+  user = await db.User.findByIdAndUpdate(req.params.id, {fullname: req.body.fullname, bio: req.body.bio.replace(/"/g,'&quot;').replace(/'/g,"&apos;").replace(/%/g, '&#37;')})
+  res.redirect(`/profile/${req.params.id}`);
+})
+
 module.exports = router;

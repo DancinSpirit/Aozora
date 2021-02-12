@@ -40,6 +40,8 @@ app.use(async function(req,res,next){
     if(app.locals.user){
     foundUser = await db.User.findById(app.locals.user.id);
     app.locals.user.avatar = foundUser.avatar;
+    app.locals.user.bio = foundUser.bio;
+    app.locals.user.fullname = foundUser.fullname;
     }
     app.locals.game = false;
     next();
