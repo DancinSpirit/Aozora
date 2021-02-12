@@ -5,9 +5,13 @@
     <%for(let x=0; x<stories.length; x++){%>
     <section class = "box-section chapter-box">
         <a class = "chapter-button" href=<%=`/game/${game.id}/story/${stories[x].id}`%>><%="Chapter " + stories[x].number%></a>
-        <div id="<%=stories[x].number%>-delete" class="chapter-delete-button">
-            <i class="fas fa-times-circle"></i>
-        </div>
+        <%for(let x=0; x<game.gamemasters.length; x++){%>
+            <%if(game.gamemasters[x].id==user.id){%>
+                <div id="<%=stories[x].number%>-delete" class="chapter-delete-button">
+                    <i class="fas fa-times-circle"></i>
+                </div>
+            <%}%>
+        <%}%>
     </section>
     <%}%>
 </section>

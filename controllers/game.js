@@ -46,7 +46,6 @@ router.post("/:id/story/delete/:chapterNumber", async function(req, res){
         for(let x=0; x<game.chapters.length; x++){
             await db.Chapter.findByIdAndUpdate(game.chapters[x]._id,{number: x+1})
         }
-        console.log(game);
         await db.Game.findByIdAndUpdate(req.params.id,{chapters: game.chapters});
         res.redirect(`/game/${foundGame._id}/story`);
     }catch(err){
@@ -57,7 +56,6 @@ router.post("/:id/story/delete/:chapterNumber", async function(req, res){
 
 /* Upload Music */
 router.post("/:id/music", async function(req,res){
-    console.log(req.body.name);
     const file = req.files.file;
     let filename = `${Date.now()}-${file.name}`;
     let url = `https://aozora.s3.us-east-2.amazonaws.com/${filename}`
@@ -77,7 +75,6 @@ router.post("/:id/music", async function(req,res){
     try{
         musicObject = {name: req.body.name, url: url};
         game = await db.Game.findByIdAndUpdate(req.params.id,{$push:{songs: musicObject}})
-        console.log(game);
     }catch(err){
         console.log("Error?");
         console.log(err)
@@ -110,7 +107,6 @@ router.post("/:id/files", async function(req,res){
         console.log("FILE TOO BIG")
     }else{
         const file = req.files.file;
-        console.log(file.size);
         let filename = `${Date.now()}-${file.name}`;
         let url = `https://aozora.s3.us-east-2.amazonaws.com/${filename}`
         const params = {
@@ -127,15 +123,12 @@ router.post("/:id/files", async function(req,res){
         })
     
         try{
-            console.log(file.mimetype.substring(0,5));
             if(file.mimetype.substring(0,5)==="image"){
                 imageObject = {name: req.body.name, url: url};
                 game = await db.Game.findByIdAndUpdate(req.params.id,{$push:{images: imageObject}})
-                console.log(game);
             }else if(file.mimetype.substring(0,5)==="audio"){
                 musicObject = {name: req.body.name, url: url};
                 game = await db.Game.findByIdAndUpdate(req.params.id,{$push:{songs: musicObject}})
-                console.log(game);
             }else{
                 console.log("INVALID FILETYPE");
             }
@@ -198,7 +191,6 @@ router.get("/:id/story/:storyId", async function(req, res){
 router.post("/:id/story/:storyId/edit/:index/:form", async function(req,res){
     try{
         let sentText = req.params.form.replace(/PERCENT-SIGN/g, '%');
-        console.log(sentText);
         sentText = sentText.replace(/"/g,'&quot;').replace(/'/g,"&apos;").replace(/%/g, '&#37;');
         let story = await db.Chapter.findById(req.params.storyId);
         let array = story.story;
@@ -216,7 +208,6 @@ router.post("/:id/story/:storyId/delete/:index/", async function(req,res){
         let story = await db.Chapter.findById(req.params.storyId);
         array = story.story;
         array.splice(req.params.index, 1);
-        console.log(array)
         await db.Chapter.findByIdAndUpdate(req.params.storyId, {story: array});
         res.send(req.params.form);
 

@@ -1,14 +1,30 @@
-<section class = "box-content">
-    <section class = "box-section">Gamemasters:</section>
+<section id="players-content" class = "box-content">
+    <section class = "box-section player-title">Gamemasters:</section>
     <%for(let x=0; x<game.gamemasters.length; x++){%>
-    <section class = "box-section gamemaster-box">
-        <%=game.gamemasters[x].username%>
+    <section class = "box-section gamemaster-section-2">
+        <div><%=game.gamemasters[x].username%></div>
+        <div class="player-buttons">
+            <div id="<%=game.gamemasters[x].id%>-playerify" class="-playerify-button player-edit-button">
+                <i class="fas fa-arrow-down"></i>
+            </div>
+            <div id="<%=game.gamemasters[x].id%>-delete" class="gamemaster-delete-button player-edit-button">
+                <i class="fas fa-times-circle"></i>
+            </div>
+        </div>
     </section>
     <%}%>
-    <section class = "box-section">Players:</section>
+    <section class = "box-section player-title">Players:</section>
     <%for(let x=0; x<game.players.length; x++){%>
-    <section class = "box-section player-box">
-        <%=game.players[x].username%>
+    <section class = "box-section player-section-2">
+        <div><%=game.players[x].username%></div>
+        <div class="player-buttons">
+            <div id="<%=game.players[x].id%>-gamemasterify" class="gamemasterify-button player-edit-button">
+                <i class="fas fa-arrow-up"></i>
+            </div>
+            <div id="<%=game.players[x].id%>-delete" class="player-delete-button player-edit-button">
+                <i class="fas fa-times-circle"></i>
+            </div>
+        </div>
     </section>
     <%}%>
 </section>

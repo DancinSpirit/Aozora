@@ -54,7 +54,17 @@
             </section>
         </section>
         <section id="bottom">
-            <section id="bottom-left">
+            <section id="bottom-left"
+                <%if(game){%>
+                    <%for(let x=0; x<game.gamemasters.length; x++){%>
+                        <%console.log(game.gamemasters[x])%>
+                        <%console.log(user.id)%>
+                        <%if(game.gamemasters[x]!=user.id){%>
+                            class = "true-invisible"
+                        <%}%>
+                    <%}%>
+                <%}%> 
+                >
                 <section id="slide-bar">
                 </section>
                 <section id="nav-buttons" class="nav-buttons">

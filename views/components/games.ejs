@@ -7,7 +7,12 @@
     <section class = "box-section game-box">
         <section class = "box-button game-button" name="<%=games[x].name%>" id="<%=games[x].id%>">
             <section class = "game-title">
-                <%=games[x].name%><span id="<%=games[x].id%>-delete"class="delete-button"><i class="fas fa-times-circle"></i></span>
+                <%=games[x].name%>
+                <%for(let y=0; y<games[x].gamemasters.length; y++){%>
+                    <%if(games[x].gamemasters[y].id==user.id){%>
+                        <span id="<%=games[x].id%>-delete"class="delete-button"><i class="fas fa-times-circle"></i></span>
+                    <%}%>
+                <%}%>
             </section>
             <p>Gamemasters:</p>
             <section class="gamemaster-section">

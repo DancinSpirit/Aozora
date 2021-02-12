@@ -30,7 +30,7 @@
                 <p id="profile-name">Name:</p> <input id="full-name-input" type="text" name="fullname" value='<%=user.fullname%>'>
             </section>
             <section id="bio-section">
-                <p id="profile-bio">Bio:</p> <textarea cols="50" rows="5"id="bio-input" name="bio"><%=user.bio%></textarea>
+                <p id="profile-bio">Bio:</p> <textarea cols="50" rows="5"id="bio-input" name="bio"><%=user.bio.replace(/&quot;/g,'"').replace(/&apos;/g,"'").replace(/&#37;/g, '%')%></textarea>
             </section>
             <input id="user-submit" type="submit" value="Submit Changes" class="submit-button">
         </form>
