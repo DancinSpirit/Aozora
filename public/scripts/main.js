@@ -60,6 +60,23 @@ const storyState = function () {
     url: `${window.location.href}/story`,
     success: function (res) {
       $("#story-box").html(res);
+      $(".chapter-delete-button").on("click",function(event){
+        event.preventDefault();
+        const name = $(this).attr("id").replace("-delete",'');
+        $(`#new-chapter`).html(`<section class="delete-message"><p class="delete-text">Are you sure you want to delete Chapter ${name}?</p><section class="delete-buttons"><button id="yes-button">Yes</button><button id="no-button">No</button></section></section>`)
+        $("#yes-button").on("click",function(){
+          $.ajax({
+            method: "POST",
+            url: `story/delete/${name}`,
+            success: function(res){
+              location.reload();
+            }
+          })
+        })
+        $("#no-button").on("click",function(){
+           storyState();
+        })
+      })
     }
   })
   reset();

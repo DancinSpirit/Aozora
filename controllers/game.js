@@ -29,9 +29,26 @@ router.post("/:id/story/create", async function(req, res){
     try{
         foundGame = await db.Game.findById(req.params.id);
         chapterNumber = foundGame.chapters.length + 1;
-        newChapter = await db.Chapter.create({chapter: chapterNumber}); 
+        newChapter = await db.Chapter.create({number: chapterNumber}); 
         foundgame = await db.Game.findByIdAndUpdate(req.params.id, {$push: {chapters: newChapter}});
         res.redirect(`/game/${foundGame._id}/story/${newChapter._id}`);
+    }catch(err){
+        console.log(err);
+        return res.send(err);
+    } 
+})
+
+/* Delete Story Chapter */
+router.post("/:id/story/delete/:chapterNumber", async function(req, res){
+    try{
+        const game = await db.Game.findById(req.params.id).populate("chapters");
+        game.chapters.splice(req.params.chapterNumber-1,1);
+        for(let x=0; x<game.chapters.length; x++){
+            await db.Chapter.findByIdAndUpdate(game.chapters[x]._id,{number: x+1})
+        }
+        console.log(game);
+        await db.Game.findByIdAndUpdate(req.params.id,{chapters: game.chapters});
+        res.redirect(`/game/${foundGame._id}/story`);
     }catch(err){
         console.log(err);
         return res.send(err);

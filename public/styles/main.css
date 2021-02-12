@@ -359,11 +359,17 @@ nav {
     margin: 5px;
 }
 
-.chapter-button{
+.chapter-box{
     font-size: 25px;
     display: flex;
     flex-direction: row;
     justify-content: space-between;
+}
+.chapter-button{
+    width: 100%;
+}
+.chapter-delete-button{
+    cursor: pointer;
 }
 
 #new-game, #new-chapter, #upload-files{
