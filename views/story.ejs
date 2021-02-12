@@ -20,8 +20,10 @@
 
 <body>
     <section id="tabs">
-        <button class="tab" id="player-tab">Player View</button>
-        <button class="tab unselected" id="gamemaster-tab">Gamemaster View</button>
+        <%if(gamemaster){%>
+            <button class="tab" id="player-tab">Player View</button>
+            <button class="tab unselected" id="gamemaster-tab">Gamemaster View</button> 
+        <%}%>
     </section>
     <section class="textbox" id="player-box">
         <section class="bottom" id="player-bottom">

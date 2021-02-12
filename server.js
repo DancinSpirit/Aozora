@@ -40,7 +40,7 @@ app.use(async function(req,res,next){
     if(app.locals.user){
     foundUser = await db.User.findById(app.locals.user.id);
     app.locals.user.avatar = foundUser.avatar;
-    app.locals.user.bio = foundUser.bio;
+    app.locals.user.bio = foundUser.bio.replace(/"/g,'&quot;').replace(/'/g,"&apos;").replace(/%/g, '&#37;');
     app.locals.user.fullname = foundUser.fullname;
     }
     app.locals.game = false;

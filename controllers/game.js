@@ -177,7 +177,22 @@ router.post("/:id/name", async function(req, res){
 router.get("/:id/story/:storyId", async function(req, res){
     const foundChapter = await db.Chapter.findById(req.params.storyId);
     const foundGame = await db.Game.findById(req.params.id);
-    res.render("story",{story: foundChapter, game: foundGame});
+    let gamemaster = false;
+    let player = false;
+    for(let x=0; x<foundGame.gamemasters.length; x++){
+        if(foundGame.gamemasters[x]==req.session.currentUser.id){
+            gamemaster = true;
+            player = true;
+        }
+    }
+    for(let x=0; x<foundGame.players.length; x++){
+        if(foundGame.players[x]==req.session.currentUser.id){
+            player = true;
+        }
+    }
+    if(player)
+    res.render("story",{story: foundChapter, game: foundGame, gamemaster: gamemaster});
+    res.redirect("/login");
 })
 /* Edit Story */
 router.post("/:id/story/:storyId/edit/:index/:form", async function(req,res){
