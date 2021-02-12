@@ -7,14 +7,16 @@ const s3 = require("../s3.js");
 router.get("/", async function(req,res){
   res.render("main", {sentState: "account"})
 })
-/* ID Profile Route */
-router.get("/:id", async function(req,res){
-  res.render("main", {sentState: "profile"})
-})
+
 
 /* Profile Component (Current User)*/
 router.get("/info", async function(req,res){
   res.render("components/profile",{thisUser: true});
+})
+
+/* ID Profile Route */
+router.get("/:id", async function(req,res){
+  res.render("main", {sentState: "profile"})
 })
 
 /* Profile Component (Get User By ID) */
