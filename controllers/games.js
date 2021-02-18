@@ -15,8 +15,10 @@ router.get("/", async function(req, res){
 router.post("/create", async function(req,res){
     try{
         let game = await db.Game.create({name: "New Untitled Game", gamemasters: [req.session.currentUser.id]}); 
+        console.log(game);
         res.send(game);
     }catch(err){
+        console.log(err);
         return res.send(err);
     }
 })
