@@ -1,9 +1,5 @@
 <section id="avatar-box">
-    <%if(user.avatar){%>
         <img id="account-avatar" src='<%=user.avatar%>'>
-    <%}else{%>
-        <img id = "account-avatar" src="/images/avatar_placeholder.png">
-    <%}%>
     <%if(thisUser){%>
         <form id="avatar-upload-form" class="mt-4" action="/profile/avatar/<%=user.id%>" method="POST" enctype="multipart/form-data">
             <div class="form-group">

@@ -20,10 +20,14 @@ router.post("/register", async function(req,res){
         const salt = await bcrypt.genSalt(10);
         const hash = await bcrypt.hash(req.body.password, salt);
         req.body.password = hash;
+        req.body.avatar = "/images/avatar_placeholder.png";
         const newUser = await db.User.create(req.body);
         req.session.currentUser = {
-            id: foundUser._id,
-            username: foundUser.username
+            id: newUser._id,
+            username: newUser.username,
+            avatar: newUser.avatar,
+            bio: newUser.bio,
+            fullname: newUser.fullname
         }
         return res.send("Registration Successful!");
     }catch(err){
@@ -41,7 +45,10 @@ router.post("/login", async function(req,res){
         if(!match) return res.send({displayText: "Password Invalid"});
         req.session.currentUser = {
             id: foundUser._id,
-            username: foundUser.username
+            username: foundUser.username,
+            avatar: foundUser.avatar,
+            bio: foundUser.bio,
+            fullname: foundUser.fullname
         }
         return res.send("Login Successful!");
     }catch(err){

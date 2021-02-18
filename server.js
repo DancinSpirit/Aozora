@@ -36,13 +36,6 @@ app.use(session({
 
 app.use(async function(req,res,next){
     app.locals.user = req.session.currentUser;
-    /* Add Avatar to User */
-    if(app.locals.user){
-    foundUser = await db.User.findById(app.locals.user.id);
-    app.locals.user.avatar = foundUser.avatar;
-    app.locals.user.bio = foundUser.bio.replace(/"/g,'&quot;').replace(/'/g,"&apos;").replace(/%/g, '&#37;');
-    app.locals.user.fullname = foundUser.fullname;
-    }
     app.locals.game = false;
     next();
 }) 
@@ -59,7 +52,6 @@ app.use("/", ctrl.main);
 
 io.on('connection', (socket) => {
     socket.on('nextLine', (msg)=>{
-        console.log(msg);
         io.emit('nextLine', msg);
     })
     socket.on('edit', (info)=>{
