@@ -94,6 +94,11 @@ const storyState = function () {
   state = "story";
 }
 
+const removeFont = function(element){
+  element.removeClass("oswald");
+  element.removeClass("noto-sans-jp");
+}
+
 const files = function () {
   $.ajax({
     method: "GET",
@@ -131,6 +136,10 @@ const files = function () {
         console.log(song);
         song.volume = 0.2;
         song.play();
+      })
+      $("#font-form").change(function(){
+        removeFont($("#example-sentence"));
+        $("#example-sentence").addClass($("option:selected", this).val());
       })
     }
   })

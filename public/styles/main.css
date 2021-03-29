@@ -273,6 +273,10 @@ nav {
     padding: 10px;
     padding-bottom: 20px;
 }
+.files-box-box-box{
+    width: 50%;
+}
+
 #games-box, #story-box{
     width: 60%;
     max-height: 80%;
@@ -529,4 +533,13 @@ nav {
 
 .true-invisible{
     display: none;
+}
+
+/* FONT CLASSES */
+.oswald{
+    font-family: 'Oswald', sans-serif;
+}
+.noto-sans-jp{
+    font-family: 'Noto Sans JP', sans-serif;
+    text-shadow: -2px 0 black, 0 2px black, 2px 0 black, 0 -2px black;
 }

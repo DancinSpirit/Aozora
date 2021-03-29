@@ -45,14 +45,29 @@
     </section>
 </section>
 <section id="files-box-box">
-    <form id="file-upload-form" class="mt-4" action="/game/<%=game._id%>/files" method="POST" enctype="multipart/form-data">
-        <p>Upload Files:</p>
-        <div class="form-group">
-            Name: <input id = "file-name" type = "text" name="name"/>
-            <p>File: <input id = "file" type="file" name="file" id="input-files" class="form-control-file border"/></p>
-        </div>
-        <button id="file-submit" type="submit" class="btn btn-primary">Submit</button>
-    </form>
+    <section class = "files-box-box-box">
+        <form id="file-upload-form" class="mt-4" action="/game/<%=game._id%>/files" method="POST" enctype="multipart/form-data">
+            <p>Upload Files:</p>
+            <div class="form-group">
+                Name: <input id = "file-name" type = "text" name="name"/>
+                <p>File: <input id = "file" type="file" name="file" id="input-files" class="form-control-file border"/></p>
+            </div>
+            <button id="file-submit" type="submit" class="btn btn-primary">Submit</button>
+        </form>
+    </section>
+    <section class = "files-box-box-box">
+        <form id="font-form" class="mt-4" action="/game/<%=game._id%>/font" method="POST">
+            <p>Select Font:</p>
+            <div class="form-group">
+                <p><select name="font">
+                    <option id="Oswald" value="oswald" <%if(game.font==="oswald"){%>selected<%}%>>Oswald</option>
+                    <option id="Noto Sans JP" value="noto-sans-jp" <%if(game.font==="noto-sans-jp"){%>selected<%}%>>Noto Sans JP</option>
+                </select></p>
+                <p id = "example-sentence" class='<%=game.font%>'>This is an example sentence!</p>
+            </div>
+            <button id="file-submit" type="submit" class="btn btn-primary">Submit</button>
+        </form>
+    </section>
 </section>
 <!-- Audio -->
 <%for(let x=0; x<game.songs.length; x++){%>

@@ -140,6 +140,12 @@ router.post("/:id/files", async function(req,res){
         }
 })
 
+router.post("/:id/font", async function(req,res){
+    console.log(req.body.font);
+    foundGame = await db.Game.findByIdAndUpdate(req.params.id, {font: req.body.font});
+    res.redirect("back");
+})
+
 /* Game Component: Story */
 router.get("/:id/story/story", async function(req, res){
     foundGame = await db.Game.findById(req.params.id).populate("chapters");
@@ -185,7 +191,6 @@ router.get("/:id/story/:storyId", async function(req, res){
     }
     if(player)
     res.render("story",{story: foundChapter, game: foundGame, gamemaster: gamemaster});
-    res.redirect("/login");
 })
 /* Edit Story */
 router.post("/:id/story/:storyId/edit/:index/:form", async function(req,res){

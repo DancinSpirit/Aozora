@@ -7,7 +7,7 @@
     <title><%=game.name%>: <%="Chapter " + story.chapter%></title>
     <!-- FONTS -->
     <link rel="preconnect" href="https://fonts.gstatic.com">
-    <link href="https://fonts.googleapis.com/css2?family=Oswald&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Oswald&family=Noto+Sans+JP&display=swap" rel="stylesheet">
     <!-- STYLES -->
     <link rel="stylesheet" href="/styles/story.css">
     <!-- JQUERY -->
@@ -18,7 +18,7 @@
     <script src="/scripts/story.js" defer></script>
 </head>
 
-<body>
+<body class=<%=game.font%>>
     <section id="tabs">
         <%if(gamemaster){%>
             <button class="tab" id="player-tab">Player View</button>
