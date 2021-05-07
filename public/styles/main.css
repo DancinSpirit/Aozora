@@ -89,7 +89,7 @@ nav {
     content: "";
     background-color: #05384e;
     min-width: 260px;
-    width: 40%;
+    width: 34%;
     height: 40px;
     position: absolute;
     transform: translateX(-150%) skew(-40deg, 0deg);
@@ -125,6 +125,14 @@ nav {
     padding-left: 8px;
     padding-right: 8px;
     color: white;
+}
+.slide-button:hover{
+    background-color: #0b5d80;
+    transition: 500ms;
+}
+.login-button:hover{
+    background-color: #023950;
+    transition: 500ms;
 }
 
 #right {
